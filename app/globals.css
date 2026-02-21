@@ -1,26 +1,214 @@
-@import "tailwindcss";
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
+/* ===== Goodymoog: Clean classic layout (no conflicts) ===== */
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+/* Reset */
+html, body {
+  margin: 0;
+  padding: 0;
+  overflow-x: hidden;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: #ffffff;
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #202122;
+  line-height: 1.6;
+}
+
+/* Links */
+a { color: #0645ad; text-decoration: none; }
+a:hover { color: #3366cc; text-decoration: underline; }
+
+/* Wrapper */
+.goodymoog-embed {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2%;
+  background: #ffffff;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.goodymoog-embed * { box-sizing: border-box; }
+
+/* Header (sticky bar) */
+.site-header{
+  position: sticky;
+  top: 0;
+  z-index: 9999;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 0;
+  border-bottom: none;
+}
+
+.logo { display: inline-flex; align-items: center; text-decoration: none; color: inherit; }
+.logo img { height: 95px; width: auto; display: block; }
+
+.top-nav{
+  display: flex;
+  gap: 18px;
+  align-items: center;
+  flex-wrap: wrap;
+}
+.top-nav a{ font-weight: 600; }
+
+/* Page container */
+.container{
+  margin: 0;
+  padding: 2px 0 0; /* tight like your screenshot */
+}
+
+/* Headings (Inter, like original) */
+h1, h2, h3, h4, h5, h6 {
+  font-family: "Georgia", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  color: #111;
+  font-weight: 400;
+}
+
+h2{
+  font-size: 1.35em;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 5px;
+  margin: 28px 0 12px;
+}
+/* Remove extra space above first section */
+.main-content h2:first-child {
+  margin-top: -11px;
+}
+
+/* Body text */
+p { font-size: 16px; color: #202122; }
+
+/* Main + Sidebar */
+.content{
+  display: flex;
+  gap: 28px;
+  align-items: flex-start;
+}
+
+.main-content{ flex: 1; min-width: 0; }
+
+.sidebar{
+  width: 251px;
+  background: #f8f9fa;
+  padding: 12px;
+  border: 1px solid #a2a9b1;
+}
+
+.sidebar img{
+  width: 100%;
+  height: auto;
+  border: 1px solid #a2a9b1;
+  margin-bottom: 10px;
+}
+
+/* Social icons row */
+.logo-row{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin: 8px 0 14px;
+  flex-wrap: nowrap;
+}
+
+.logo-row a{ width: 38px; height: 38px; display: inline-flex; }
+
+.logo-row img{
+  width: 100%;
+  height: 100%;
+  object-fit: contain;
+  border: none !important;
+  background: none !important;
+  box-shadow: none !important;
+  outline: none !important;
+}
+
+/* Sidebar sections */
+.sidebar h3{
+  margin: 14px 0 8px;
+  font-size: 18px;
+  font-weight: 700;
+  border-bottom: 1px solid #a2a9b1;
+  padding-bottom: 4px;
+  color: #111;
+}
+
+.sidebar-list{
+  list-style: none;
+  padding-left: 18px;
+  margin: 10px 0 14px;
+}
+
+/* Album text boxes */
+.album-box{
+  background: #f3f4f6;
+  border-radius: 15px;
+  padding: 14px 18px;
+  max-width: 850px;
+}
+
+.album-box p{
+  margin: 0;
+}
+
+/* Videos */
+.video-row{
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+  margin: 12px 0 18px;
+}
+
+.video-row iframe{
+  width: 420px;
+  height: 251.25px;
+  border: 0;
+}
+
+/* References (Inter + clean, not Libertine) */
+.references{
+  font-family: "Inter", system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+  column-count: 2;
+  column-gap: 40px;
+  font-size: 13px;
+  line-height: 1.6;
+  padding-left: 20px;
+  color: #3a3a3a;
+}
+
+.references li{
+  break-inside: avoid;
+  margin-bottom: 0.75em;
+}
+
+/* External link icon (optional) */
+a.external::after{
+  content: "";
+  display: inline-block;
+  width: 12px;
+  height: 12px;
+  margin-left: 3px;
+  background: url("https://upload.wikimedia.org/wikipedia/commons/6/64/Icon_External_Link.png") no-repeat center;
+  background-size: contain;
+}
+
+/* Responsive */
+@media (max-width: 900px){
+  .content{ flex-direction: column; }
+  .sidebar{ width: 100%; }
+  .references{ column-count: 1; }
+}
+
+@media (max-width: 520px){
+  .video-row iframe{
+    width: 100%;
+    height: 56.25vw;
+    max-height: 260px;
+  }
 }
