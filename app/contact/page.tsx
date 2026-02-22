@@ -22,7 +22,7 @@ export default function ContactPage() {
   const sanitized = subject.trim() ? subject.trim().replace(/\s+/g, "_") : "Enclosed*24";
   const enclosureText = `Enclosure: ${sanitized}.html`;
 
-  // Setup + resize canvas
+  // Setup + resize canvas (Vercel/TS safe)
   useEffect(() => {
     const canvasEl = canvasRef.current;
     if (!canvasEl) return;
@@ -32,21 +32,23 @@ export default function ContactPage() {
 
     ctxRef.current = ctx;
 
-    function sizeCanvas() {
+    const sizeCanvas = () => {
       const c = canvasRef.current;
-      if (!c) return;
+      const context = ctxRef.current;
+      if (!c || !context) return;
 
       const rect = c.getBoundingClientRect();
       c.width = rect.width * SCALE;
       c.height = rect.height * SCALE;
 
-      ctx.lineWidth = 3 * SCALE;
-      ctx.lineCap = "round";
-      ctx.lineJoin = "round";
+      context.lineWidth = 3 * SCALE;
+      context.lineCap = "round";
+      context.lineJoin = "round";
 
-      ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, c.width, c.height);
-    }
+      // white background
+      context.fillStyle = "#ffffff";
+      context.fillRect(0, 0, c.width, c.height);
+    };
 
     sizeCanvas();
     window.addEventListener("resize", sizeCanvas);
@@ -63,9 +65,7 @@ export default function ContactPage() {
     let lastX = 0;
     let lastY = 0;
 
-    const isErasing = tool === "eraser";
-
-    function getCanvasPos(e: MouseEvent | TouchEvent) {
+    const getCanvasPos = (e: MouseEvent | TouchEvent) => {
       const rect = canvas.getBoundingClientRect();
       const touch = "touches" in e ? e.touches[0] : null;
       const clientX = touch ? touch.clientX : (e as MouseEvent).clientX;
@@ -75,20 +75,23 @@ export default function ContactPage() {
         x: (clientX - rect.left) * SCALE,
         y: (clientY - rect.top) * SCALE,
       };
-    }
+    };
 
-    function startDraw(e: MouseEvent | TouchEvent) {
+    const startDraw = (e: MouseEvent | TouchEvent) => {
       drawing = true;
       const { x, y } = getCanvasPos(e);
       lastX = x;
       lastY = y;
-    }
+    };
 
-    function draw(e: MouseEvent | TouchEvent) {
+    const draw = (e: MouseEvent | TouchEvent) => {
       if (!drawing) return;
+
       const { x, y } = getCanvasPos(e);
 
+      const isErasing = tool === "eraser";
       ctx.strokeStyle = isErasing ? "#ffffff" : penColor;
+
       ctx.beginPath();
       ctx.moveTo(lastX, lastY);
       ctx.lineTo(x, y);
@@ -96,11 +99,11 @@ export default function ContactPage() {
 
       lastX = x;
       lastY = y;
-    }
+    };
 
-    function endDraw() {
+    const endDraw = () => {
       drawing = false;
-    }
+    };
 
     const onMouseDown = (e: MouseEvent) => {
       e.preventDefault();
@@ -147,15 +150,16 @@ export default function ContactPage() {
     };
   }, [tool, penColor]);
 
-  function clearCanvas() {
+  const clearCanvas = () => {
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
     if (!canvas || !ctx) return;
+
     ctx.fillStyle = "#ffffff";
     ctx.fillRect(0, 0, canvas.width, canvas.height);
-  }
+  };
 
-  function addFooterLabel() {
+  const addFooterLabel = () => {
     const canvas = canvasRef.current;
     const ctx = ctxRef.current;
     if (!canvas || !ctx) return;
@@ -188,9 +192,9 @@ export default function ContactPage() {
     ctx.fillText(fromText, x, y);
 
     ctx.restore();
-  }
+  };
 
-  async function onSubmit(e: FormEvent<HTMLFormElement>) {
+  const onSubmit = async (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
     const canvas = canvasRef.current;
@@ -214,7 +218,7 @@ export default function ContactPage() {
     try {
       const resBasin = await fetch(basinURL, { method: "POST", body: formData });
 
-      // fire-and-forget; no-cors won't give readable response (that’s expected)
+      // fire-and-forget
       fetch(driveScriptURL, {
         method: "POST",
         mode: "no-cors",
@@ -233,7 +237,7 @@ export default function ContactPage() {
       console.error(err);
       setConfirmation({ text: "⚠️ Network error.", color: "red" });
     }
-  }
+  };
 
   return (
     <div className="pageShell">
@@ -311,13 +315,7 @@ export default function ContactPage() {
               <div className="email-panel">
                 <div className="field">
                   <label htmlFor="subject">Subject:</label>
-                  <input
-                    id="subject"
-                    type="text"
-                    value={subject}
-                    onChange={(e) => setSubject(e.target.value)}
-                    required
-                  />
+                  <input id="subject" type="text" value={subject} onChange={(e) => setSubject(e.target.value)} required />
                 </div>
                 <div className="field">
                   <label htmlFor="from">From:</label>
