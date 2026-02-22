@@ -1,49 +1,27 @@
+// components/Header.tsx
 import Link from "next/link";
 import Image from "next/image";
+import styles from "./Header.module.css";
 
 export default function Header() {
   return (
-    <header className="bg-red-500 text-white p-10">
-      <div className="mx-auto max-w-5xl px-6 py-5 flex items-center justify-between">
-        
-        {/* Logo */}
-        <Link href="/" className="flex items-center">
+    <header className={styles.header}>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.logo}>
           <Image
             src="/images/logo.webp"
             alt="Goodymoog"
-            width={120}
-            height={40}
+            width={140}
+            height={60}
             priority
-            className="h-7 w-auto"
           />
         </Link>
 
-        {/* Navigation */}
-        <nav className="flex items-center gap-6 text-[14px] font-light tracking-[0.12em] uppercase">
-          <Link
-            href="/"
-            className="text-black/70 hover:text-black/70 hover:opacity-50 transition duration-200"
-          >
-            Music
-          </Link>
-          <Link
-            href="/art"
-            className="text-black/70 hover:text-black/70 hover:opacity-50 transition duration-200"
-          >
-            Art
-          </Link>
-          <Link
-            href="/merch"
-            className="text-black/70 hover:text-black/70 hover:opacity-50 transition duration-200"
-          >
-            Merch
-          </Link>
-          <Link
-            href="/contact"
-            className="text-black/70 hover:text-black/70 hover:opacity-50 transition duration-200"
-          >
-            Contact
-          </Link>
+        <nav className={styles.nav}>
+          <Link href="/">Music</Link>
+          <Link href="/art">Art</Link>
+          <Link href="/merch">Merch</Link>
+          <Link href="/contact">Contact</Link>
         </nav>
       </div>
     </header>
