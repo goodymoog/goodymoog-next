@@ -1,7 +1,7 @@
 "use client";
 
 import Header from "@/components/Header";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, type FormEvent } from "react";
 
 export default function ContactPage() {
   const SCALE = 3;
@@ -24,25 +24,28 @@ export default function ContactPage() {
 
   // Setup + resize canvas
   useEffect(() => {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+    const canvasEl = canvasRef.current;
+    if (!canvasEl) return;
 
-    const ctx = canvas.getContext("2d");
+    const ctx = canvasEl.getContext("2d");
     if (!ctx) return;
 
     ctxRef.current = ctx;
 
     function sizeCanvas() {
-      const rect = canvas.getBoundingClientRect();
-      canvas.width = rect.width * SCALE;
-      canvas.height = rect.height * SCALE;
+      const c = canvasRef.current;
+      if (!c) return;
+
+      const rect = c.getBoundingClientRect();
+      c.width = rect.width * SCALE;
+      c.height = rect.height * SCALE;
 
       ctx.lineWidth = 3 * SCALE;
       ctx.lineCap = "round";
       ctx.lineJoin = "round";
 
       ctx.fillStyle = "#ffffff";
-      ctx.fillRect(0, 0, canvas.width, canvas.height);
+      ctx.fillRect(0, 0, c.width, c.height);
     }
 
     sizeCanvas();
@@ -187,7 +190,7 @@ export default function ContactPage() {
     ctx.restore();
   }
 
-  async function onSubmit(e: React.FormEvent) {
+  async function onSubmit(e: FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const canvas = canvasRef.current;
@@ -197,7 +200,7 @@ export default function ContactPage() {
 
     const base64Full = canvas.toDataURL("image/png");
     const inlineHTML = `<img src="${base64Full}" alt="Drawing" style="max-width:100%;border:1px solid #444">`;
-    const base64Data = base64Full.split(",")[1];
+    const base64Data = base64Full.split(",")[1] ?? "";
 
     const formData = new FormData();
     formData.append("subject", subject);
@@ -211,6 +214,7 @@ export default function ContactPage() {
     try {
       const resBasin = await fetch(basinURL, { method: "POST", body: formData });
 
+      // fire-and-forget; no-cors won't give readable response (that’s expected)
       fetch(driveScriptURL, {
         method: "POST",
         mode: "no-cors",
@@ -233,7 +237,6 @@ export default function ContactPage() {
 
   return (
     <div className="pageShell">
-      {/* THIS FIXES YOUR NAV SPREADING TOO FAR RIGHT */}
       <div className="headerShell">
         <Header />
       </div>
@@ -263,10 +266,42 @@ export default function ContactPage() {
 
                 <span style={{ marginLeft: 10 }}>Color:</span>
 
-                <button type="button" className="color-btn" style={{ background: "#1D4ED8" }} onClick={() => { setPenColor("#1D4ED8"); setTool("pencil"); }} />
-                <button type="button" className="color-btn" style={{ background: "#498C50" }} onClick={() => { setPenColor("#498C50"); setTool("pencil"); }} />
-                <button type="button" className="color-btn" style={{ background: "#FA961E" }} onClick={() => { setPenColor("#FA961E"); setTool("pencil"); }} />
-                <button type="button" className="color-btn" style={{ background: "#B077E9" }} onClick={() => { setPenColor("#B077E9"); setTool("pencil"); }} />
+                <button
+                  type="button"
+                  className="color-btn"
+                  style={{ background: "#1D4ED8" }}
+                  onClick={() => {
+                    setPenColor("#1D4ED8");
+                    setTool("pencil");
+                  }}
+                />
+                <button
+                  type="button"
+                  className="color-btn"
+                  style={{ background: "#498C50" }}
+                  onClick={() => {
+                    setPenColor("#498C50");
+                    setTool("pencil");
+                  }}
+                />
+                <button
+                  type="button"
+                  className="color-btn"
+                  style={{ background: "#FA961E" }}
+                  onClick={() => {
+                    setPenColor("#FA961E");
+                    setTool("pencil");
+                  }}
+                />
+                <button
+                  type="button"
+                  className="color-btn"
+                  style={{ background: "#B077E9" }}
+                  onClick={() => {
+                    setPenColor("#B077E9");
+                    setTool("pencil");
+                  }}
+                />
 
                 <button type="button" id="clear-draw" style={{ marginLeft: "auto" }} onClick={clearCanvas}>
                   Clear
@@ -276,7 +311,13 @@ export default function ContactPage() {
               <div className="email-panel">
                 <div className="field">
                   <label htmlFor="subject">Subject:</label>
-                  <input id="subject" type="text" value={subject} onChange={(e) => setSubject(e.target.value)} required />
+                  <input
+                    id="subject"
+                    type="text"
+                    value={subject}
+                    onChange={(e) => setSubject(e.target.value)}
+                    required
+                  />
                 </div>
                 <div className="field">
                   <label htmlFor="from">From:</label>
@@ -323,14 +364,12 @@ export default function ContactPage() {
           min-height: 100vh;
         }
 
-        /* Center the HEADER the same way Home centers it */
         .headerShell {
           max-width: 1200px;
           margin: 0 auto;
           padding: 0 24px;
         }
 
-        /* Center the page content too */
         .pageInner {
           max-width: 1200px;
           margin: 0 auto;
