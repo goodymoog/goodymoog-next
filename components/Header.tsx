@@ -1,16 +1,51 @@
+import Link from "next/link";
+import Image from "next/image";
+
 export default function Header() {
   return (
-    <header className="site-header">
-      <a className="logo" href="/">
-        <img src="/images/logo.webp" alt="Goodymoog" />
-      </a>
+    <header className="w-full bg-white border-b border-black/10">
+      <div className="mx-auto max-w-6xl px-6 py-4 flex items-center justify-between">
+        
+        {/* Logo */}
+        <Link href="/" className="flex items-center">
+          <Image
+            src="/images/logo.webp"
+            alt="Goodymoog"
+            width={140}
+            height={40}
+            priority
+            className="h-8 w-auto"
+          />
+        </Link>
 
-      <nav className="top-nav">
-        <a href="/">Music</a>
-        <a href="/art">Art</a>
-        <a href="/merch">Merch</a>
-        <a href="/contact">Contact</a>
-      </nav>
+        {/* Navigation */}
+        <nav className="flex items-center gap-8 text-sm tracking-wide">
+          <Link
+            href="/"
+            className="text-black/80 hover:opacity-60 transition-opacity duration-200"
+          >
+            Music
+          </Link>
+          <Link
+            href="/art"
+            className="text-black/80 hover:opacity-60 transition-opacity duration-200"
+          >
+            Art
+          </Link>
+          <Link
+            href="/merch"
+            className="text-black/80 hover:opacity-60 transition-opacity duration-200"
+          >
+            Merch
+          </Link>
+          <Link
+            href="/contact"
+            className="text-black/80 hover:opacity-60 transition-opacity duration-200"
+          >
+            Contact
+          </Link>
+        </nav>
+      </div>
     </header>
   );
 }
