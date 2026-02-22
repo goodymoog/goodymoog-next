@@ -11,9 +11,10 @@ export default function Header() {
           <Image
             src="/images/logo.webp"
             alt="Goodymoog"
-            width={140}
-            height={60}
+            width={260}              // bigger source image
+            height={120}
             priority
+            className={styles.logoImg} // control final size via CSS
           />
         </Link>
 
