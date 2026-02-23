@@ -1,4 +1,7 @@
+"use client";
+
 import Header from "@/components/Header";
+import Image from "next/image";
 import styles from "./MerchPage.module.css";
 
 type MerchItem = {
@@ -9,7 +12,7 @@ type MerchItem = {
   status?: "In stock" | "Preorder" | "Sold out";
   description: string;
   details: { label: string; value: string }[];
-  image?: string; // optional: "/images/merch/cd.webp"
+  image?: string; // e.g. "/images/merch/cd.webp"
 };
 
 const MERCH: MerchItem[] = [
@@ -49,8 +52,7 @@ const MERCH: MerchItem[] = [
     subtitle: "Print",
     price: "$20",
     status: "Sold out",
-    description:
-      "High-quality poster print of the album artwork. Limited run.",
+    description: "High-quality poster print of the album artwork. Limited run.",
     details: [
       { label: "Size", value: "18×24 in" },
       { label: "Paper", value: "Matte" },
@@ -62,19 +64,15 @@ const MERCH: MerchItem[] = [
 
 function StatusPill({ status }: { status?: MerchItem["status"] }) {
   if (!status) return null;
-  return (
-    <span
-      className={`${styles.pill} ${
-        status === "In stock"
-          ? styles.pillIn
-          : status === "Preorder"
-          ? styles.pillPre
-          : styles.pillOut
-      }`}
-    >
-      {status}
-    </span>
-  );
+
+  const cls =
+    status === "In stock"
+      ? styles.pillIn
+      : status === "Preorder"
+      ? styles.pillPre
+      : styles.pillOut;
+
+  return <span className={`${styles.pill} ${cls}`}>{status}</span>;
 }
 
 export default function MerchPage() {
@@ -84,7 +82,6 @@ export default function MerchPage() {
 
       <main className={styles.wrap}>
         <div className={styles.article}>
-          {/* Title */}
           <header className={styles.top}>
             <div className={styles.titleRow}>
               <h1 className={styles.h1}>Merch</h1>
@@ -96,10 +93,8 @@ export default function MerchPage() {
             <div className={styles.rule} />
           </header>
 
-          {/* Two-column layout (content + infobox) */}
           <div className={styles.grid}>
             <section className={styles.contentCol}>
-              {/* TOC */}
               <nav className={styles.toc} aria-label="Table of contents">
                 <div className={styles.tocTitle}>Contents</div>
                 <ol className={styles.tocList}>
@@ -125,18 +120,19 @@ export default function MerchPage() {
                 </ol>
               </nav>
 
-              {/* Sections */}
               <section id="overview" className={styles.section}>
                 <h2 className={styles.h2}>Overview</h2>
                 <p className={styles.p}>
                   This page lists official Goodymoog merchandise, including
-                  physical music formats, apparel, and limited prints. Availability
-                  changes over time; items may be restocked or retired.
+                  physical music formats, apparel, and limited prints.
+                  Availability changes over time; items may be restocked or
+                  retired.
                 </p>
 
                 <div className={styles.noteBox} role="note">
-                  <strong>Note:</strong> Want a fully integrated checkout? You can
-                  wire these “Buy” buttons to Stripe Checkout or Shopify later.
+                  <strong>Note:</strong> Want a fully integrated checkout? You
+                  can wire these “Buy” buttons to Stripe Checkout or Shopify
+                  later.
                 </div>
               </section>
 
@@ -145,16 +141,14 @@ export default function MerchPage() {
 
                 <div className={styles.cards}>
                   {MERCH.map((item) => (
-                    <article
-                      key={item.id}
-                      id={item.id}
-                      className={styles.card}
-                    >
+                    <article key={item.id} id={item.id} className={styles.card}>
                       <div className={styles.cardHeader}>
                         <div>
                           <h3 className={styles.h3}>{item.title}</h3>
                           {item.subtitle ? (
-                            <div className={styles.kicker}>{item.subtitle}</div>
+                            <div className={styles.kicker}>
+                              {item.subtitle}
+                            </div>
                           ) : null}
                         </div>
 
@@ -166,18 +160,19 @@ export default function MerchPage() {
 
                       <div className={styles.cardBody}>
                         <div className={styles.media}>
-                          {/* Optional image; shows placeholder if missing */}
                           {item.image ? (
-                            // eslint-disable-next-line @next/next/no-img-element
-                            <img
-                              src={item.image}
-                              alt={item.title}
-                              className={styles.img}
-                            />
-                          ) : (
-                            <div className={styles.imgPlaceholder}>
-                              Image
+                            <div className={styles.imageFrame}>
+                              <Image
+                                src={item.image}
+                                alt={item.title}
+                                width={160}
+                                height={160}
+                                className={styles.img}
+                                priority={item.id === "cd"}
+                              />
                             </div>
+                          ) : (
+                            <div className={styles.imgPlaceholder}>Image</div>
                           )}
                         </div>
 
@@ -260,17 +255,18 @@ export default function MerchPage() {
               </section>
             </section>
 
-            {/* Infobox */}
             <aside className={styles.infoCol}>
               <div className={styles.infobox}>
                 <div className={styles.infoboxTitle}>Merch (Goodymoog)</div>
 
                 <div className={styles.infoboxImageWrap}>
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
+                  <Image
                     src="/images/logo.webp"
                     alt="Goodymoog logo"
+                    width={160}
+                    height={160}
                     className={styles.infoboxImg}
+                    priority
                   />
                 </div>
 
@@ -313,7 +309,8 @@ export default function MerchPage() {
           <footer className={styles.footer}>
             <div className={styles.rule} />
             <p className={styles.footerText}>
-              Text is styled in a Wikipedia-inspired layout (not affiliated with Wikipedia).
+              Text is styled in a Wikipedia-inspired layout (not affiliated with
+              Wikipedia).
             </p>
           </footer>
         </div>
