@@ -18,9 +18,9 @@ type MerchItem = {
 const MERCH: MerchItem[] = [
   {
     id: "cd",
-    title: "Goodymoog — CD (Jewel Case)",
+    title: "Sickwiththeflow — CD (Jewel Case)",
     subtitle: "Physical release",
-    price: "$15",
+    price: "$10",
     status: "In stock",
     description:
       "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
@@ -29,22 +29,22 @@ const MERCH: MerchItem[] = [
       { label: "Includes", value: "Artwork insert + disc" },
       { label: "Ships from", value: "USA" },
     ],
-    image: "/images/merch/cd.webp",
+    image: "/images/merch/swtf.jpg",
   },
-  {
-    id: "tee",
-    title: "Goodymoog — Logo Tee",
-    subtitle: "Apparel",
-    price: "$30",
-    status: "Preorder",
+   {
+    id: "cd",
+    title: "New Mexico — CD (Jewel Case)",
+    subtitle: "Physical release",
+    price: "$10",
+    status: "In stock",
     description:
-      "Soft tee with a minimal front logo. Preorder window; ships after production.",
+      "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
     details: [
-      { label: "Fit", value: "Unisex" },
-      { label: "Sizes", value: "S–XL" },
-      { label: "Material", value: "Cotton blend" },
+      { label: "Format", value: "CD (jewel case)" },
+      { label: "Includes", value: "Artwork insert + disc" },
+      { label: "Ships from", value: "USA" },
     ],
-    image: "/images/merch/tee.webp",
+    image: "/images/merch/new_mexico.webp",
   },
   {
     id: "poster",
