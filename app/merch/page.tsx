@@ -16,8 +16,23 @@ type MerchItem = {
 };
 
 const MERCH: MerchItem[] = [
-  {
-    id: "cd",
+   {
+    id: "warp-drive-cd",
+    title: "Warp Drive — CD (Jewel Case)",
+    subtitle: "Physical release",
+    price: "$10",
+    status: "Unavailable",
+    description:
+      "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
+    details: [
+      { label: "Format", value: "CD (jewel case)" },
+      { label: "Includes", value: "Artwork insert + disc" },
+      { label: "Ships from", value: "USA" },
+    ],
+    image: "/images/merch/Warp Drive.png",
+  },
+   {
+    id: "sickwiththeflow-cd",
     title: "Sickwiththeflow — CD (Jewel Case)",
     subtitle: "Physical release",
     price: "$10",
@@ -32,7 +47,7 @@ const MERCH: MerchItem[] = [
     image: "/images/merch/swtf.jpg",
   },
    {
-    id: "cd",
+    id: "new-mexico-cd",
     title: "New Mexico — CD (Jewel Case)",
     subtitle: "Physical release",
     price: "$10",
