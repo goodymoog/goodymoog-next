@@ -1,6 +1,6 @@
 import Stripe from "stripe";
 
-export const runtime = "nodejs"; // ensures Node runtime (Stripe needs this)
+export const runtime = "nodejs";
 
 export async function POST(req: Request) {
   const secretKey = process.env.STRIPE_SECRET_KEY;
@@ -8,32 +8,30 @@ export async function POST(req: Request) {
     return new Response("Missing STRIPE_SECRET_KEY", { status: 500 });
   }
 
-  const stripe = new Stripe(secretKey, {
-    apiVersion: "2026-01-28.clover",
-  });
-
+  const stripe = new Stripe(secretKey);
   const { itemId } = await req.json();
 
-  const catalog: Record<string, { name: string; priceCents: number }> = {
-    cd: { name: "Goodymoog — CD (Jewel Case)", priceCents: 1500 },
-    tee: { name: "Goodymoog — Logo Tee", priceCents: 3000 },
-    poster: { name: "Goodymoog — Poster", priceCents: 2000 },
+  const priceMap: Record<string, string> = {
+    "warp-drive-cd": "price_1T43muGgY4LU9is8VB2EF95m",
+    "sickwiththeflow-cd": "price_1T43n8GgY4LU9is8uY455XZw",
+    "new-mexico-cd": "price_1T43nKGgY4LU9is8QNCvlfvJ",
+    "poster": "price_1T43naGgY4LU9is8emkDh0Th",
   };
 
-  const item = catalog[itemId];
-  if (!item) return new Response("Invalid item", { status: 400 });
+  const priceId = priceMap[itemId];
 
-  const origin = req.headers.get("origin") || "http://localhost:3000";
+  if (!priceId) {
+    return new Response("Invalid item", { status: 400 });
+  }
+
+  const origin =
+    req.headers.get("origin") || process.env.NEXT_PUBLIC_SITE_URL;
 
   const session = await stripe.checkout.sessions.create({
     mode: "payment",
     line_items: [
       {
-        price_data: {
-          currency: "usd",
-          product_data: { name: item.name },
-          unit_amount: item.priceCents,
-        },
+        price: priceId,
         quantity: 1,
       },
     ],
