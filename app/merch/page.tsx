@@ -134,23 +134,6 @@ export default function MerchPage() {
                   </li>
                 </ol>
               </nav>
-
-              <section id="overview" className={styles.section}>
-                <h2 className={styles.h2}>Overview</h2>
-                <p className={styles.p}>
-                  This page lists official Goodymoog merchandise, including
-                  physical music formats, apparel, and limited prints.
-                  Availability changes over time; items may be restocked or
-                  retired.
-                </p>
-
-                <div className={styles.noteBox} role="note">
-                  <strong>Note:</strong> Want a fully integrated checkout? You
-                  can wire these “Buy” buttons to Stripe Checkout or Shopify
-                  later.
-                </div>
-              </section>
-
               <section id="items" className={styles.section}>
                 <h2 className={styles.h2}>Items</h2>
 
