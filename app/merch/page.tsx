@@ -9,7 +9,7 @@ type MerchItem = {
   title: string;
   subtitle?: string;
   price: string;
-  status?: "In stock" | "Preorder" | "Sold out";
+  status?: "In stock" | "Preorder" | "Sold out" | "Unavailable";
   description: string;
   details: { label: string; value: string }[];
   image?: string; // e.g. "/images/merch/cd.webp"
@@ -183,7 +183,7 @@ export default function MerchPage() {
                                 width={160}
                                 height={160}
                                 className={styles.img}
-                                priority={item.id === "cd"}
+                                priority={item.id === "warp-drive-cd"}
                               />
                             </div>
                           ) : (
