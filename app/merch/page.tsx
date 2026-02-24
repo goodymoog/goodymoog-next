@@ -92,7 +92,7 @@ export default function MerchPage() {
         <div className={styles.article}>
           <header className={styles.top}>
             <div className={styles.titleRow}>
-              <h1 className={styles.h1}>Merch</h1>
+              <h1 className={styles.h1}>Items</h1>
             </div>
             <p className={styles.subtitle}>
               Official physical items and limited releases.
@@ -104,7 +104,7 @@ export default function MerchPage() {
             {/* MAIN COLUMN */}
             <section className={styles.contentCol}>
               <section id="items" className={styles.section}>
-                <h2 className={styles.h2}>Items</h2>
+                {/* <h2 className={styles.h2}>Items</h2> */}
 
                 <div className={styles.cards}>
                   {MERCH.map((item) => {
