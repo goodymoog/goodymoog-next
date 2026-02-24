@@ -1,10 +1,31 @@
 import Header from "@/components/Header";
+
 export default function Home() {
   return (
-    <div className="goodymoog-embed">
-      <Header />
-       
-      <div className="container">
+    <div
+      className="goodymoog-embed"
+      style={{
+        width: "100%",
+        maxWidth: "100%",
+        overflowX: "hidden", // prevents sideways overflow from iframes/sidebar etc.
+      }}
+    >
+      {/* FULL-BLEED HEADER WRAP */}
+      <div style={{ width: "100%", maxWidth: "100%" }}>
+        <Header />
+      </div>
+
+      {/* PAGE CONTENT */}
+      <div
+        className="container"
+        style={{
+          width: "100%",
+          maxWidth: 1100,
+          margin: "0 auto",
+          padding: "0 16px", // prevents content from touching edges
+          boxSizing: "border-box",
+        }}
+      >
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
@@ -15,15 +36,27 @@ export default function Home() {
                 <i> New Mexico</i> as a way to re-experience the state's vivid
                 landscapes and vibrant wildlife. For me, New Mexico represents calm
                 and tranquility—feelings I’ve tried to capture throughout the album.{" "}
-                <a href="https://www.goodymoog.com/new-mexico" target="_blank" rel="noreferrer">
+                <a
+                  href="https://www.goodymoog.com/new-mexico"
+                  target="_blank"
+                  rel="noreferrer"
+                >
                   Read more
                 </a>
               </p>
             </div>
 
             <div className="video-row">
-              <iframe src="https://www.youtube.com/embed/R_CMnyW23f0" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/JMSwQ9VrBBA" allowFullScreen />
+              <iframe
+                src="https://www.youtube.com/embed/R_CMnyW23f0"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
+              <iframe
+                src="https://www.youtube.com/embed/JMSwQ9VrBBA"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
             </div>
 
             <h2>2025: Sickwiththeflow</h2>
@@ -44,14 +77,22 @@ export default function Home() {
             </div>
 
             <div className="video-row">
-              <iframe src="https://www.youtube.com/embed/Cni0061G75M" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/wZic1EBhgAI" allowFullScreen />
+              <iframe
+                src="https://www.youtube.com/embed/Cni0061G75M"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
+              <iframe
+                src="https://www.youtube.com/embed/wZic1EBhgAI"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
             </div>
 
             <h2>2026: Warp Drive</h2>
             <div className="album-box">
               <p>
-                <i>Warp Drive</i> is a collection of songs that forced me to 
+                <i>Warp Drive</i> is a collection of songs that forced me to
                 destroy my worst nightmares. I now understand that under the veil of
                 anger is sadness. And, under all that sadness is a longing to change
                 our warped vision of the past.
@@ -59,8 +100,16 @@ export default function Home() {
             </div>
 
             <div className="video-row">
-              <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/W_HmBQmwcAw" allowFullScreen />
+              <iframe
+                src="https://www.youtube.com/embed/WHNrpnFbFqk"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
+              <iframe
+                src="https://www.youtube.com/embed/W_HmBQmwcAw"
+                allowFullScreen
+                style={{ width: "100%", aspectRatio: "16 / 9", border: 0 }}
+              />
             </div>
 
             <h2>2026: Chasing Sunsets™</h2>
