@@ -16,21 +16,23 @@ type MerchItem = {
 };
 
 const MERCH: MerchItem[] = [
-  {
-    id: "warp-drive-cd",
-    title: "Warp Drive — CD (Jewel Case)",
-    subtitle: "Physical release",
-    price: "$10",
-    status: "Unavailable",
-    description:
-      "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
-    details: [
-      { label: "Format", value: "CD (jewel case)" },
-      { label: "Includes", value: "Artwork insert + disc" },
-      { label: "Ships from", value: "USA" },
-    ],
-    image: "/images/merch/Warp Drive.png",
-  },
+
+  // {
+  //   id: "warp-drive-cd",
+  //   title: "Warp Drive — CD (Jewel Case)",
+  //   subtitle: "Physical release",
+  //   price: "$10",
+  //   status: "Unavailable",
+  //   description:
+  //     "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
+  //   details: [
+  //     { label: "Format", value: "CD (jewel case)" },
+  //     { label: "Includes", value: "Artwork insert + disc" },
+  //     { label: "Ships from", value: "USA" },
+  //   ],
+  //   image: "/images/merch/Warp Drive.png",
+  // },
+
   {
     id: "sickwiththeflow-cd",
     title: "Sickwiththeflow — CD (Jewel Case)",
@@ -61,20 +63,20 @@ const MERCH: MerchItem[] = [
     ],
     image: "/images/merch/new_mexico.webp",
   },
-  {
-    id: "poster",
-    title: "Goodymoog — Poster",
-    subtitle: "Print",
-    price: "$20",
-    status: "Sold out",
-    description: "High-quality poster print of the album artwork. Limited run.",
-    details: [
-      { label: "Size", value: "18×24 in" },
-      { label: "Paper", value: "Matte" },
-      { label: "Edition", value: "Limited" },
-    ],
-    image: "/images/merch/poster.webp",
-  },
+  // {
+  //   id: "poster",
+  //   title: "Goodymoog — Poster",
+  //   subtitle: "Print",
+  //   price: "$20",
+  //   status: "Sold out",
+  //   description: "High-quality poster print of the album artwork. Limited run.",
+  //   details: [
+  //     { label: "Size", value: "18×24 in" },
+  //     { label: "Paper", value: "Matte" },
+  //     { label: "Edition", value: "Limited" },
+  //   ],
+  //   image: "/images/merch/poster.webp",
+  // },
 ];
 
 function StatusPill({ status }: { status?: MerchItem["status"] }) {
@@ -264,13 +266,14 @@ export default function MerchPage() {
                   <summary>Can I bundle items?</summary>
                   <p className={styles.p}>
                     Yes—once you wire a real checkout, bundling is easy. For now,
-                    message me and I can arrange it manually.
+                    message me and I can arrange it manually. <a href="/contact">Contact</a>
+                    
                   </p>
                 </details>
               </section>
             </section>
 
-            <aside className={styles.infoCol}>
+            {/* <aside className={styles.infoCol}>
               <div className={styles.infobox}>
                 <div className={styles.infoboxTitle}>Merch (Goodymoog)</div>
 
@@ -318,7 +321,7 @@ export default function MerchPage() {
                   </a>
                 </div>
               </div>
-            </aside>
+            </aside> */}
           </div>
 
           <footer className={styles.footer}>
