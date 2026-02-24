@@ -16,23 +16,6 @@ type MerchItem = {
 };
 
 const MERCH: MerchItem[] = [
-
-  // {
-  //   id: "warp-drive-cd",
-  //   title: "Warp Drive — CD (Jewel Case)",
-  //   subtitle: "Physical release",
-  //   price: "$10",
-  //   status: "Unavailable",
-  //   description:
-  //     "Official physical CD in a standard jewel case. Includes full tracklist and artwork insert.",
-  //   details: [
-  //     { label: "Format", value: "CD (jewel case)" },
-  //     { label: "Includes", value: "Artwork insert + disc" },
-  //     { label: "Ships from", value: "USA" },
-  //   ],
-  //   image: "/images/merch/Warp Drive.png",
-  // },
-
   {
     id: "sickwiththeflow-cd",
     title: "Sickwiththeflow — CD (Jewel Case)",
@@ -63,20 +46,6 @@ const MERCH: MerchItem[] = [
     ],
     image: "/images/merch/new_mexico.webp",
   },
-  // {
-  //   id: "poster",
-  //   title: "Goodymoog — Poster",
-  //   subtitle: "Print",
-  //   price: "$20",
-  //   status: "Sold out",
-  //   description: "High-quality poster print of the album artwork. Limited run.",
-  //   details: [
-  //     { label: "Size", value: "18×24 in" },
-  //     { label: "Paper", value: "Matte" },
-  //     { label: "Edition", value: "Limited" },
-  //   ],
-  //   image: "/images/merch/poster.webp",
-  // },
 ];
 
 function StatusPill({ status }: { status?: MerchItem["status"] }) {
@@ -124,7 +93,7 @@ export default function MerchPage() {
           <header className={styles.top}>
             <div className={styles.titleRow}>
               <h1 className={styles.h1}>Merch</h1>
-              <span></span>
+              <span />
             </div>
             <p className={styles.subtitle}>
               Official physical items and limited releases.
@@ -133,25 +102,16 @@ export default function MerchPage() {
           </header>
 
           <div className={styles.grid}>
+            {/* MAIN COLUMN */}
             <section className={styles.contentCol}>
-              <nav className={styles.toc} aria-label="Table of contents">
-                <div className={styles.tocTitle}>Contents</div>
-                <ol className={styles.tocList}>
-                  <li>
-                    <a href="#overview">Overview</a>
-                  </li>
-                  <li>
-                    <a href="#items">Items</a>
-                    <ol></ol>
-                  </li>
-                  <li>
-                    <a href="#shipping">Shipping & returns</a>
-                  </li>
-                  <li>
-                    <a href="#faq">FAQ</a>
-                  </li>
-                </ol>
-              </nav>
+              <section id="overview" className={styles.section}>
+                <h2 className={styles.h2}>Overview</h2>
+                <p className={styles.p}>
+                  Everything here is official Goodymoog merch. Stock changes
+                  occasionally—if something shows unavailable, hit Questions and
+                  I’ll tell you what’s possible.
+                </p>
+              </section>
 
               <section id="items" className={styles.section}>
                 <h2 className={styles.h2}>Items</h2>
@@ -159,7 +119,8 @@ export default function MerchPage() {
                 <div className={styles.cards}>
                   {MERCH.map((item) => {
                     const disabled =
-                      item.status === "Sold out" || item.status === "Unavailable";
+                      item.status === "Sold out" ||
+                      item.status === "Unavailable";
 
                     return (
                       <article key={item.id} id={item.id} className={styles.card}>
@@ -187,7 +148,6 @@ export default function MerchPage() {
                                   width={160}
                                   height={160}
                                   className={styles.img}
-                                  priority={item.id === "warp-drive-cd"}
                                 />
                               </div>
                             ) : (
@@ -232,7 +192,7 @@ export default function MerchPage() {
               </section>
 
               <section id="shipping" className={styles.section}>
-                <h2 className={styles.h2}>Shipping & returns</h2>
+                <h2 className={styles.h2}>Shipping &amp; returns</h2>
                 <ul className={styles.ul}>
                   <li>Orders ship in 1–5 business days (unless preorder).</li>
                   <li>Tracking is provided when available.</li>
@@ -266,50 +226,40 @@ export default function MerchPage() {
                   <summary>Can I bundle items?</summary>
                   <p className={styles.p}>
                     Yes—once you wire a real checkout, bundling is easy. For now,
-                    message me and I can arrange it manually. <a href="/contact">Contact</a>
-                    
+                    message me and I can arrange it manually.{" "}
+                    <a href="/contact">Contact</a>
                   </p>
                 </details>
               </section>
             </section>
 
-            {/* <aside className={styles.infoCol}>
+            {/* SIDEBAR COLUMN (OLD INFOBOX SPOT) */}
+            <aside className={styles.infoCol}>
               <div className={styles.infobox}>
-                <div className={styles.infoboxTitle}>Merch (Goodymoog)</div>
-
-                <div className={styles.infoboxImageWrap}>
-                  <Image
-                    src="/images/logo.webp"
-                    alt="Goodymoog logo"
-                    width={160}
-                    height={160}
-                    className={styles.infoboxImg}
-                    priority
-                  />
-                </div>
-
-                <table className={styles.infoTable}>
-                  <tbody>
-                    <tr>
-                      <th>Creator</th>
-                      <td>Goodymoog</td>
-                    </tr>
-                    <tr>
-                      <th>Type</th>
-                      <td>Physical media, apparel, prints</td>
-                    </tr>
-                    <tr>
-                      <th>Availability</th>
-                      <td>Varies by item</td>
-                    </tr>
-                    <tr>
-                      <th>Support</th>
-                      <td>
-                        <a href="/contact">Contact</a>
-                      </td>
-                    </tr>
-                  </tbody>
-                </table>
+                <nav className={styles.toc} aria-label="Table of contents">
+                  <div className={styles.tocTitle}>Contents</div>
+                  <ol className={styles.tocList}>
+                    <li>
+                      <a href="#overview">Overview</a>
+                    </li>
+                    <li>
+                      <a href="#items">Items</a>
+                      <ol className={styles.tocSubList}>
+                        {MERCH.map((m) => (
+                          <li key={m.id}>
+                            <a href={`#${m.id}`}>{m.title}</a>
+                          </li>
+                        ))}
+                      </ol>
+                    </li>
+                    <li>
+                      <a href="#shipping">Shipping &amp; returns</a>
+                    </li>
+                    <li>
+                      <a href="#faq">FAQ</a>
+                    </li>
+                  </ol>
+                </nav>
 
                 <div className={styles.infoboxFooter}>
                   <a className={styles.smallLink} href="#items">
@@ -321,7 +271,7 @@ export default function MerchPage() {
                   </a>
                 </div>
               </div>
-            </aside> */}
+            </aside>
           </div>
 
           <footer className={styles.footer}>
