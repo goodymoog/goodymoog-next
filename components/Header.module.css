@@ -6,7 +6,7 @@
 .inner {
   max-width: 1100px;
   margin: 0 auto;
-  padding: 14px 18px;
+  padding: 16px 18px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,8 +18,9 @@
   text-decoration: none;
 }
 
+/* MAKE LOGO BIGGER HERE */
 .logoImg {
-  height: 32px;
+  height: 44px; /* was 32px */
   width: auto;
   object-fit: contain;
 }

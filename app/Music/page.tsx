@@ -10,11 +10,6 @@ export default function Home() {
         overflowX: "hidden", // prevents sideways overflow from iframes/sidebar etc.
       }}
     >
-      {/* FULL-BLEED HEADER WRAP */}
-      <div style={{ width: "100%", maxWidth: "100%" }}>
-        <Header />
-      </div>
-
       {/* PAGE CONTENT */}
       <div
         className="container"
