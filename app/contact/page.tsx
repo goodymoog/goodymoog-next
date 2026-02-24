@@ -356,8 +356,13 @@ export default function ContactPage() {
 
       <style jsx>{`
         .pageShell {
-          background: #ffffff;
           min-height: 100vh;
+          background-image:
+            linear-gradient(rgba(255,255,255,0.82), rgba(255,255,255,0.82)),
+            url("/images/backgrounds/contact.jpg");
+          background-size: cover;
+          background-position: center;
+          background-repeat: no-repeat;
         }
 
         .headerShell {
