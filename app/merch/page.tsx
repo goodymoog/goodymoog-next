@@ -12,7 +12,7 @@ type MerchItem = {
   status?: "In stock" | "Preorder" | "Sold out" | "Unavailable";
   description: string;
   details: { label: string; value: string }[];
-  image?: string; // e.g. "/images/merch/cd.webp"
+  image?: string;
 };
 
 const MERCH: MerchItem[] = [
@@ -78,7 +78,7 @@ export default function MerchPage() {
 
       const data: { url?: string; error?: string } = await res.json();
       if (data.url) window.location.href = data.url;
-      else alert(data.error || "Checkout failed (no URL returned)");
+      else alert(data.error || "Checkout failed");
     } catch {
       alert("Checkout failed (network error)");
     }
@@ -93,7 +93,6 @@ export default function MerchPage() {
           <header className={styles.top}>
             <div className={styles.titleRow}>
               <h1 className={styles.h1}>Merch</h1>
-              <span />
             </div>
             <p className={styles.subtitle}>
               Official physical items and limited releases.
@@ -104,15 +103,6 @@ export default function MerchPage() {
           <div className={styles.grid}>
             {/* MAIN COLUMN */}
             <section className={styles.contentCol}>
-              <section id="overview" className={styles.section}>
-                <h2 className={styles.h2}>Overview</h2>
-                <p className={styles.p}>
-                  Everything here is official Goodymoog merch. Stock changes
-                  occasionally—if something shows unavailable, hit Questions and
-                  I’ll tell you what’s possible.
-                </p>
-              </section>
-
               <section id="items" className={styles.section}>
                 <h2 className={styles.h2}>Items</h2>
 
@@ -123,13 +113,19 @@ export default function MerchPage() {
                       item.status === "Unavailable";
 
                     return (
-                      <article key={item.id} id={item.id} className={styles.card}>
+                      <article
+                        key={item.id}
+                        id={item.id}
+                        className={styles.card}
+                      >
                         <div className={styles.cardHeader}>
                           <div>
                             <h3 className={styles.h3}>{item.title}</h3>
-                            {item.subtitle ? (
-                              <div className={styles.kicker}>{item.subtitle}</div>
-                            ) : null}
+                            {item.subtitle && (
+                              <div className={styles.kicker}>
+                                {item.subtitle}
+                              </div>
+                            )}
                           </div>
 
                           <div className={styles.metaRight}>
@@ -151,12 +147,16 @@ export default function MerchPage() {
                                 />
                               </div>
                             ) : (
-                              <div className={styles.imgPlaceholder}>Image</div>
+                              <div className={styles.imgPlaceholder}>
+                                Image
+                              </div>
                             )}
                           </div>
 
                           <div className={styles.text}>
-                            <p className={styles.p}>{item.description}</p>
+                            <p className={styles.p}>
+                              {item.description}
+                            </p>
 
                             <table className={styles.table}>
                               <tbody>
@@ -173,13 +173,18 @@ export default function MerchPage() {
                               <button
                                 className={styles.buyBtn}
                                 type="button"
-                                onClick={() => handleCheckout(item.id)}
+                                onClick={() =>
+                                  handleCheckout(item.id)
+                                }
                                 disabled={disabled}
                               >
                                 {disabled ? item.status : "Buy"}
                               </button>
 
-                              <a className={styles.linkBtn} href="/contact">
+                              <a
+                                className={styles.linkBtn}
+                                href="/contact"
+                              >
                                 Questions
                               </a>
                             </div>
@@ -192,13 +197,12 @@ export default function MerchPage() {
               </section>
 
               <section id="shipping" className={styles.section}>
-                <h2 className={styles.h2}>Shipping &amp; returns</h2>
+                <h2 className={styles.h2}>Shipping & returns</h2>
                 <ul className={styles.ul}>
-                  <li>Orders ship in 1–5 business days (unless preorder).</li>
-                  <li>Tracking is provided when available.</li>
+                  <li>Orders ship in 1–5 business days.</li>
+                  <li>Tracking provided when available.</li>
                   <li>
-                    Returns accepted for damaged items; contact within 7 days of
-                    delivery.
+                    Returns accepted for damaged items within 7 days.
                   </li>
                 </ul>
               </section>
@@ -209,67 +213,41 @@ export default function MerchPage() {
                 <details className={styles.details}>
                   <summary>Do you ship internationally?</summary>
                   <p className={styles.p}>
-                    Not yet by default—if you need international shipping, hit
-                    “Questions” and I’ll tell you options.
-                  </p>
-                </details>
-
-                <details className={styles.details}>
-                  <summary>How do preorders work?</summary>
-                  <p className={styles.p}>
-                    Preorders charge at checkout (unless you set it up otherwise)
-                    and ship once production finishes.
+                    Not yet — contact me for options.
                   </p>
                 </details>
 
                 <details className={styles.details}>
                   <summary>Can I bundle items?</summary>
                   <p className={styles.p}>
-                    Yes—once you wire a real checkout, bundling is easy. For now,
-                    message me and I can arrange it manually.{" "}
-                    <a href="/contact">Contact</a>
+                    Yes — contact me and I can arrange it manually.<a href="/contact">Contact</a>
                   </p>
                 </details>
               </section>
             </section>
 
-            {/* SIDEBAR COLUMN (OLD INFOBOX SPOT) */}
+            {/* SIDEBAR */}
             <aside className={styles.infoCol}>
               <div className={styles.infobox}>
-                <nav className={styles.toc} aria-label="Table of contents">
+                <nav
+                  className={styles.toc}
+                  aria-label="Table of contents"
+                >
                   <div className={styles.tocTitle}>Contents</div>
                   <ol className={styles.tocList}>
                     <li>
-                      <a href="#overview">Overview</a>
-                    </li>
-                    <li>
                       <a href="#items">Items</a>
-                      <ol className={styles.tocSubList}>
-                        {MERCH.map((m) => (
-                          <li key={m.id}>
-                            <a href={`#${m.id}`}>{m.title}</a>
-                          </li>
-                        ))}
-                      </ol>
                     </li>
                     <li>
-                      <a href="#shipping">Shipping &amp; returns</a>
+                      <a href="#shipping">
+                        Shipping & returns
+                      </a>
                     </li>
                     <li>
                       <a href="#faq">FAQ</a>
                     </li>
                   </ol>
                 </nav>
-
-                <div className={styles.infoboxFooter}>
-                  <a className={styles.smallLink} href="#items">
-                    View items
-                  </a>
-                  <span className={styles.dot}>·</span>
-                  <a className={styles.smallLink} href="/music">
-                    Music
-                  </a>
-                </div>
               </div>
             </aside>
           </div>
@@ -277,8 +255,7 @@ export default function MerchPage() {
           <footer className={styles.footer}>
             <div className={styles.rule} />
             <p className={styles.footerText}>
-              Text is styled in a Wikipedia-inspired layout (not affiliated with
-              Wikipedia).
+              Styled in a Wikipedia-inspired layout.
             </p>
           </footer>
         </div>
