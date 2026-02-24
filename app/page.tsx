@@ -1,8 +1,6 @@
-import Header from "@/components/Header";
 export default function Home() {
   return (
     <div className="goodymoog-embed">
-      <Header />
        
       <div className="container">
         <div className="content">

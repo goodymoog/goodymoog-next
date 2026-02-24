@@ -1,4 +1,3 @@
-import Header from "@/components/Header";
 import Link from "next/link";
 import styles from "./Art.module.css";
 import { ART } from "../../lib/art";
@@ -6,7 +5,6 @@ import { ART } from "../../lib/art";
 export default function ArtIndexPage() {
   return (
     <main className={styles.wrap}>
-      <Header />
 
       <div className={styles.page}>
         <header className={styles.header}>

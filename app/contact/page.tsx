@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import { useEffect, useRef, useState, type FormEvent } from "react";
 
 export default function ContactPage() {
@@ -242,7 +241,6 @@ export default function ContactPage() {
   return (
     <div className="pageShell">
       <div className="headerShell">
-        <Header />
       </div>
 
       <div className="pageInner">

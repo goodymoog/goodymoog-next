@@ -1,6 +1,5 @@
 "use client";
 
-import Header from "@/components/Header";
 import Image from "next/image";
 import styles from "./MerchPage.module.css";
 
@@ -86,7 +85,6 @@ export default function MerchPage() {
 
   return (
     <>
-      <Header />
 
       <main className={styles.wrap}>
         <div className={styles.article}>
