@@ -78,7 +78,7 @@ h2{
 }
 /* Remove extra space above first section */
 .main-content h2:first-child {
-  margin-top: -11px;
+  margin-top: -5 px;
 }
 
 /* Body text */

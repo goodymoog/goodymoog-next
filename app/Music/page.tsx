@@ -11,16 +11,18 @@ export default function Home() {
       }}
     >
       {/* PAGE CONTENT */}
-      <div
-        className="container"
-        style={{
-          width: "100%",
-          maxWidth: 1100,
-          margin: "0 auto",
-          padding: "0 16px", // prevents content from touching edges
-          boxSizing: "border-box",
-        }}
-      >
+      
+        <div
+      className="container"
+      style={{
+        width: "100%",
+        maxWidth: 1100,
+        margin: "0 auto",
+        overflowX: "hidden",
+        padding: "40px 16px 0", // ✅ top right/left bottom
+        boxSizing: "border-box",
+      }}
+    >
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
