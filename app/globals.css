@@ -26,7 +26,7 @@ a:hover { color: #0a81f3; text-decoration: underline; }
   max-width: 1200px;
   margin: 0 auto;
   padding: 0 2%;
-  background: #ffffff;
+  background: transparent;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -218,3 +218,17 @@ a.external::after{
 @tailwind components;
 @tailwind utilities;
 
+/* Default site background = white */
+body { background: #fff; }
+
+/* Page background helper */
+.page-bg {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+/* Pick which pages get images */
+.bg-home { background-image: url("/images/backgrounds/home.jpg"); }
+.bg-contact { background-image: url("/images/backgrounds/contact.jpg"); }
