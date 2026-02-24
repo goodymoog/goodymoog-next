@@ -5,39 +5,25 @@ import styles from "./Header.module.css";
 export default function Header() {
   return (
     <header className={styles.header}>
-      {/* top row */}
-      <div className={styles.top}>
-        <div className={styles.inner}>
-          <Link href="/" className={styles.logoLink} aria-label="Goodymoog home">
-            <Image
-              src="/images/logo.webp"
-              alt="Goodymoog"
-              width={180}
-              height={60}
-              priority
-              className={styles.logo}
-            />
-          </Link>
+      <div className={styles.inner}>
+        <Link href="/" className={styles.logo}>
+          <Image
+            src="/images/logo.webp"
+            alt="Goodymoog"
+            width={200}
+            height={80}
+            priority
+            className={styles.logoImg}
+          />
+        </Link>
 
-          <nav className={styles.nav} aria-label="Primary">
-            <Link className={styles.navLink} href="/">
-              Music
-            </Link>
-            <Link className={styles.navLink} href="/art">
-              Art
-            </Link>
-            <Link className={styles.navLink} href="/items">
-              Items
-            </Link>
-            <Link className={styles.navLink} href="/contact">
-              Contact
-            </Link>
-          </nav>
-        </div>
+        <nav className={styles.nav}>
+          <Link href="/">Music</Link>
+          <Link href="/art">Art</Link>
+          <Link href="/merch">Items</Link>
+          <Link href="/contact">Contact</Link>
+        </nav>
       </div>
-
-      {/* bottom hairline like Wikipedia */}
-      <div className={styles.rule} />
     </header>
   );
 }
