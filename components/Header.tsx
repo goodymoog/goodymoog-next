@@ -1,9 +1,13 @@
-// components/Header.tsx
+"use client";
+
 import Link from "next/link";
 import Image from "next/image";
+import { usePathname } from "next/navigation";
 import styles from "./Header.module.css";
 
 export default function Header() {
+  const pathname = usePathname();
+
   return (
     <header className={styles.header}>
       <div className={styles.inner}>
@@ -11,18 +15,17 @@ export default function Header() {
           <Image
             src="/images/logo.webp"
             alt="Goodymoog"
-            width={260}              // bigger source image
-            height={120}
+            width={110}
+            height={40}
             priority
-            className={styles.logoImg} // control final size via CSS
           />
         </Link>
 
         <nav className={styles.nav}>
-          <Link href="/">Music</Link>
-          <Link href="/art">Art</Link>
-          <Link href="/merch">Merch</Link>
-          <Link href="/contact">Contact</Link>
+          <Link className={pathname === "/" ? styles.active : ""} href="/">Music</Link>
+          <Link className={pathname === "/art" ? styles.active : ""} href="/art">Art</Link>
+          <Link className={pathname === "/merch" ? styles.active : ""} href="/merch">Items</Link>
+          <Link className={pathname === "/contact" ? styles.active : ""} href="/contact">Contact</Link>
         </nav>
       </div>
     </header>
