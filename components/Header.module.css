@@ -20,7 +20,7 @@
 
 /* MAKE LOGO BIGGER HERE */
 .logoImg {
-  height: 44px; /* was 32px */
+  height: 70px; /* was 32px */
   width: auto;
   object-fit: contain;
 }
@@ -32,7 +32,7 @@
 
 .nav a {
   text-decoration: none;
-  font-size: 14px;
+  font-size: 16px;
   color: #202122;
 }
 
