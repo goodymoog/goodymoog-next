@@ -1,9 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap');
 
 /* ===== Goodymoog: Clean classic layout (no conflicts) ===== */
-html {
-  font-size: 110%;
-}
 
 /* Reset */
 html, body {
@@ -219,4 +216,3 @@ a.external::after{
 /* @tailwind base;
 @tailwind components;
 @tailwind utilities; */
-
