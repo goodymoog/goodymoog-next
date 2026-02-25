@@ -60,6 +60,15 @@
         left: 12px;
       }
 
+      #powerUpBoard {
+        position: absolute;
+        left: 12px;
+        top: 38px;
+        font-size: 14px;
+        color: var(--ui-muted);
+        user-select: none;
+      }
+
       #leaderboard {
         right: 12px;
         text-align: right;
@@ -147,6 +156,7 @@
   <body>
     <div id="gameContainer">
       <div id="scoreBoard">Score: 0</div>
+      <div id="powerUpBoard"></div>
 
       <div id="leaderboard">
         <h3>Leaderboard</h3>
@@ -156,7 +166,10 @@
       <div id="instructions">
         <p>Use <b>LEFT</b> and <b>RIGHT</b> arrow keys to move.</p>
         <p>Press <b>SPACE</b> to shoot.</p>
-        <p>Don’t let the red blocks reach the bottom.</p>
+        <p>Don’t let the blocks reach the bottom.</p>
+        <p style="margin-top: 10px">
+          🟧 Line-shot (10s) • 🟪 Full-auto (10s) • 🟦 Convert red → bombs (10s)
+        </p>
         <button id="startGameButton">Start Game</button>
       </div>
 
@@ -199,6 +212,7 @@
       canvas.height = 600;
 
       const scoreBoard = document.getElementById("scoreBoard");
+      const powerUpBoard = document.getElementById("powerUpBoard");
       const instructions = document.getElementById("instructions");
       const startGameButton = document.getElementById("startGameButton");
       const gameOverMessage = document.getElementById("gameOverMessage");
@@ -207,12 +221,68 @@
       const leaderboardList = document.getElementById("leaderboardList");
       const playerNameInput = document.getElementById("playerNameInput");
 
-      let player, bullets, enemies, gameLoopInterval, enemySpawnInterval, score;
+      let player,
+        bullets,
+        enemies,
+        gameLoopInterval,
+        enemySpawnInterval,
+        score;
+
       let keys = {};
+      let lastShotMs = 0;
 
       const playerSpeed = 10;
       const bulletSpeed = 9;
       const enemySpeed = 2;
+
+      const POWERUP_MS = 10_000;
+
+      // power-up timers (absolute timestamps)
+      let powerups = {
+        lineShotUntil: 0, // orange
+        autoUntil: 0, // purple
+        convertUntil: 0, // blue
+      };
+
+      function now() {
+        return performance.now();
+      }
+
+      function isLineShotActive() {
+        return now() < powerups.lineShotUntil;
+      }
+      function isAutoActive() {
+        return now() < powerups.autoUntil;
+      }
+      function isConvertActive() {
+        return now() < powerups.convertUntil;
+      }
+
+      function updateScore() {
+        scoreBoard.textContent = `Score: ${score}`;
+      }
+
+      function updatePowerupHUD() {
+        const parts = [];
+        if (isLineShotActive())
+          parts.push(
+            `🟧 Line Shot: ${Math.ceil(
+              (powerups.lineShotUntil - now()) / 1000
+            )}s`
+          );
+        if (isAutoActive())
+          parts.push(
+            `🟪 Full Auto: ${Math.ceil((powerups.autoUntil - now()) / 1000)}s`
+          );
+        if (isConvertActive())
+          parts.push(
+            `🟦 Convert→Bombs: ${Math.ceil(
+              (powerups.convertUntil - now()) / 1000
+            )}s`
+          );
+
+        powerUpBoard.textContent = parts.length ? parts.join("  |  ") : "";
+      }
 
       function resetGame() {
         player = {
@@ -222,88 +292,263 @@
           height: 50,
           color: "white",
         };
+
         bullets = [];
         enemies = [];
         score = 0;
+
+        powerups = { lineShotUntil: 0, autoUntil: 0, convertUntil: 0 };
+        lastShotMs = 0;
+
         updateScore();
+        updatePowerupHUD();
 
         instructions.style.display = "none";
         gameOverMessage.style.display = "none";
       }
 
-      function updateScore() {
-        scoreBoard.textContent = `Score: ${score}`;
-      }
-
+      // enemy types: red (normal), orange, purple, blue, bomb
       function spawnEnemy() {
         const size = 40;
         const x = Math.random() * (canvas.width - size);
-        enemies.push({ x, y: 0, size });
+
+        // tweak probabilities
+        const r = Math.random();
+        let type = "red";
+        if (r < 0.75) type = "red";
+        else if (r < 0.85) type = "orange";
+        else if (r < 0.95) type = "purple";
+        else type = "blue";
+
+        enemies.push({ x, y: 0, size, type, fuse: 0 });
       }
 
-      function shootBullet() {
+      function addPowerup(type) {
+        const t = now() + POWERUP_MS;
+        if (type === "orange")
+          powerups.lineShotUntil = Math.max(powerups.lineShotUntil, t);
+        if (type === "purple")
+          powerups.autoUntil = Math.max(powerups.autoUntil, t);
+        if (type === "blue")
+          powerups.convertUntil = Math.max(powerups.convertUntil, t);
+        updatePowerupHUD();
+      }
+
+      function shootNormalBullet() {
+        const bulletType = isConvertActive() ? "convert" : "normal";
         bullets.push({
           x: player.x + player.width / 2 - 5,
           y: player.y,
           width: 10,
           height: 20,
+          vx: 0,
+          vy: -bulletSpeed,
+          type: bulletType,
         });
+      }
+
+      // Orange power-up: horizontal “line” of bullets across the screen
+      function shootLineShot() {
+        const bulletType = isConvertActive() ? "convert" : "normal";
+
+        const count = 12;
+        const margin = 12;
+        const usableW = canvas.width - margin * 2;
+
+        for (let i = 0; i < count; i++) {
+          const x = margin + (usableW * i) / (count - 1);
+          bullets.push({
+            x: x - 4,
+            y: player.y,
+            width: 8,
+            height: 18,
+            vx: 0,
+            vy: -bulletSpeed,
+            type: bulletType,
+          });
+        }
+      }
+
+      function tryShoot() {
+        const t = now();
+
+        // fire rate
+        const normalRate = 220; // ms between shots
+        const autoRate = 90; // full auto speed (purple)
+
+        const rate = isAutoActive() ? autoRate : normalRate;
+        if (t - lastShotMs < rate) return;
+        lastShotMs = t;
+
+        // line-shot overrides normal bullet
+        if (isLineShotActive()) shootLineShot();
+        else shootNormalBullet();
+      }
+
+      function rectsIntersect(bullet, enemy) {
+        return (
+          bullet.x < enemy.x + enemy.size &&
+          bullet.x + bullet.width > enemy.x &&
+          bullet.y < enemy.y + enemy.size &&
+          bullet.y + bullet.height > enemy.y
+        );
+      }
+
+      function drawBullet(b) {
+        ctx.fillStyle = b.type === "convert" ? "deepskyblue" : "yellow";
+        ctx.fillRect(b.x, b.y, b.width, b.height);
+      }
+
+      function drawEnemy(e) {
+        if (e.type === "red") ctx.fillStyle = "red";
+        if (e.type === "orange") ctx.fillStyle = "orange";
+        if (e.type === "purple") ctx.fillStyle = "purple";
+        if (e.type === "blue") ctx.fillStyle = "deepskyblue";
+
+        if (e.type !== "bomb") {
+          ctx.fillRect(e.x, e.y, e.size, e.size);
+          return;
+        }
+
+        // bomb look
+        ctx.fillStyle = "crimson";
+        ctx.beginPath();
+        ctx.arc(e.x + e.size / 2, e.y + e.size / 2, e.size / 2, 0, Math.PI * 2);
+        ctx.fill();
+
+        // fuse bar
+        ctx.fillStyle = "rgba(255,255,255,0.25)";
+        ctx.fillRect(e.x + 6, e.y + e.size + 4, e.size - 12, 4);
+        const p = Math.max(0, Math.min(1, e.fuse / 28));
+        ctx.fillStyle = "rgba(255,255,255,0.8)";
+        ctx.fillRect(e.x + 6, e.y + e.size + 4, (e.size - 12) * p, 4);
+      }
+
+      function explodeBomb(bombEnemy) {
+        const cx = bombEnemy.x + bombEnemy.size / 2;
+        const cy = bombEnemy.y + bombEnemy.size / 2;
+        const radius = 90;
+
+        let removed = 0;
+        for (let i = enemies.length - 1; i >= 0; i--) {
+          const e = enemies[i];
+          const ex = e.x + e.size / 2;
+          const ey = e.y + e.size / 2;
+          const dx = ex - cx;
+          const dy = ey - cy;
+
+          if (dx * dx + dy * dy <= radius * radius) {
+            enemies.splice(i, 1);
+            removed++;
+          }
+        }
+
+        // scoring
+        score += removed * 10 + (removed > 0 ? 20 : 0);
+        updateScore();
+
+        // ring flash
+        ctx.beginPath();
+        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.strokeStyle = "rgba(255,255,255,0.25)";
+        ctx.lineWidth = 2;
+        ctx.stroke();
+      }
+
+      function handleEnemyHit(enemy, bulletIndex, enemyIndex) {
+        const bullet = bullets[bulletIndex];
+
+        // special blocks: grant powerup
+        if (enemy.type === "orange" || enemy.type === "purple" || enemy.type === "blue") {
+          bullets.splice(bulletIndex, 1);
+          enemies.splice(enemyIndex, 1);
+          score += 15;
+          updateScore();
+          addPowerup(enemy.type);
+          return;
+        }
+
+        // converter bullet turns red into bomb
+        if (enemy.type === "red" && bullet.type === "convert") {
+          bullets.splice(bulletIndex, 1);
+          enemy.type = "bomb";
+          enemy.fuse = 28; // ~0.5s at 60fps
+          score += 5;
+          updateScore();
+          return;
+        }
+
+        // normal kill (red or bomb)
+        bullets.splice(bulletIndex, 1);
+        enemies.splice(enemyIndex, 1);
+        score += 10;
+        updateScore();
       }
 
       function gameLoop() {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
 
-        // Player move
+        // movement
         if (keys["ArrowLeft"] && player.x > 0) player.x -= playerSpeed;
         if (keys["ArrowRight"] && player.x + player.width < canvas.width)
           player.x += playerSpeed;
 
-        // Draw player
+        // full-auto: hold space
+        if (isAutoActive() && keys["Space"]) {
+          tryShoot();
+        }
+
+        // draw player
         ctx.fillStyle = player.color;
         ctx.fillRect(player.x, player.y, player.width, player.height);
 
-        // Bullets
+        // bullets update
         for (let i = bullets.length - 1; i >= 0; i--) {
-          const bullet = bullets[i];
-          bullet.y -= bulletSpeed;
+          const b = bullets[i];
+          b.x += b.vx;
+          b.y += b.vy;
 
-          ctx.fillStyle = "yellow";
-          ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+          drawBullet(b);
 
-          if (bullet.y < 0) bullets.splice(i, 1);
+          if (b.y + b.height < 0 || b.x + b.width < 0 || b.x > canvas.width) {
+            bullets.splice(i, 1);
+          }
         }
 
-        // Enemies + collisions
+        // enemies + collisions + bombs
         for (let e = enemies.length - 1; e >= 0; e--) {
           const enemy = enemies[e];
           enemy.y += enemySpeed;
 
-          ctx.fillStyle = "red";
-          ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
-
+          // lose condition
           if (enemy.y + enemy.size > canvas.height) {
             endGame();
             return;
           }
 
-          for (let b = bullets.length - 1; b >= 0; b--) {
-            const bullet = bullets[b];
-
-            const hit =
-              bullet.x < enemy.x + enemy.size &&
-              bullet.x + bullet.width > enemy.x &&
-              bullet.y < enemy.y + enemy.size &&
-              bullet.y + bullet.height > enemy.y;
-
-            if (hit) {
-              bullets.splice(b, 1);
+          // bomb fuse countdown
+          if (enemy.type === "bomb") {
+            enemy.fuse -= 1;
+            if (enemy.fuse <= 0) {
+              const copy = { ...enemy };
               enemies.splice(e, 1);
-              score += 10;
-              updateScore();
+              explodeBomb(copy);
+              continue;
+            }
+          }
+
+          drawEnemy(enemy);
+
+          // bullet collisions
+          for (let b = bullets.length - 1; b >= 0; b--) {
+            if (rectsIntersect(bullets[b], enemy)) {
+              handleEnemyHit(enemy, b, e);
               break;
             }
           }
         }
+
+        updatePowerupHUD();
       }
 
       function startGame() {
@@ -351,11 +596,27 @@
       }
 
       document.addEventListener("keydown", (e) => {
+        // use code for space
+        if (e.code === "Space") {
+          e.preventDefault();
+
+          // one-shot on press (unless auto is active; auto fires in loop)
+          if (!keys["Space"] && !isAutoActive()) {
+            tryShoot();
+          }
+
+          keys["Space"] = true;
+          return;
+        }
+
         keys[e.key] = true;
-        if (e.key === " ") shootBullet();
       });
 
       document.addEventListener("keyup", (e) => {
+        if (e.code === "Space") {
+          keys["Space"] = false;
+          return;
+        }
         keys[e.key] = false;
       });
 
