@@ -13,10 +13,8 @@ export default function Home() {
       </section>
 
       <section className="homeIntro">
-        <p>
-          Born under New Mexico's vast skies,<br />
-          Goodymoog grew up immersed in<br />
-          the quiet rhythms of the desert.
+        <p style={{ color: "white" }}>
+          Born under New Mexico’s vast skies, Goodymoog grew up immersed in the quiet rhythms of the desert. Rooted in patience and exploration, Goodymoog often wanders the desert at dawn, attuning himself to the distant hum of mustard coyotes.
         </p>
       </section>
     </div>
