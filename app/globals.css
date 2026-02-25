@@ -249,9 +249,7 @@ body { background: #fff; }
 .homeHero {
   display: flex;
   justify-content: center;
-  align-items: flex-start;   /* NOT center */
-  padding-top: 12px;         /* small controlled space */
-  padding-bottom: 40px;
+  padding-top: 8px;
 }
 
 /* Player container */
