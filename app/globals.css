@@ -249,14 +249,10 @@ body { background: #fff; }
 .homeHero {
   display: flex;
   justify-content: center;
-  align-items: flex-start;  /* was center */
-  padding-top: 12px;  
-  margin-top: -20px      /* was 60px */
-  padding-bottom: 20px;
+  align-items: flex-start;   /* NOT center */
+  padding-top: 12px;         /* small controlled space */
+  padding-bottom: 40px;
 }
-
-.homeHero { outline: 3px solid red; }
-.playerFrame { outline: 3px solid lime; }
 
 /* Player container */
 .playerFrame {
