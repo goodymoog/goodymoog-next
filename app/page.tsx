@@ -29,16 +29,6 @@ export default function Home() {
             distant hum of mustard coyotes.
           </p>
 
-          <i>
-            <a
-              href="https://drive.google.com/uc?export=download&id=1GcGpogW8UH4oyk0MVrkclr-C3oyyUKvP"
-              style={{ color: "#cfd0ff", textDecoration: "none" }}
-              download
-            >
-              Download EPK
-            </a>
-          </i>
-
           <br />
 
           <a href="https://www.goodymoog.com/learn-more">Read more</a>
