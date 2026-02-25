@@ -290,3 +290,18 @@ body { background: #fff; }
 .goodymoog-embed {
   background: transparent !important;
 }
+/* --- HOME: force player to sit right under header --- */
+.homeHero{
+  display: grid !important;
+  place-items: start center !important; /* top + centered */
+  height: auto !important;
+  min-height: 0 !important;
+  padding-top: 8px !important;
+  padding-bottom: 0 !important;
+  margin: 0 !important;
+}
+
+.playerFrame{
+  margin: 0 auto !important;  /* center horizontally */
+  align-self: start !important; /* top within grid */
+}
