@@ -168,7 +168,7 @@
         <p>Press <b>SPACE</b> to shoot.</p>
         <p>Don’t let the blocks reach the bottom.</p>
         <p style="margin-top: 10px">
-          🟧 Line-shot (10s) • 🟪 Full-auto (10s) • 🟦 Convert red → bombs (10s)
+          🟧 Guided Missile (10s) • 🟪 Full-auto (10s) • 🟦 Convert red → bombs (10s)
         </p>
         <button id="startGameButton">Start Game</button>
       </div>
@@ -221,13 +221,7 @@
       const leaderboardList = document.getElementById("leaderboardList");
       const playerNameInput = document.getElementById("playerNameInput");
 
-      let player,
-        bullets,
-        enemies,
-        gameLoopInterval,
-        enemySpawnInterval,
-        score;
-
+      let player, bullets, enemies, gameLoopInterval, enemySpawnInterval, score;
       let keys = {};
       let lastShotMs = 0;
 
@@ -237,10 +231,17 @@
 
       const POWERUP_MS = 10_000;
 
+      // ---------- NEW TWEAKS ----------
+      const BOMB_FUSE_FRAMES = 8;      // faster explosion (was ~28)
+      const MISSILE_SPEED = 10;
+      const SHOCK_BULLET_COUNT = 28;
+      const SHOCK_BULLET_SPEED = 14;
+      // --------------------------------
+
       // power-up timers (absolute timestamps)
       let powerups = {
-        lineShotUntil: 0, // orange
-        autoUntil: 0, // purple
+        missileUntil: 0, // orange -> guided missile
+        autoUntil: 0,    // purple
         convertUntil: 0, // blue
       };
 
@@ -248,8 +249,8 @@
         return performance.now();
       }
 
-      function isLineShotActive() {
-        return now() < powerups.lineShotUntil;
+      function isMissileActive() {
+        return now() < powerups.missileUntil;
       }
       function isAutoActive() {
         return now() < powerups.autoUntil;
@@ -264,10 +265,10 @@
 
       function updatePowerupHUD() {
         const parts = [];
-        if (isLineShotActive())
+        if (isMissileActive())
           parts.push(
-            `🟧 Line Shot: ${Math.ceil(
-              (powerups.lineShotUntil - now()) / 1000
+            `🟧 Guided Missile: ${Math.ceil(
+              (powerups.missileUntil - now()) / 1000
             )}s`
           );
         if (isAutoActive())
@@ -297,7 +298,7 @@
         enemies = [];
         score = 0;
 
-        powerups = { lineShotUntil: 0, autoUntil: 0, convertUntil: 0 };
+        powerups = { missileUntil: 0, autoUntil: 0, convertUntil: 0 };
         lastShotMs = 0;
 
         updateScore();
@@ -326,7 +327,7 @@
       function addPowerup(type) {
         const t = now() + POWERUP_MS;
         if (type === "orange")
-          powerups.lineShotUntil = Math.max(powerups.lineShotUntil, t);
+          powerups.missileUntil = Math.max(powerups.missileUntil, t);
         if (type === "purple")
           powerups.autoUntil = Math.max(powerups.autoUntil, t);
         if (type === "blue")
@@ -344,29 +345,22 @@
           vx: 0,
           vy: -bulletSpeed,
           type: bulletType,
+          life: 9999,
         });
       }
 
-      // Orange power-up: horizontal “line” of bullets across the screen
-      function shootLineShot() {
-        const bulletType = isConvertActive() ? "convert" : "normal";
-
-        const count = 12;
-        const margin = 12;
-        const usableW = canvas.width - margin * 2;
-
-        for (let i = 0; i < count; i++) {
-          const x = margin + (usableW * i) / (count - 1);
-          bullets.push({
-            x: x - 4,
-            y: player.y,
-            width: 8,
-            height: 18,
-            vx: 0,
-            vy: -bulletSpeed,
-            type: bulletType,
-          });
-        }
+      // NEW: guided missile shot (orange power-up)
+      function shootMissile() {
+        bullets.push({
+          x: player.x + player.width / 2 - 5,
+          y: player.y,
+          width: 10,
+          height: 20,
+          vx: 0,
+          vy: -MISSILE_SPEED,
+          type: "missile",
+          life: 9999,
+        });
       }
 
       function tryShoot() {
@@ -374,14 +368,16 @@
 
         // fire rate
         const normalRate = 220; // ms between shots
-        const autoRate = 90; // full auto speed (purple)
+        const autoRate = 90;    // full auto speed (purple)
+        const missileRate = 280; // missiles a bit slower so it feels punchy
 
-        const rate = isAutoActive() ? autoRate : normalRate;
+        let rate = isAutoActive() ? autoRate : normalRate;
+        if (isMissileActive()) rate = Math.max(rate, missileRate);
+
         if (t - lastShotMs < rate) return;
         lastShotMs = t;
 
-        // line-shot overrides normal bullet
-        if (isLineShotActive()) shootLineShot();
+        if (isMissileActive()) shootMissile();
         else shootNormalBullet();
       }
 
@@ -395,8 +391,18 @@
       }
 
       function drawBullet(b) {
-        ctx.fillStyle = b.type === "convert" ? "deepskyblue" : "yellow";
+        if (b.type === "convert") ctx.fillStyle = "deepskyblue";
+        else if (b.type === "missile") ctx.fillStyle = "orange";
+        else if (b.type === "shock") ctx.fillStyle = "rgba(255,255,255,0.85)";
+        else ctx.fillStyle = "yellow";
+
         ctx.fillRect(b.x, b.y, b.width, b.height);
+
+        // tiny trail for missile
+        if (b.type === "missile") {
+          ctx.fillStyle = "rgba(255,165,0,0.25)";
+          ctx.fillRect(b.x - 2, b.y + 14, b.width + 4, b.height);
+        }
       }
 
       function drawEnemy(e) {
@@ -416,47 +422,84 @@
         ctx.arc(e.x + e.size / 2, e.y + e.size / 2, e.size / 2, 0, Math.PI * 2);
         ctx.fill();
 
-        // fuse bar
+        // fuse bar (fast)
         ctx.fillStyle = "rgba(255,255,255,0.25)";
         ctx.fillRect(e.x + 6, e.y + e.size + 4, e.size - 12, 4);
-        const p = Math.max(0, Math.min(1, e.fuse / 28));
+        const p = Math.max(0, Math.min(1, e.fuse / BOMB_FUSE_FRAMES));
         ctx.fillStyle = "rgba(255,255,255,0.8)";
         ctx.fillRect(e.x + 6, e.y + e.size + 4, (e.size - 12) * p, 4);
       }
 
+      function spawnShockwaveBullets(cx, cy) {
+        for (let i = 0; i < SHOCK_BULLET_COUNT; i++) {
+          const a = (i / SHOCK_BULLET_COUNT) * Math.PI * 2;
+          bullets.push({
+            x: cx - 3,
+            y: cy - 3,
+            width: 6,
+            height: 6,
+            vx: Math.cos(a) * SHOCK_BULLET_SPEED,
+            vy: Math.sin(a) * SHOCK_BULLET_SPEED,
+            type: "shock",
+            life: 40, // frames
+          });
+        }
+      }
+
+      // NEW: bomb explosion annihilates everything
       function explodeBomb(bombEnemy) {
         const cx = bombEnemy.x + bombEnemy.size / 2;
         const cy = bombEnemy.y + bombEnemy.size / 2;
-        const radius = 90;
 
-        let removed = 0;
-        for (let i = enemies.length - 1; i >= 0; i--) {
-          const e = enemies[i];
-          const ex = e.x + e.size / 2;
-          const ey = e.y + e.size / 2;
-          const dx = ex - cx;
-          const dy = ey - cy;
+        // score everything currently alive
+        const removed = enemies.length;
 
-          if (dx * dx + dy * dy <= radius * radius) {
-            enemies.splice(i, 1);
-            removed++;
-          }
-        }
+        // ANNihilate all blocks instantly
+        enemies = [];
 
-        // scoring
-        score += removed * 10 + (removed > 0 ? 20 : 0);
+        // big score pop
+        score += removed * 10 + 100;
         updateScore();
+
+        // visual shockwave bullets
+        spawnShockwaveBullets(cx, cy);
 
         // ring flash
         ctx.beginPath();
-        ctx.arc(cx, cy, radius, 0, Math.PI * 2);
+        ctx.arc(cx, cy, 160, 0, Math.PI * 2);
         ctx.strokeStyle = "rgba(255,255,255,0.25)";
         ctx.lineWidth = 2;
         ctx.stroke();
       }
 
+      function nearestEnemyTo(x, y) {
+        let best = null;
+        let bestD2 = Infinity;
+        for (const e of enemies) {
+          const ex = e.x + e.size / 2;
+          const ey = e.y + e.size / 2;
+          const dx = ex - x;
+          const dy = ey - y;
+          const d2 = dx * dx + dy * dy;
+          if (d2 < bestD2) {
+            bestD2 = d2;
+            best = e;
+          }
+        }
+        return best;
+      }
+
       function handleEnemyHit(enemy, bulletIndex, enemyIndex) {
         const bullet = bullets[bulletIndex];
+
+        // shock bullets delete anything they touch
+        if (bullet.type === "shock") {
+          bullets.splice(bulletIndex, 1);
+          enemies.splice(enemyIndex, 1);
+          score += 10;
+          updateScore();
+          return;
+        }
 
         // special blocks: grant powerup
         if (enemy.type === "orange" || enemy.type === "purple" || enemy.type === "blue") {
@@ -468,17 +511,17 @@
           return;
         }
 
-        // converter bullet turns red into bomb
+        // converter bullet turns red into bomb (fast fuse)
         if (enemy.type === "red" && bullet.type === "convert") {
           bullets.splice(bulletIndex, 1);
           enemy.type = "bomb";
-          enemy.fuse = 28; // ~0.5s at 60fps
+          enemy.fuse = BOMB_FUSE_FRAMES;
           score += 5;
           updateScore();
           return;
         }
 
-        // normal kill (red or bomb)
+        // missile kills like normal (or bomb)
         bullets.splice(bulletIndex, 1);
         enemies.splice(enemyIndex, 1);
         score += 10;
@@ -505,12 +548,43 @@
         // bullets update
         for (let i = bullets.length - 1; i >= 0; i--) {
           const b = bullets[i];
+
+          // missile homing behavior
+          if (b.type === "missile") {
+            const target = nearestEnemyTo(b.x + b.width / 2, b.y + b.height / 2);
+            if (target) {
+              const tx = target.x + target.size / 2;
+              const ty = target.y + target.size / 2;
+              const dx = tx - (b.x + b.width / 2);
+              const dy = ty - (b.y + b.height / 2);
+              const mag = Math.hypot(dx, dy) || 1;
+
+              // set velocity directly toward closest enemy
+              b.vx = (dx / mag) * MISSILE_SPEED;
+              b.vy = (dy / mag) * MISSILE_SPEED;
+            } else {
+              // no targets => go up
+              b.vx = 0;
+              b.vy = -MISSILE_SPEED;
+            }
+          }
+
           b.x += b.vx;
           b.y += b.vy;
 
+          // shock bullets fade out
+          if (b.type === "shock") {
+            b.life -= 1;
+            if (b.life <= 0) {
+              bullets.splice(i, 1);
+              continue;
+            }
+          }
+
           drawBullet(b);
 
-          if (b.y + b.height < 0 || b.x + b.width < 0 || b.x > canvas.width) {
+          // remove offscreen
+          if (b.y + b.height < -50 || b.y > canvas.height + 50 || b.x + b.width < -50 || b.x > canvas.width + 50) {
             bullets.splice(i, 1);
           }
         }
@@ -526,7 +600,7 @@
             return;
           }
 
-          // bomb fuse countdown
+          // bomb fuse countdown (FAST)
           if (enemy.type === "bomb") {
             enemy.fuse -= 1;
             if (enemy.fuse <= 0) {
@@ -596,7 +670,6 @@
       }
 
       document.addEventListener("keydown", (e) => {
-        // use code for space
         if (e.code === "Space") {
           e.preventDefault();
 
