@@ -2,24 +2,24 @@ import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <>
-      {/* Fixed animated background */}
-      <div className="fixedHero" aria-hidden="true">
+    <div className="page-bg bg-home">
+      <Header />
+
+      {/* Fixed, clickable player */}
+      <div className="playerFixed">
         <iframe
           src="https://goodymoog.github.io/goodymoog-player5/"
-          title="Goodymoog Player Background"
+          title="Goodymoog Player"
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
         />
-        <div className="fixedHeroOverlay" />
       </div>
 
-      {/* Real page content */}
-      <div className="pageOnTop">
-        <Header />
-
+      {/* Your normal homepage content (starts below player) */}
+      <main className="homeContent">
         <div className="goodymoog-embed">
-          {/* KEEP your entire homepage content here unchanged */}
+          {/* paste your existing homepage JSX here */}
         </div>
-      </div>
-    </>
+      </main>
+    </div>
   );
 }
