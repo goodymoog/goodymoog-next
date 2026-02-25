@@ -232,3 +232,32 @@ body { background: #fff; }
 /* Pick which pages get images */
 .bg-home { background-image: url("/images/backgrounds/home.jpg"); }
 .bg-contact { background-image: url("/images/backgrounds/contact.jpg"); }
+
+.fixedHero {
+  position: fixed;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.fixedHero iframe {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.fixedHeroOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(255,255,255,0.85),
+    rgba(255,255,255,0.9)
+  );
+}
+
+.pageOnTop {
+  position: relative;
+  z-index: 1;
+}
