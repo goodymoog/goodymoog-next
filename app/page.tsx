@@ -29,8 +29,6 @@ export default function Home() {
             distant hum of mustard coyotes.
           </p>
 
-          <br />
-
           <a href="https://www.goodymoog.com/learn-more">Read more</a>
         </div>
       </section>
