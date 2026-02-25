@@ -1,22 +1,17 @@
-import Header from "@/components/Header";
-
 export default function Home() {
   return (
     <div className="homePage">
-      <Header />
+      {/* NO <Header /> HERE */}
 
-      {/* HERO SECTION */}
       <section className="homeHero">
         <div className="playerFrame">
           <iframe
             src="https://goodymoog.github.io/goodymoog-player5/"
             title="Goodymoog Player"
-            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           />
         </div>
       </section>
 
-      {/* INTRO TEXT */}
       <section className="homeIntro">
         <p>
           Born under New Mexico's vast skies,<br />
