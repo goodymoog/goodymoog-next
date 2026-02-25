@@ -255,6 +255,9 @@ body { background: #fff; }
   padding-bottom: 20px;
 }
 
+.homeHero { outline: 3px solid red; }
+.playerFrame { outline: 3px solid lime; }
+
 /* Player container */
 .playerFrame {
   width: min(520px, 92vw);
