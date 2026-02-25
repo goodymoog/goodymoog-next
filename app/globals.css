@@ -249,8 +249,8 @@ body { background: #fff; }
 .homeHero {
   display: flex;
   justify-content: center;
-  align-items: center;
-  padding-top: 60px;
+  align-items: flex-start;  /* was center */
+  padding-top: 12px;        /* was 60px */
   padding-bottom: 20px;
 }
 
