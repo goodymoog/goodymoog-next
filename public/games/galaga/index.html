@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <title>Block Shooter Game</title>
+
+    <!-- Firebase (Compat) -->
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.6.10/firebase-firestore-compat.js"></script>
+
+    <style>
+      :root {
+        --ui-text: rgba(255, 255, 255, 0.92);
+        --ui-muted: rgba(255, 255, 255, 0.7);
+      }
+
+      html,
+      body {
+        height: 100%;
+      }
+
+      body {
+        margin: 0;
+        overflow: hidden;
+        font-family: Arial, sans-serif;
+        background: #000;
+        color: var(--ui-text);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+      }
+
+      #gameContainer {
+        position: relative;
+        width: 800px;
+        height: 600px;
+        overflow: hidden;
+      }
+
+      canvas {
+        display: block;
+        width: 100%;
+        height: 100%;
+      }
+
+      /* HUD */
+      #scoreBoard,
+      #leaderboard {
+        position: absolute;
+        top: 12px;
+        font-size: 16px;
+        font-family: Arial, sans-serif;
+        color: var(--ui-text);
+        background: transparent;
+        user-select: none;
+      }
+
+      #scoreBoard {
+        left: 12px;
+      }
+
+      #leaderboard {
+        right: 12px;
+        text-align: right;
+      }
+
+      #leaderboard h3 {
+        margin: 0 0 6px 0;
+        font-size: 16px;
+        display: inline-block;
+        color: var(--ui-text);
+      }
+
+      #leaderboard ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+      }
+
+      #leaderboard li {
+        font-size: 14px;
+        color: var(--ui-muted);
+        line-height: 1.35;
+      }
+
+      /* Center overlays */
+      #instructions,
+      #gameOverMessage {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        text-align: center;
+        color: var(--ui-text);
+        font-size: 16px;
+        padding: 18px 20px;
+        border-radius: 12px;
+        background: rgba(0, 0, 0, 0.35);
+        border: 1px solid rgba(255, 255, 255, 0.15);
+        backdrop-filter: blur(6px);
+        width: min(420px, 92%);
+      }
+
+      #instructions p {
+        margin: 8px 0;
+        color: var(--ui-muted);
+      }
+
+      #gameOverMessage {
+        display: none;
+      }
+
+      button {
+        padding: 10px 14px;
+        font-size: 14px;
+        background: rgba(255, 255, 255, 0.08);
+        color: var(--ui-text);
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        border-radius: 10px;
+        cursor: pointer;
+        margin-top: 12px;
+      }
+
+      button:hover {
+        background: rgba(255, 255, 255, 0.12);
+      }
+
+      #playerNameInput {
+        margin-top: 12px;
+        padding: 10px 12px;
+        font-size: 14px;
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.22);
+        background: rgba(0, 0, 0, 0.35);
+        color: var(--ui-text);
+        width: min(240px, 90%);
+        outline: none;
+      }
+
+      #playerNameInput::placeholder {
+        color: rgba(255, 255, 255, 0.45);
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="gameContainer">
+      <div id="scoreBoard">Score: 0</div>
+
+      <div id="leaderboard">
+        <h3>Leaderboard</h3>
+        <ul id="leaderboardList"></ul>
+      </div>
+
+      <div id="instructions">
+        <p>Use <b>LEFT</b> and <b>RIGHT</b> arrow keys to move.</p>
+        <p>Press <b>SPACE</b> to shoot.</p>
+        <p>Don’t let the red blocks reach the bottom.</p>
+        <button id="startGameButton">Start Game</button>
+      </div>
+
+      <div id="gameOverMessage">
+        <p style="margin: 0 0 8px 0; font-weight: 700">GAME OVER</p>
+        <input
+          type="text"
+          id="playerNameInput"
+          placeholder="Enter your name"
+          maxlength="10"
+          autocomplete="off"
+        />
+        <div>
+          <button id="submitScoreButton">Submit Score</button>
+          <button id="restartButton" style="margin-left: 8px">Restart</button>
+        </div>
+      </div>
+
+      <canvas id="gameCanvas"></canvas>
+    </div>
+
+    <script>
+      // Firebase Configuration (public config; rules still control security)
+      const firebaseConfig = {
+        apiKey: "AIzaSyCFHpY3xxM0ttqo45j8SNmFUox8wMnk1Dg",
+        authDomain: "goodymoog-galaxia.firebaseapp.com",
+        projectId: "goodymoog-galaxia",
+        storageBucket: "goodymoog-galaxia.firebasestorage.app",
+        messagingSenderId: "732379333009",
+        appId: "1:732379333009:web:ae8bffc6d4d074e5b05a30",
+      };
+
+      firebase.initializeApp(firebaseConfig);
+      const db = firebase.firestore();
+      const leaderboardRef = db.collection("leaderboard");
+
+      const canvas = document.getElementById("gameCanvas");
+      const ctx = canvas.getContext("2d");
+      canvas.width = 800;
+      canvas.height = 600;
+
+      const scoreBoard = document.getElementById("scoreBoard");
+      const instructions = document.getElementById("instructions");
+      const startGameButton = document.getElementById("startGameButton");
+      const gameOverMessage = document.getElementById("gameOverMessage");
+      const restartButton = document.getElementById("restartButton");
+      const submitScoreButton = document.getElementById("submitScoreButton");
+      const leaderboardList = document.getElementById("leaderboardList");
+      const playerNameInput = document.getElementById("playerNameInput");
+
+      let player, bullets, enemies, gameLoopInterval, enemySpawnInterval, score;
+      let keys = {};
+
+      const playerSpeed = 10;
+      const bulletSpeed = 9;
+      const enemySpeed = 2;
+
+      function resetGame() {
+        player = {
+          x: canvas.width / 2 - 25,
+          y: canvas.height - 70,
+          width: 50,
+          height: 50,
+          color: "white",
+        };
+        bullets = [];
+        enemies = [];
+        score = 0;
+        updateScore();
+
+        instructions.style.display = "none";
+        gameOverMessage.style.display = "none";
+      }
+
+      function updateScore() {
+        scoreBoard.textContent = `Score: ${score}`;
+      }
+
+      function spawnEnemy() {
+        const size = 40;
+        const x = Math.random() * (canvas.width - size);
+        enemies.push({ x, y: 0, size });
+      }
+
+      function shootBullet() {
+        bullets.push({
+          x: player.x + player.width / 2 - 5,
+          y: player.y,
+          width: 10,
+          height: 20,
+        });
+      }
+
+      function gameLoop() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        // Player move
+        if (keys["ArrowLeft"] && player.x > 0) player.x -= playerSpeed;
+        if (keys["ArrowRight"] && player.x + player.width < canvas.width)
+          player.x += playerSpeed;
+
+        // Draw player
+        ctx.fillStyle = player.color;
+        ctx.fillRect(player.x, player.y, player.width, player.height);
+
+        // Bullets
+        for (let i = bullets.length - 1; i >= 0; i--) {
+          const bullet = bullets[i];
+          bullet.y -= bulletSpeed;
+
+          ctx.fillStyle = "yellow";
+          ctx.fillRect(bullet.x, bullet.y, bullet.width, bullet.height);
+
+          if (bullet.y < 0) bullets.splice(i, 1);
+        }
+
+        // Enemies + collisions
+        for (let e = enemies.length - 1; e >= 0; e--) {
+          const enemy = enemies[e];
+          enemy.y += enemySpeed;
+
+          ctx.fillStyle = "red";
+          ctx.fillRect(enemy.x, enemy.y, enemy.size, enemy.size);
+
+          if (enemy.y + enemy.size > canvas.height) {
+            endGame();
+            return;
+          }
+
+          for (let b = bullets.length - 1; b >= 0; b--) {
+            const bullet = bullets[b];
+
+            const hit =
+              bullet.x < enemy.x + enemy.size &&
+              bullet.x + bullet.width > enemy.x &&
+              bullet.y < enemy.y + enemy.size &&
+              bullet.y + bullet.height > enemy.y;
+
+            if (hit) {
+              bullets.splice(b, 1);
+              enemies.splice(e, 1);
+              score += 10;
+              updateScore();
+              break;
+            }
+          }
+        }
+      }
+
+      function startGame() {
+        resetGame();
+        gameLoopInterval = setInterval(gameLoop, 1000 / 60);
+        enemySpawnInterval = setInterval(spawnEnemy, 1000);
+      }
+
+      function endGame() {
+        clearInterval(gameLoopInterval);
+        clearInterval(enemySpawnInterval);
+        gameOverMessage.style.display = "block";
+      }
+
+      async function submitScore() {
+        const playerName = (playerNameInput.value || "").trim() || "Player";
+
+        await leaderboardRef.add({
+          name: playerName,
+          score: score,
+          timestamp: firebase.firestore.FieldValue.serverTimestamp(),
+        });
+
+        playerNameInput.value = "";
+        gameOverMessage.style.display = "none";
+        instructions.style.display = "block";
+      }
+
+      function renderLeaderboard() {
+        leaderboardRef
+          .orderBy("score", "desc")
+          .limit(3)
+          .onSnapshot((snapshot) => {
+            leaderboardList.innerHTML = "";
+            let rank = 1;
+
+            snapshot.forEach((doc) => {
+              const entry = doc.data();
+              const li = document.createElement("li");
+              li.textContent = `${rank}) ${entry.name} - ${entry.score}`;
+              leaderboardList.appendChild(li);
+              rank++;
+            });
+          });
+      }
+
+      document.addEventListener("keydown", (e) => {
+        keys[e.key] = true;
+        if (e.key === " ") shootBullet();
+      });
+
+      document.addEventListener("keyup", (e) => {
+        keys[e.key] = false;
+      });
+
+      startGameButton.addEventListener("click", startGame);
+      restartButton.addEventListener("click", startGame);
+      submitScoreButton.addEventListener("click", submitScore);
+
+      renderLeaderboard();
+    </script>
+  </body>
+</html>
