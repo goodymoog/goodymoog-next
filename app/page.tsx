@@ -2,24 +2,28 @@ import Header from "@/components/Header";
 
 export default function Home() {
   return (
-    <div className="page-bg bg-home">
+    <div className="homePage">
       <Header />
 
-      {/* Fixed, clickable player */}
-      <div className="playerFixed">
-        <iframe
-          src="https://goodymoog.github.io/goodymoog-player5/"
-          title="Goodymoog Player"
-          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-        />
-      </div>
-
-      {/* Your normal homepage content (starts below player) */}
-      <main className="homeContent">
-        <div className="goodymoog-embed">
-          {/* paste your existing homepage JSX here */}
+      {/* HERO SECTION */}
+      <section className="homeHero">
+        <div className="playerFrame">
+          <iframe
+            src="https://goodymoog.github.io/goodymoog-player5/"
+            title="Goodymoog Player"
+            allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          />
         </div>
-      </main>
+      </section>
+
+      {/* INTRO TEXT */}
+      <section className="homeIntro">
+        <p>
+          Born under New Mexico's vast skies,<br />
+          Goodymoog grew up immersed in<br />
+          the quiet rhythms of the desert.
+        </p>
+      </section>
     </div>
   );
 }

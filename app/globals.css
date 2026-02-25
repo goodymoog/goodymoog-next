@@ -233,30 +233,63 @@ body { background: #fff; }
 .bg-home { background-image: url("/images/backgrounds/home.jpg"); }
 .bg-contact { background-image: url("/images/backgrounds/contact.jpg"); }
 
-.playerFixed {
-  position: fixed;
-  left: 50%;
-  top: 84px; /* adjust if header is taller/shorter */
-  transform: translateX(-50%);
-  width: min(1100px, calc(100vw - 32px));
-  height: min(78vh, 820px);
-  z-index: 10;
-  border-radius: 12px;
-  overflow: hidden;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.25);
+/* ============================= */
+/* HOME PAGE BACKGROUND */
+/* ============================= */
+
+.homePage {
+  min-height: 100vh;
+  background: url("/images/backgrounds/home.jpg") center / cover no-repeat fixed;
 }
 
-.playerFixed iframe {
+/* ============================= */
+/* HERO LAYOUT */
+/* ============================= */
+
+.homeHero {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 60px;
+  padding-bottom: 20px;
+}
+
+/* Player container */
+.playerFrame {
+  width: min(520px, 92vw);
+  aspect-ratio: 3 / 5;
+  border-radius: 26px;
+  overflow: hidden;
+  box-shadow: 0 30px 80px rgba(0, 0, 0, 0.4);
+  background: transparent;
+}
+
+.playerFrame iframe {
   width: 100%;
   height: 100%;
   border: 0;
 }
 
-.homeContent {
-  width: 100%;
-  max-width: 1100px;
-  margin: 0 auto;
-  padding: 0 16px;
-  padding-top: calc(min(78vh, 820px) + 110px); /* player height + gap */
-  box-sizing: border-box;
+/* ============================= */
+/* TEXT BELOW PLAYER */
+/* ============================= */
+
+.homeIntro {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  padding: 20px 16px 100px;
+  color: rgba(255, 255, 255, 0.95);
+  font-size: 22px;
+  line-height: 1.8;
+  text-shadow: 0 4px 24px rgba(0, 0, 0, 0.45);
+}
+
+/* ============================= */
+/* REMOVE WHITE WIKI BOX ON HOME */
+/* ============================= */
+
+/* Make sure this is NOT forcing white background */
+.goodymoog-embed {
+  background: transparent !important;
 }
