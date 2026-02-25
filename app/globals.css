@@ -250,7 +250,8 @@ body { background: #fff; }
   display: flex;
   justify-content: center;
   align-items: flex-start;  /* was center */
-  padding-top: 12px;        /* was 60px */
+  padding-top: 12px;  
+  margin-top: -20px      /* was 60px */
   padding-bottom: 20px;
 }
 
