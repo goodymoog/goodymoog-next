@@ -230,8 +230,8 @@ body { background: #fff; }
 }
 
 /* Pick which pages get images */
-.bg-home { background-image: url("/images/backgrounds/home.jpg"); }
-.bg-contact { background-image: url("/images/backgrounds/contact.jpg"); }
+.bg-home { background-image: url("/images/backgrounds/home.webo"); }
+.bg-contact { background-image: url("/images/backgrounds/contact.webp"); }
 
 /* ============================= */
 /* HOME PAGE BACKGROUND */
@@ -239,7 +239,7 @@ body { background: #fff; }
 
 .homePage {
   min-height: 100vh;
-  background: url("/images/backgrounds/home.jpg") center / cover no-repeat fixed;
+  background: url("/images/backgrounds/home.webp") center / cover no-repeat fixed;
 }
 /* ============================= */
 /* HERO LAYOUT */

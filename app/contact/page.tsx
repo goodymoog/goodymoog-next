@@ -358,7 +358,7 @@ export default function ContactPage() {
         .pageShell {
           min-height: 100vh;
           background-image:
-            url("/images/backgrounds/contact.jpg");
+            url("/images/backgrounds/contact.webp");
           background-size: cover;
           background-position: center;
           background-repeat: no-repeat;
