@@ -1,14 +1,19 @@
 .page {
-  background: #ffffff;
+  background: white;
   color: #202122;
   min-height: 100vh;
-  padding: 24px;
   font-family: Georgia, "Times New Roman", serif;
+}
+
+.container {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 24px 16px 60px;
 }
 
 .breadcrumb {
   font-size: 14px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .header h1 {
@@ -17,10 +22,9 @@
 }
 
 .year {
-  display: inline-block;
-  margin-top: 4px;
   font-size: 14px;
   color: #54595d;
+  margin-top: 4px;
 }
 
 .lead {
@@ -33,11 +37,7 @@
   display: grid;
   grid-template-columns: 1fr 300px;
   gap: 32px;
-  margin-top: 32px;
-}
-
-.article {
-  max-width: 800px;
+  margin-top: 36px;
 }
 
 .article h2 {
@@ -52,26 +52,8 @@
   margin-top: 12px;
 }
 
-.infobox {
-  background: #f8f9fa;
-  border: 1px solid #a2a9b1;
-  padding: 12px;
-  height: fit-content;
-}
-
-.infobox img {
-  width: 100%;
-  height: auto;
-  margin-bottom: 12px;
-}
-
-.infoSection div {
-  font-size: 14px;
-  margin-bottom: 6px;
-}
-
 .figure {
-  margin-top: 16px;
+  margin-top: 20px;
 }
 
 .figure img {
@@ -94,4 +76,27 @@
   width: 100%;
   height: 100%;
   border: none;
+}
+
+.infobox {
+  background: #f8f9fa;
+  border: 1px solid #a2a9b1;
+  padding: 12px;
+  height: fit-content;
+}
+
+.infobox img {
+  width: 100%;
+  height: auto;
+  margin-bottom: 12px;
+}
+
+.infoBlock div {
+  font-size: 14px;
+  margin-bottom: 6px;
+}
+
+.back {
+  margin-top: 40px;
+  font-size: 14px;
 }
