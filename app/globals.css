@@ -279,24 +279,14 @@ body { background: #fff; }
 /* ============================= */
 
 @media (max-width: 480px) {
-  /* give the sticky header breathing room */
-  .container{
-    padding-top: 10px;  /* adjust: 0–16 */
+  /* make room for Safari bottom bar */
+  .homeHero {
+    padding-bottom: 90px;
   }
 
-  /* keep hero in normal flow (no overlap) */
-  .homeHero{
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  /* move ONLY the iframe a bit */
-  .playerFrame{
-    margin-top: 8px;    /* try 0, 6, 10 */
-  }
-
-  /* if the background feels like it's creeping under header on iOS */
-  .homePage{
-    background-attachment: scroll; /* fixes mobile "fixed background" weirdness */
+  /* slightly smaller player so it fits above Safari UI */
+  .playerFrame {
+    width: min(440px, 92vw);
+    aspect-ratio: 3 / 5;
   }
 }
