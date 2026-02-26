@@ -269,3 +269,7 @@ body { background: #fff; }
   border: 0;
   display: block;
 }
+
+.album-box {
+  color: #666666;
+}
