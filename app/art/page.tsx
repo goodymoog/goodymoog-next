@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import { ART } from "../../lib/art";
 
@@ -62,7 +64,7 @@ export default function ArtIndexPage() {
               color: "#6b7280",
               fontSize: 14,
               lineHeight: 1.6,
-              maxWidth: 62 * 10, // ~620px
+              maxWidth: 620,
             }}
           >
             Minimal index. Click a project to view the full page.
