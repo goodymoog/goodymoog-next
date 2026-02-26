@@ -100,3 +100,49 @@
   margin-top: 40px;
   font-size: 14px;
 }
+
+/* add these to the bottom of Shattered.module.css */
+
+.article {
+  min-width: 0; /* prevents weird overflow on small screens */
+}
+
+.videoWrapper {
+  width: 100%;
+}
+
+/* ✅ Mobile: stack into 1 column */
+@media (max-width: 900px) {
+  .container {
+    padding-top: 72px; /* gives breathing room under header if you have one */
+  }
+
+  .layout {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+
+  .infobox {
+    order: 2; /* article first, infobox second */
+  }
+
+  .header h1 {
+    font-size: 32px;
+  }
+
+  .article h2 {
+    font-size: 20px;
+  }
+}
+
+/* extra small phones */
+@media (max-width: 420px) {
+  .header h1 {
+    font-size: 28px;
+  }
+
+  .container {
+    padding-left: 14px;
+    padding-right: 14px;
+  }
+}
