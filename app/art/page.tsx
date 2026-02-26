@@ -17,8 +17,8 @@ export default function ArtIndexPage() {
         color: "#111",
         minHeight: "100vh",
         display: "flex",
-        justifyContent: "center", // horizontal centering only
-        paddingTop: "110px",      // 👈 controls vertical position
+        justifyContent: "center",
+        paddingTop: "70px",   // 👈 moved higher
         paddingBottom: "60px",
         paddingLeft: "20px",
         paddingRight: "20px",
