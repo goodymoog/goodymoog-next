@@ -1,0 +1,303 @@
+.wrap {
+  background: #ffffff;
+  color: #202122;
+  min-height: 100vh;
+}
+
+.article {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 28px 16px 64px;
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.top {
+  margin-bottom: 18px;
+}
+
+.kicker {
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #54595d;
+  margin-bottom: 8px;
+}
+
+.h1 {
+  font-size: 44px;
+  line-height: 1.05;
+  margin: 0;
+  letter-spacing: -0.5px;
+}
+
+.sub {
+  margin: 10px 0 0;
+  max-width: 68ch;
+  color: #54595d;
+  font-size: 16px;
+  line-height: 1.5;
+}
+
+.meta {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-top: 14px;
+}
+
+.pill {
+  font-size: 12px;
+  border: 1px solid #a2a9b1;
+  padding: 4px 10px;
+  border-radius: 999px;
+  color: #54595d;
+  background: #fff;
+}
+
+.hero {
+  margin-top: 18px;
+  margin-bottom: 26px;
+}
+
+.heroMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  border-radius: 16px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #f8f9fa;
+}
+
+.img {
+  object-fit: cover;
+}
+
+.heroCaption {
+  margin-top: 10px;
+  color: #54595d;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 18px;
+  align-items: start;
+}
+
+@media (max-width: 860px) {
+  .grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.main {
+  padding-right: 4px;
+}
+
+.side {
+  display: grid;
+  gap: 12px;
+}
+
+.h2 {
+  font-size: 18px;
+  margin: 18px 0 8px;
+  letter-spacing: -0.2px;
+}
+
+.p {
+  margin: 0 0 12px;
+  line-height: 1.65;
+  font-size: 15px;
+  color: #202122;
+}
+
+.muted {
+  color: #54595d;
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.card {
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  padding: 14px;
+  background: #fff;
+}
+
+.cardTitle {
+  font-size: 12px;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: #54595d;
+  margin-bottom: 10px;
+}
+
+.dl {
+  margin: 0;
+}
+
+.dlRow {
+  display: grid;
+  grid-template-columns: 90px 1fr;
+  gap: 10px;
+  padding: 8px 0;
+  border-top: 1px solid rgba(0,0,0,0.06);
+}
+
+.dlRow:first-child {
+  border-top: 0;
+  padding-top: 0;
+}
+
+.dlRow dt {
+  color: #54595d;
+  font-size: 13px;
+}
+
+.dlRow dd {
+  margin: 0;
+  font-size: 13px;
+}
+
+.section {
+  margin-top: 26px;
+}
+
+.sectionHead {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 12px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.gallery {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 980px) {
+  .gallery {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 620px) {
+  .gallery {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+.tile {
+  margin: 0;
+}
+
+.tileMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 1 / 1;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #f8f9fa;
+}
+
+.split {
+  margin-top: 14px;
+  border: 1px solid rgba(0,0,0,0.08);
+  border-radius: 16px;
+  overflow: hidden;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+@media (max-width: 860px) {
+  .split {
+    grid-template-columns: 1fr;
+  }
+}
+
+.splitMedia {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  background: #f8f9fa;
+}
+
+.splitText {
+  padding: 14px;
+  background: #fff;
+}
+
+.splitTitle {
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.2px;
+}
+
+.steps {
+  margin: 0;
+  padding-left: 18px;
+  color: #202122;
+}
+
+.stepTitle {
+  font-weight: 700;
+  margin: 10px 0 6px;
+}
+
+.processGrid {
+  margin-top: 12px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 10px;
+}
+
+@media (max-width: 860px) {
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.processTile {
+  margin: 0;
+}
+
+.processMedia {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  border-radius: 14px;
+  overflow: hidden;
+  border: 1px solid rgba(0,0,0,0.08);
+  background: #f8f9fa;
+}
+
+.foot {
+  margin-top: 28px;
+}
+
+.rule {
+  height: 1px;
+  background: rgba(0,0,0,0.08);
+  margin-bottom: 10px;
+}
+
+.small {
+  margin: 0;
+  font-size: 13px;
+  color: #202122;
+  line-height: 1.5;
+}
+
+.smallMuted {
+  margin: 0;
+  font-size: 13px;
+  color: #54595d;
+  line-height: 1.5;
+}
