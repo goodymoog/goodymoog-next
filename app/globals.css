@@ -279,14 +279,21 @@ body { background: #fff; }
 /* ============================= */
 
 @media (max-width: 480px) {
-  /* make room for Safari bottom bar */
+  /* keep the hero from getting hidden behind Safari UI */
   .homeHero {
-    padding-bottom: 90px;
+    padding-bottom: calc(120px + env(safe-area-inset-bottom));
   }
 
-  /* slightly smaller player so it fits above Safari UI */
+  /* hard-limit the iframe box to the *visible* screen height */
   .playerFrame {
     width: min(440px, 92vw);
+    max-height: calc(100svh - 220px); /* adjust 220 if needed */
     aspect-ratio: 3 / 5;
+    margin: 0 auto;
+  }
+
+  .playerFrame iframe {
+    width: 100%;
+    height: 100%;
   }
 }
