@@ -279,21 +279,30 @@ body { background: #fff; }
 /* ============================= */
 
 @media (max-width: 480px) {
-  /* keep the hero from getting hidden behind Safari UI */
+  /* lock the home hero to the visible phone screen */
   .homeHero {
-    padding-bottom: calc(120px + env(safe-area-inset-bottom));
+    min-height: calc(100svh - 140px); /* space for header */
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    overflow: hidden;                 /* prevents scroll inside the hero */
+    padding-bottom: env(safe-area-inset-bottom);
   }
 
-  /* hard-limit the iframe box to the *visible* screen height */
+  /* keep player fully visible */
   .playerFrame {
     width: min(440px, 92vw);
-    max-height: calc(100svh - 220px); /* adjust 220 if needed */
+    max-height: calc(100svh - 220px);
     aspect-ratio: 3 / 5;
-    margin: 0 auto;
   }
+}
 
-  .playerFrame iframe {
-    width: 100%;
-    height: 100%;
-  }
+/* Prevent scrolling *inside* the player iframe container */
+.playerFrame {
+  overflow: hidden;
+}
+
+.playerFrame iframe {
+  overflow: hidden;
+  display: block;
 }
