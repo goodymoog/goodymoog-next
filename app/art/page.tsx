@@ -17,9 +17,11 @@ export default function ArtIndexPage() {
         color: "#111",
         minHeight: "100vh",
         display: "flex",
-        alignItems: "center",
-        justifyContent: "center",
-        padding: "40px 20px",
+        justifyContent: "center", // horizontal centering only
+        paddingTop: "110px",      // 👈 controls vertical position
+        paddingBottom: "60px",
+        paddingLeft: "20px",
+        paddingRight: "20px",
         fontFamily:
           "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial",
       }}
