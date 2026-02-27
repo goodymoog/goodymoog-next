@@ -12,7 +12,7 @@ export default function Home() {
         </div>
       </section>
 
-      <section className="homeIntro">
+      {/* <section className="homeIntro">
         <div style={{ textAlign: "center" }}>
           <p
             style={{
@@ -31,7 +31,7 @@ export default function Home() {
 
           <a href="https://www.goodymoog.com/learn-more">Read more</a>
         </div>
-      </section>
+      </section> */}
     </div>
   );
 }
