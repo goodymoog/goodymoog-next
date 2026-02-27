@@ -285,7 +285,7 @@ body { background: #fff; }
     height: auto;
     max-height: none;
     overflow: visible;             /* ✅ prevents cut-off */
-    transform: scale(0.93);        /* tweak 0.86–0.92 */
+    transform: scale(0.99);        /* tweak 0.86–0.92 */
     transform-origin: top center;
   }
 
