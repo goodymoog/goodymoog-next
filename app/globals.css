@@ -287,3 +287,16 @@ body { background: #fff; }
   }
 
 }
+@media (max-width: 480px) {
+  .homePage {
+    background-attachment: scroll; /* iOS smooth */
+  }
+
+  /* shrink the whole player so it never clips */
+  .playerFrame {
+    width: 92vw;
+    aspect-ratio: 3 / 5;
+    transform: scale(0.88);      /* try 0.86–0.92 */
+    transform-origin: top center;
+  }
+}
