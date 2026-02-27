@@ -16,44 +16,47 @@ export default function ArtIndexPage() {
         background: "#fff",
         color: "#111",
         minHeight: "100vh",
-        display: "flex",
-        justifyContent: "center",
-        paddingTop: "70px",   // 👈 moved higher
+        paddingTop: "40px",
         paddingBottom: "60px",
-        paddingLeft: "20px",
-        paddingRight: "20px",
+        paddingLeft: "24px",
+        paddingRight: "24px",
         fontFamily:
           "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial",
       }}
     >
       <div
         style={{
-          width: "100%",
-          maxWidth: 600,
-          textAlign: "center",
+          maxWidth: 1100,
+          margin: "0 auto",
         }}
       >
         <h1
           style={{
-            fontSize: 28,
+            fontSize: 32,
             fontWeight: 500,
-            letterSpacing: "-0.02em",
-            marginBottom: 40,
+            margin: "0 0 24px 0",
+            paddingBottom: "8px",
+            borderBottom: "1px solid #ccc",
           }}
         >
           Art
         </h1>
 
-        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
+        <ul
+          style={{
+            listStyle: "none",
+            padding: 0,
+            margin: 0,
+          }}
+        >
           {projects.map((p) => (
-            <li key={p.slug} style={{ marginBottom: 18 }}>
+            <li key={p.slug} style={{ marginBottom: 20 }}>
               <Link
                 href={`/art/${p.slug}`}
                 style={{
                   textDecoration: "none",
-                  color: "inherit",
+                  color: "#111",
                   fontSize: 18,
-                  letterSpacing: "-0.01em",
                 }}
               >
                 {p.title}
