@@ -18,8 +18,8 @@ export default function ArtIndexPage() {
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
-        paddingTop: "90px",   // 👈 slightly lower
-        paddingBottom: "80px",
+        paddingTop: "58px",   // 👈 slight move down (not huge)
+        paddingBottom: "70px",
         paddingLeft: "24px",
         paddingRight: "24px",
         fontFamily:
@@ -37,7 +37,7 @@ export default function ArtIndexPage() {
           style={{
             fontSize: 32,
             fontWeight: 500,
-            marginBottom: 40,
+            marginBottom: 36,
             letterSpacing: "-0.02em",
           }}
         >
@@ -46,7 +46,7 @@ export default function ArtIndexPage() {
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {projects.map((p) => (
-            <li key={p.slug} style={{ marginBottom: 22 }}>
+            <li key={p.slug} style={{ marginBottom: 20 }}>
               <Link
                 href={`/art/${p.slug}`}
                 style={{
