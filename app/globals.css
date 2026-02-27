@@ -248,19 +248,18 @@ body { background: #fff; }
 .homeHero {
   display: flex;
   justify-content: center;
-  align-items: flex-start;   /* critical */
+  align-items: flex-start;
   margin: 0;
-  padding: 0;                /* remove all vertical padding */
+  padding: 0;
 }
-
-/* Player container */
 .playerFrame {
   width: min(520px, 92vw);
-  aspect-ratio: 3 / 5;
+  height: 780px;          /* fixed height so it never chops */
+  max-height: 80vh;       /* keeps it inside screen */
   overflow: hidden;
   background: transparent;
   box-shadow: none;
-  margin: 0;                 /* important */
+  margin: 0 auto;
 }
 
 .playerFrame iframe {
@@ -270,39 +269,21 @@ body { background: #fff; }
   display: block;
 }
 
+
 .album-box {
   color: #666666;
 }
 
-/* ============================= */
-/* MOBILE PLAYER POSITION FIX */
-/* ============================= */
-
 @media (max-width: 480px) {
-  /* lock the home hero to the visible phone screen */
-  .homeHero {
-    min-height: calc(100svh - 140px); /* space for header */
-    display: flex;
-    justify-content: center;
-    align-items: flex-start;
-    overflow: hidden;                 /* prevents scroll inside the hero */
-    padding-bottom: env(safe-area-inset-bottom);
+
+  /* Fix iPhone background lag */
+  .homePage {
+    background-attachment: scroll;
   }
 
-  /* keep player fully visible */
+  /* Slightly shrink player so it fits above Safari UI */
   .playerFrame {
-    width: min(440px, 92vw);
-    max-height: calc(100svh - 220px);
-    aspect-ratio: 3 / 5;
+    max-height: 70svh;   /* tweak 66–72 if needed */
   }
-}
 
-/* Prevent scrolling *inside* the player iframe container */
-.playerFrame {
-  overflow: hidden;
-}
-
-.playerFrame iframe {
-  overflow: hidden;
-  display: block;
 }
