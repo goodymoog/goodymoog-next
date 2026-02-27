@@ -16,39 +16,25 @@ export default function ArtIndexPage() {
         background: "#fff",
         color: "#111",
         minHeight: "100vh",
-        paddingTop: "40px",
-        paddingBottom: "60px",
-        paddingLeft: "24px",
-        paddingRight: "24px",
+        padding: "0 24px 60px", // ✅ no extra top padding
         fontFamily:
           "ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial",
       }}
     >
-      <div
-        style={{
-          maxWidth: 1100,
-          margin: "0 auto",
-        }}
-      >
+      <div style={{ maxWidth: 1100, margin: "0 auto" }}>
         <h1
           style={{
             fontSize: 32,
             fontWeight: 500,
-            margin: "0 0 24px 0",
-            paddingBottom: "8px",
+            margin: "0 0 24px 0", // ✅ ensure no top margin
+            paddingBottom: 8,
             borderBottom: "1px solid #ccc",
           }}
         >
           Art
         </h1>
 
-        <ul
-          style={{
-            listStyle: "none",
-            padding: 0,
-            margin: 0,
-          }}
-        >
+        <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
           {projects.map((p) => (
             <li key={p.slug} style={{ marginBottom: 20 }}>
               <Link
@@ -67,9 +53,7 @@ export default function ArtIndexPage() {
         </ul>
 
         <style>{`
-          a:hover {
-            text-decoration: underline;
-          }
+          a:hover { text-decoration: underline; }
         `}</style>
       </div>
     </main>
