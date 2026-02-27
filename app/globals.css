@@ -256,7 +256,7 @@ body { background: #fff; }
   width: min(520px, 92vw);
   height: 780px;          /* fixed height so it never chops */
   max-height: 80vh;       /* keeps it inside screen */
-  overflow: hidden;
+  overflow: visible;
   background: transparent;
   box-shadow: none;
   margin: 0 auto;
@@ -275,28 +275,23 @@ body { background: #fff; }
 }
 
 @media (max-width: 480px) {
-
-  /* Fix iPhone background lag */
-  .homePage {
-    background-attachment: scroll;
-  }
-
-  /* Slightly shrink player so it fits above Safari UI */
-  .playerFrame {
-    max-height: 70svh;   /* tweak 66–72 if needed */
-  }
-
-}
-@media (max-width: 480px) {
   .homePage {
     background-attachment: scroll; /* iOS smooth */
   }
 
-  /* shrink the whole player so it never clips */
+  /* IMPORTANT: stop clipping */
   .playerFrame {
     width: 92vw;
-    aspect-ratio: 3 / 5;
-    transform: scale(0.88);      /* try 0.86–0.92 */
+    height: auto;
+    max-height: none;
+    overflow: visible;             /* ✅ prevents cut-off */
+    transform: scale(0.88);        /* tweak 0.86–0.92 */
     transform-origin: top center;
+  }
+
+  /* give iframe a consistent internal height */
+  .playerFrame iframe {
+    height: 780px;
+    max-height: none;
   }
 }
