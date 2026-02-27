@@ -11,7 +11,6 @@ export default function Home() {
           />
         </div>
       </section>
-
       {/* <section className="homeIntro">
         <div style={{ textAlign: "center" }}>
           <p
