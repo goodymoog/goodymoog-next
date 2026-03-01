@@ -295,3 +295,7 @@ body { background: #fff; }
     max-height: none;
   }
 }
+/* wherever your homepage background lives */
+.homePage {
+  padding-bottom: 64px; /* space for footer */
+}
