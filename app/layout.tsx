@@ -60,14 +60,42 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
+
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
         style={{ margin: 0 }}
       >
         <Header />
+
         {children}
+
         <Footer />
+
+        {/* Structured Data */}
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "MusicGroup",
+              "name": "Goodymoog",
+              "url": "https://www.goodymoog.com",
+              "founder": {
+                "@type": "Person",
+                "name": "Théo"
+              },
+              "sameAs": [
+                "https://www.instagram.com/goodymoog",
+                "https://open.spotify.com/artist/0uplUm0m3nTzTrfj6aLRoS",
+                "https://www.youtube.com/@goodymoog"
+              ]
+            }),
+          }}
+        />
       </body>
+
+
+      
     </html>
   );
 }
