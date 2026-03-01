@@ -18,7 +18,7 @@ export default function ArtIndexPage() {
         minHeight: "100vh",
         display: "flex",
         justifyContent: "center",
-        paddingTop: "30px",   // 👈 slight move down (not huge)
+        paddingTop: "23px",   // 👈 slight move down (not huge)
         paddingBottom: "70px",
         paddingLeft: "24px",
         paddingRight: "24px",
