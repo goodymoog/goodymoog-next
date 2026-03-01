@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./Shattered.module.css";
+import styles from "./WildFlowers.module.css";
 
 export default function Page() {
   return (
