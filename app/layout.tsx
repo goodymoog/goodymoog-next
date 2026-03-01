@@ -14,9 +14,43 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Goodymoog",
-  description: "Independent music & art",
+export const metadata = {
+  title: {
+    default: "Goodymoog",
+    template: "%s | Goodymoog",
+  },
+  description:
+    "Goodymoog is an independent artist blending ambient textures, cinematic soundscapes, and experimental electronic music.",
+  keywords: [
+    "Goodymoog",
+    "ambient music",
+    "electronic artist",
+    "independent music",
+    "experimental sound",
+  ],
+  openGraph: {
+    title: "Goodymoog",
+    description:
+      "Ambient and experimental electronic music by Goodymoog.",
+    url: "https://www.goodymoog.com",
+    siteName: "Goodymoog",
+    images: [
+      {
+        url: "/og-image.jpg", // put image in /public
+        width: 1200,
+        height: 630,
+      },
+    ],
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Goodymoog",
+    description:
+      "Ambient and experimental electronic music by Goodymoog.",
+    images: ["/og-image.jpg"],
+  },
 };
 
 export default function RootLayout({

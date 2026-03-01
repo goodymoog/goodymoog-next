@@ -1,3 +1,9 @@
+export const metadata = {
+  title: "Music",
+  description:
+    "Explore Goodymoog’s latest releases, albums, and sound experiments.",
+};
+
 export default function Home() {
   return (
     <div className="goodymoog-embed">
