@@ -44,3 +44,27 @@
 .nav a:hover {
   opacity: 0.7;
 }
+
+
+/* -------- MOBILE -------- */
+
+@media (max-width: 768px) {
+
+  .inner {
+    height: 70px;
+    padding: 0 18px;
+  }
+
+  .logoImg {
+    height: 52px;
+  }
+
+  .nav {
+    gap: 18px;
+  }
+
+  .nav a {
+    font-size: 14px;
+  }
+
+}
