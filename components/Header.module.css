@@ -1,12 +1,14 @@
 .header {
-  background: #ffffff;
+  background: #fff;
   border-bottom: 1px solid rgba(0, 0, 0, 0.08);
 }
 
 .inner {
-  max-width: 1100px;
+  max-width: 1180px;
   margin: 0 auto;
-  padding: 16px 18px;
+  padding: 0 28px;
+  height: 92px;
+
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -18,24 +20,27 @@
   text-decoration: none;
 }
 
-/* MAKE LOGO BIGGER HERE */
 .logoImg {
-  height: 70px; /* was 32px */
+  display: block;
+  height: 74px;
   width: auto;
   object-fit: contain;
 }
 
 .nav {
   display: flex;
-  gap: 18px;
+  align-items: center;
+  gap: 34px;
 }
 
 .nav a {
   text-decoration: none;
   font-size: 16px;
-  color: #202122;
+  line-height: 1;
+  color: #2f2f2f;
+  font-weight: 400;
 }
 
 .nav a:hover {
-  text-decoration: underline;
+  opacity: 0.7;
 }
