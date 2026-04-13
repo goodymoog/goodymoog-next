@@ -1,5 +1,10 @@
 import Link from "next/link";
 import { ART } from "../../lib/art";
+export const metadata = {
+  title: "Art",
+  description:
+    "Explore Théo Heron’s visual art, creative experiments, and selected works.",
+};
 
 type ArtProject = {
   slug: string;

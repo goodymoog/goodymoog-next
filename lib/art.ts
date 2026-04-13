@@ -93,7 +93,6 @@ export const ART: ArtSeries[] = [
   {
     slug: "new-mexico",
     title: "New Mexico",
-    year: "2020",
     location: "Santa Fe, NM",
     tags: ["Photography", "Sound", "Collage"],
     // If you want to use the Squarespace CDN images directly, paste URLs here.
