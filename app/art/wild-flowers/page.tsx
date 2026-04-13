@@ -14,10 +14,7 @@ export default function Page() {
           <div className={styles.year}>2021–2022</div>
 
           <p className={styles.lead}>
-            Shattered Sidewalks is a site-specific stencil-and-ash work created
-            at the former location of a church that burned down. Using ash from
-            the site, a stencil image of the church was formed on the sidewalk
-            and filmed as it gradually disappeared.
+            Enter Description
           </p>
         </header>
 
@@ -26,27 +23,20 @@ export default function Page() {
             <section>
               <h2>Overview</h2>
               <p>
-                The project began after witnessing the church fire and reflecting
-                on how structures that feel permanent can vanish overnight.
+               ...
               </p>
               <p>
-                Rather than producing a permanent memorial, the work embraces
-                ephemerality. The ash-based stencil was designed to disappear,
-                with video documentation serving as the lasting record.
+                ...
               </p>
             </section>
 
             <section>
               <h2>Process</h2>
               <p>
-                A stencil of the church was created and placed at the original
-                site. Ash from the burned structure was brushed through the
-                stencil rather than using spray paint.
+                ...
               </p>
               <p>
-                Wind alone was not enough to remove the ash, so brushing
-                techniques—similar to sand animation—were used to erase the
-                image gradually on camera.
+                ...
               </p>
             </section>
 
@@ -59,7 +49,7 @@ export default function Page() {
                   alt="Ash stencil still"
                 />
                 <figcaption>
-                  Stencil filled with ash at the original site.
+                  ...
                 </figcaption>
               </figure>
 
@@ -69,7 +59,7 @@ export default function Page() {
                   alt="Erosion still"
                 />
                 <figcaption>
-                  Image dissolving as ash disperses.
+                  ...
                 </figcaption>
               </figure>
 
