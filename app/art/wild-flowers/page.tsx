@@ -80,10 +80,8 @@ export default function Page() {
             />
 
             <div className={styles.infoBlock}>
+              <div><strong>Title:</strong> Image 1</div>
               <div><strong>Year:</strong> 2021–2022</div>
-              <div><strong>Medium:</strong> Stencil + ash + video</div>
-              <div><strong>Theme:</strong> Ephemerality</div>
-              <div><strong>Influences:</strong> Banksy; sand animation</div>
             </div>
           </aside>
         </div>
