@@ -1,9 +1,6 @@
+"use client";
+
 import { useEffect, useRef, useState, type FormEvent } from "react";
-export const metadata = {
-  title: "Contact",
-  description:
-    "Get in touch with Goodymoog for music, art, collaborations, and inquiries.",
-};
 
 export default function ContactPage() {
   const SCALE = 3;
