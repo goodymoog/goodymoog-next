@@ -1,10 +1,7 @@
+"use client";
+
 import Image from "next/image";
 import styles from "./MerchPage.module.css";
-export const metadata = {
-  title: "Items",
-  description:
-    "Browse Goodymoog items, releases, and selected creative pieces.",
-};
 
 type MerchItem = {
   id: string;
