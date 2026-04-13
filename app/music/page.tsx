@@ -34,7 +34,7 @@ export default function Home() {
             <div className="album-box">
               <p>
                 <i>Sickwiththeflow</i> is a raw and unfiltered account of all the
-                things that make me sick to my stomach—toxic friends, strained
+                things that make me sick to my stomach: toxic friends, strained
                 relationships, excessive overthinking, low self esteem... but it’s
                 also about finding my rhythm in the middle of all that noise.{" "}
                 <a
@@ -64,7 +64,7 @@ export default function Home() {
 
             <div className="video-row">
               <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/W_HmBQmwcAw" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/4X-IWUUNaQM" allowFullScreen />
             </div>
 
             <h2>2026: Chasing Sunsets™</h2>
@@ -120,7 +120,7 @@ export default function Home() {
 
           {/* SIDEBAR */}
           <aside className="sidebar">
-            <img src="https://i.imgur.com/RK4VttT.png" alt="Goodymoog" />
+            <img src="/logos/goodymoog.png" alt="Goodymoog" />
 
             <div className="logo-row">
               <a
@@ -129,7 +129,7 @@ export default function Home() {
                 rel="noreferrer"
               >
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/1/19/Spotify_logo_without_text.svg"
+                  src="/logos/spotify.svg"
                   alt="Spotify"
                 />
               </a>
@@ -139,7 +139,7 @@ export default function Home() {
                 rel="noreferrer"
               >
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/5/5f/Apple_Music_icon.svg/256px-Apple_Music_icon.svg.png"
+                  src="/logos/apple-music.png"
                   alt="Apple Music"
                 />
               </a>
@@ -149,24 +149,24 @@ export default function Home() {
                 rel="noreferrer"
               >
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/e/e9/Stacked_Amazon_Music_WhiteOnCharcoal_Circle_RGB.png/512px-Stacked_Amazon_Music_WhiteOnCharcoal_Circle_RGB.png"
+                  src="/logos/amazon-music.png"
                   alt="Amazon Music"
                 />
               </a>
               <a href="https://goodymoog.bandcamp.com/" target="_blank" rel="noreferrer">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6a/Bandcamp-button-bc-circle-aqua.svg/512px-Bandcamp-button-bc-circle-aqua.svg.png"
+                  src="/logos/bandcamp.png"
                   alt="Bandcamp"
                 />
               </a>
-              <a href="https://bsky.app/profile/goodymoog.bsky.social" target="_blank" rel="noreferrer">
+              <a href="https://x.com/goodymoog" target="_blank" rel="noreferrer">
                 <img
-                  src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/7a/Bluesky_Logo.svg/512px-Bluesky_Logo.svg.png?20240211144739"
+                  src="/logos/x.png"
                   alt="Bluesky"
                 />
               </a>
               <a href="https://instagram.com/goodymoog" target="_blank" rel="noreferrer">
-                <img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" />
+                <img src="/logos/instagram.png" alt="Instagram" />
               </a>
             </div>
 
