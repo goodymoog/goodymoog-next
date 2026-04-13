@@ -1,5 +1,5 @@
 export const metadata = {
-  title: "Music",
+  // title: "Music",
   description:
     "Explore Goodymoog’s latest releases, albums, and sound experiments.",
 };
