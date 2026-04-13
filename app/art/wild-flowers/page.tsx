@@ -80,7 +80,7 @@ export default function Page() {
             />
 
             <div className={styles.infoBlock}>
-              <div><strong>Title:</strong> Image 1</div>
+              <div><strong>Title:</strong> Image</div>
               <div><strong>Year:</strong> 2021–2022</div>
             </div>
           </aside>
