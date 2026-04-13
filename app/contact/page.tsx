@@ -1,5 +1,3 @@
-"use client";
-
 import { useEffect, useRef, useState, type FormEvent } from "react";
 export const metadata = {
   title: "Contact",
