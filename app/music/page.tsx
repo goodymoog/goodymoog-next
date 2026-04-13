@@ -129,7 +129,7 @@ export default function Home() {
                 rel="noreferrer"
               >
                 <img
-                  src="/logos/spotify.svg"
+                  src="/logos/spotify.png"
                   alt="Spotify"
                 />
               </a>
