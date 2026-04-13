@@ -45,8 +45,8 @@ export default function Page() {
 
               <figure className={styles.figure}>
                 <img
-                  src="/art/shattered-sidewalks/01.jpg"
-                  alt="Ash stencil still"
+                  // src="/art/shattered-sidewalks/01.jpg"
+                  // alt="Ash stencil still"
                 />
                 <figcaption>
                   ...
@@ -55,8 +55,8 @@ export default function Page() {
 
               <figure className={styles.figure}>
                 <img
-                  src="/art/shattered-sidewalks/02.jpg"
-                  alt="Erosion still"
+                  // src="/art/shattered-sidewalks/02.jpg"
+                  // alt="Erosion still"
                 />
                 <figcaption>
                   ...
@@ -65,8 +65,8 @@ export default function Page() {
 
               <div className={styles.videoWrapper}>
                 <iframe
-                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  title="Shattered Sidewalks video"
+                  // src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
+                  // title="Shattered Sidewalks video"
                   allowFullScreen
                 />
               </div>
@@ -75,8 +75,8 @@ export default function Page() {
 
           <aside className={styles.infobox}>
             <img
-              src="/art/shattered-sidewalks/cover.jpg"
-              alt="Shattered Sidewalks cover"
+              // src="/art/shattered-sidewalks/cover.jpg"
+              // alt="Shattered Sidewalks cover"
             />
 
             <div className={styles.infoBlock}>
