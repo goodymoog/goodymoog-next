@@ -19,8 +19,8 @@ export default function Header() {
 
         <nav className={styles.nav}>
           <Link href="/music">Music</Link>
-          <Link href="/art">Art</Link>
           <Link href="/merch">Items</Link>
+          <Link href="/art">Art</Link>
           <Link href="/contact">Contact</Link>
         </nav>
       </div>
