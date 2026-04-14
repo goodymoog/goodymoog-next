@@ -1,10 +1,3 @@
-import Link from "next/link";
-
-const linkStyle = {
-  textDecoration: "none",
-  color: "inherit",
-} as const;
-
 export default function Footer() {
   return (
     <footer
