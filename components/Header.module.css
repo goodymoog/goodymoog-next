@@ -42,15 +42,17 @@
   text-decoration: none;
   font-size: 16px;
   line-height: 1;
-  color: #2f2f2f;
+  color: #2f2f2f !important;
   font-weight: 400;
-  opacity: 1;
+  opacity: 1 !important;
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
 .nav a:hover {
-  color: #777;
+  color: #777 !important;
   text-decoration: none;
-  opacity: 1;
+  opacity: 1 !important;
 }
 
 
