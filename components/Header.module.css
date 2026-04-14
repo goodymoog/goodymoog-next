@@ -42,9 +42,7 @@
   font-weight: 400;
 }
 
-.nav a:hover,
-.nav a:focus,
-.nav a:active {
+.nav a:hover {
   text-decoration: none;
   opacity: 0.7;
 }
