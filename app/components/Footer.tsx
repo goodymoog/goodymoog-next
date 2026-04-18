@@ -4,7 +4,7 @@ export default function Footer() {
       style={{
         borderTop: "1px solid rgba(255,255,255,0.08)",
         padding: "14px 16px",
-        background: "#777777",
+        background: "#C0C0C0",
       }}
     >
       <div
