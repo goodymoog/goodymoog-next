@@ -4,9 +4,10 @@ export default function FAQPage() {
       style={{
         minHeight: "calc(100vh - 190px)",
         display: "flex",
-        alignItems: "center",
+        alignItems: "flex-start",
         justifyContent: "center",
-        padding: "20px 20px 40px",
+        padding: "20px 20px 76px",
+        paddingTop: "180px",
         color: "#111",
         textAlign: "center",
       }}
