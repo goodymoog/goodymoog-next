@@ -19,7 +19,7 @@ export default function Footer() {
           letterSpacing: "0.03em",
         }}
       >
-        <span>© {new Date().getFullYear()} Goodymoog</span>
+        <span>© {new Date().getFullYear()} Goodymoog Records</span>
       </div>
     </footer>
   );
