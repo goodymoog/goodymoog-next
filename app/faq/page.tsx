@@ -89,7 +89,7 @@ export default function FAQPage() {
             ambient soundscapes, and beat-making into a distinct sonic world.
             His music is both chaotic and calming, flashy and political, and at
             times abrasive. His inspirations range from internet memes and long
-            desert walks to birdsong, wind, and other unexpected sounds from
+            desert walks to birds, wind chimes, and other unexpected sounds from
             the natural world.
           </p>
         </div>
