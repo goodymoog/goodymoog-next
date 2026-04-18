@@ -6,6 +6,12 @@ export default function FAQPage() {
           0% {
             background-position: 200% center;
           }
+          45% {
+            background-position: 120% center;
+          }
+          55% {
+            background-position: 100% center;
+          }
           100% {
             background-position: -200% center;
           }
@@ -39,11 +45,11 @@ export default function FAQPage() {
             <span
               style={{
                 background:
-                  "linear-gradient(120deg, #111 0%, #111 35%, #ffffff 50%, #111 65%, #111 100%)",
-                backgroundSize: "200% auto",
+                  "linear-gradient(120deg, #111 0%, #111 42%, rgba(255,255,255,0.85) 50%, #111 58%, #111 100%)",
+                backgroundSize: "250% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "sparkleShine 3s linear infinite",
+                animation: "sparkleShine 6s ease-in-out infinite",
                 display: "inline-block",
               }}
             >
