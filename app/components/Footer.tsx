@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function Footer() {
   return (
     <footer
@@ -12,15 +14,27 @@ export default function Footer() {
           maxWidth: 1100,
           margin: "0 auto",
           display: "flex",
+          flexDirection: "column",
           justifyContent: "center",
           alignItems: "center",
           fontSize: 11,
           color: "#000000",
           letterSpacing: "0.03em",
+          gap: "4px",
         }}
       >
         <span>© {new Date().getFullYear()} Goodymoog Records</span>
-        <span>FAQ</span>
+
+        <Link
+          href="/faq"
+          style={{
+            color: "#000000",
+            textDecoration: "none",
+            cursor: "pointer",
+          }}
+        >
+          FAQ
+        </Link>
       </div>
     </footer>
   );
