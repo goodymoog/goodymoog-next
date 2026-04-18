@@ -2,9 +2,9 @@ export default function Footer() {
   return (
     <footer
       style={{
-        borderTop: "1px solid rgba(0,0,0,0.08)",
+        borderTop: "1px solid rgba(255,255,255,0.08)",
         padding: "14px 16px",
-        background: "#bfbfbf",
+        background: "#5f5f5f",
       }}
     >
       <div
@@ -15,7 +15,7 @@ export default function Footer() {
           justifyContent: "center",
           alignItems: "center",
           fontSize: 12,
-          color: "rgba(0,0,0,0.65)",
+          color: "#f2efe8",
           letterSpacing: "0.03em",
         }}
       >
