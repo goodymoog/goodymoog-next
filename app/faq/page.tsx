@@ -1,3 +1,28 @@
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "FAQ | Goodymoog Records",
+  description:
+    "Learn more about Goodymoog Records, the creative project of Théo, a producer and rapper from Los Angeles.",
+  alternates: {
+    canonical: "/faq",
+  },
+  openGraph: {
+    title: "FAQ | Goodymoog Records",
+    description:
+      "Learn more about Goodymoog Records, the creative project of Théo, a producer and rapper from Los Angeles.",
+    url: "https://www.goodymoog.com/faq",
+    siteName: "Goodymoog Records",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "FAQ | Goodymoog Records",
+    description:
+      "Learn more about Goodymoog Records, the creative project of Théo, a producer and rapper from Los Angeles.",
+  },
+};
+
 export default function FAQPage() {
   return (
     <>
@@ -59,7 +84,7 @@ export default function FAQPage() {
               margin: "0 auto",
             }}
           >
-            Goodymoog is the creative project of Théo, a producer and rapper
+            Goodymoog Records is the creative project of Théo, a producer and rapper
             from Los Angeles. His work blends experimental electronic music,
             ambient soundscapes, and beat-making into a distinct sonic world.
             His music is both chaotic and calming, flashy and political, and at
