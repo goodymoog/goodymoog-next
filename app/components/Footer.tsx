@@ -20,6 +20,7 @@ export default function Footer() {
         }}
       >
         <span>© {new Date().getFullYear()} Goodymoog Records</span>
+        <span>FAQ</span>
       </div>
     </footer>
   );
