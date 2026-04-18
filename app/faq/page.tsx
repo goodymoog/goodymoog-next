@@ -32,7 +32,7 @@ export default function FAQPage() {
         >
           Goodymoog is the creative project of Théo, a producer and rapper from
           Los Angeles. His work blends experimental electronic music, ambient
-          soundscapes, and beat-making into a distinct sonic world. The music is
+          soundscapes, and beat-making into a distinct sonic world. His music is
           both chaotic and calming, flashy and political, and at times abrasive.
           His inspirations range from internet memes and long desert walks to
           birdsong, wind, and other unexpected sounds from the natural world.
