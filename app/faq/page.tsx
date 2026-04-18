@@ -43,7 +43,7 @@ export default function FAQPage() {
                 backgroundSize: "220% auto",
                 WebkitBackgroundClip: "text",
                 WebkitTextFillColor: "transparent",
-                animation: "sparkleShine 10s linear infinite",
+                animation: "sparkleShine 20s linear infinite",
                 display: "inline-block",
               }}
             >
