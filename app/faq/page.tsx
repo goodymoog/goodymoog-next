@@ -2,11 +2,11 @@ export default function FAQPage() {
   return (
     <main
       style={{
-        minHeight: "calc(100vh - 220px)",
+        minHeight: "calc(100vh - 190px)",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
-        padding: "20px 20px",
+        padding: "20px 20px 40px",
         color: "#111",
         textAlign: "center",
       }}
@@ -14,24 +14,29 @@ export default function FAQPage() {
       <div
         style={{
           width: "100%",
-          maxWidth: 800,
+          maxWidth: 820,
         }}
       >
-        <h1 style={{ fontSize: "2rem", marginBottom: "24px" }}>
+        <h1 style={{ fontSize: "2rem", marginBottom: "20px" }}>
           What is Goodymoog?
         </h1>
 
-        <div style={{ display: "grid", gap: "20px", lineHeight: 1.6 }}>
-          <section>
-            <h2 style={{ fontSize: "1.1rem", marginBottom: "8px" }}>
-              What is Goodymoog?
-            </h2>
-            <p>
-              Goodymoog is a creative music project and record label identity
-              centered around original releases, visuals, and world-building.
-            </p>
-          </section>
-        </div>
+        <p
+          style={{
+            fontSize: "1.15rem",
+            lineHeight: 1.8,
+            maxWidth: 760,
+            margin: "0 auto",
+          }}
+        >
+          Goodymoog is the creative project of Théo, a producer and rapper from
+          Los Angeles. His work blends experimental electronic music, ambient
+          soundscapes, and beat-making into a distinct sonic world. The music
+          is both chaotic and calming, flashy and political, and at times
+          abrasive. His inspirations range from internet memes and long desert
+          walks to birdsong, wind, and other unexpected sounds from the natural
+          world.
+        </p>
       </div>
     </main>
   );
