@@ -4,10 +4,9 @@ export default function FAQPage() {
       style={{
         minHeight: "calc(100vh - 190px)",
         display: "flex",
-        alignItems: "flex-start",
+        alignItems: "center",
         justifyContent: "center",
-        padding: "20px 20px 76px",
-        paddingTop: "180px",
+        padding: "20px 20px 40px",
         color: "#111",
         textAlign: "center",
       }}
@@ -16,6 +15,7 @@ export default function FAQPage() {
         style={{
           width: "100%",
           maxWidth: 820,
+          transform: "translateY(-50px)",
         }}
       >
         <h1 style={{ fontSize: "2rem", marginBottom: "20px" }}>
