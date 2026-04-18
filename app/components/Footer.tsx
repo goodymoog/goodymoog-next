@@ -15,7 +15,7 @@ export default function Footer() {
           justifyContent: "center",
           alignItems: "center",
           fontSize: 11,
-          color: "#f2efe8",
+          color: "#000000",
           letterSpacing: "0.03em",
         }}
       >
