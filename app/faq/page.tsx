@@ -15,10 +15,15 @@ export default function FAQPage() {
         style={{
           width: "100%",
           maxWidth: 820,
-          marginTop: "-50px",
+          marginTop: "-100px",
         }}
       >
-        <h1 style={{ fontSize: "2rem", marginBottom: "20px" }}>
+        <h1
+          style={{
+            fontSize: "2rem",
+            marginBottom: "56px",
+          }}
+        >
           What is Goodymoog?
         </h1>
 
