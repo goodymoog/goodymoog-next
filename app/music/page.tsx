@@ -194,6 +194,7 @@ export default function Home() {
             <ul className="sidebar-list">
               <li><a href="https://www.youtube.com/watch?v=6u3v1DK6UF4" target="_blank" rel="noreferrer">Video 1</a></li>
               <li><a href="https://www.youtube.com/watch?v=teBQMlNX-3I" target="_blank" rel="noreferrer">Video 2</a></li>
+              <li><a href="https://www.youtube.com/watch?v=HqqtfCA40_4" target="_blank" rel="noreferrer">Video 3</a></li>
               <li><a href="https://www.goodymoog.com/game" target="_blank" rel="noreferrer">Galaga</a></li>
               <li><a href="https://en.wikipedia.org/wiki/Special:Random" target="_blank" rel="noreferrer">Random Wiki</a></li>
             </ul>
