@@ -64,7 +64,7 @@ export default function Home() {
 
             <div className="video-row">
               <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/4X-IWUUNaQM" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/i7xMoGBs_OU" allowFullScreen />
             </div>
 
             <h2>2026: Chasing Sunsets™</h2>
