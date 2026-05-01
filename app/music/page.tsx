@@ -26,11 +26,11 @@ export default function Home() {
               <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
               <iframe src="https://www.youtube.com/embed/i7xMoGBs_OU" allowFullScreen />
             </div>
-
+{/* 
             <h2>2026: Chasing Sunsets™</h2>
             <div className="album-box">
               <p>Chasing love and dreaming under a clearer sky.</p>
-            </div>
+            </div> */}
 
             <h2>2025: Sickwiththeflow</h2>
             <div className="album-box">
