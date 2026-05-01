@@ -12,22 +12,24 @@ export default function Home() {
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
-            <h2>2024–2025: New Mexico II</h2>
+            <h2>2026: Warp Drive</h2>
             <div className="album-box">
               <p>
-                Searching for meditative music to help me study, I created
-                <i> New Mexico</i> as a way to re-experience the state's vivid
-                landscapes and vibrant wildlife. For me, New Mexico represents calm
-                and tranquility—feelings I’ve tried to capture throughout the album.{" "}
-                <a href="https://www.goodymoog.com/new-mexico" target="_blank" rel="noreferrer">
-                  Read more
-                </a>
+                <i>Warp Drive</i> is a collection of songs that forced me to 
+                destroy my worst nightmares. I now understand that under the veil of
+                anger is sadness. And, under all that sadness is a longing to change
+                our warped vision of the past.
               </p>
             </div>
 
             <div className="video-row">
-              <iframe src="https://www.youtube.com/embed/R_CMnyW23f0" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/JMSwQ9VrBBA" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/i7xMoGBs_OU" allowFullScreen />
+            </div>
+
+            <h2>2026: Chasing Sunsets™</h2>
+            <div className="album-box">
+              <p>Chasing love and dreaming under a clearer sky.</p>
             </div>
 
             <h2>2025: Sickwiththeflow</h2>
@@ -52,25 +54,24 @@ export default function Home() {
               <iframe src="https://www.youtube.com/embed/wZic1EBhgAI" allowFullScreen />
             </div>
 
-            <h2>2026: Warp Drive</h2>
+            <h2>2024–2025: New Mexico II</h2>
             <div className="album-box">
               <p>
-                <i>Warp Drive</i> is a collection of songs that forced me to 
-                destroy my worst nightmares. I now understand that under the veil of
-                anger is sadness. And, under all that sadness is a longing to change
-                our warped vision of the past.
+                Searching for meditative music to help me study, I created
+                <i> New Mexico</i> as a way to re-experience the state's vivid
+                landscapes and vibrant wildlife. For me, New Mexico represents calm
+                and tranquility—feelings I’ve tried to capture throughout the album.{" "}
+                <a href="https://www.goodymoog.com/new-mexico" target="_blank" rel="noreferrer">
+                  Read more
+                </a>
               </p>
             </div>
 
             <div className="video-row">
-              <iframe src="https://www.youtube.com/embed/WHNrpnFbFqk" allowFullScreen />
-              <iframe src="https://www.youtube.com/embed/i7xMoGBs_OU" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/R_CMnyW23f0" allowFullScreen />
+              <iframe src="https://www.youtube.com/embed/JMSwQ9VrBBA" allowFullScreen />
             </div>
-
-            <h2>2026: Chasing Sunsets™</h2>
-            <div className="album-box">
-              <p>Chasing love and dreaming under a clearer sky.</p>
-            </div>
+        
 
             {/* REFERENCES */}
             <h2>References</h2>
