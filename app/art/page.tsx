@@ -58,7 +58,7 @@ export default function ArtIndexPage() {
           flexDirection: "column",
           justifyContent: "center",
           textAlign: "center",
-          padding: "20px 28px",
+          padding: "24px 32px",
           overflow: "auto",
           boxShadow: "0 12px 40px rgba(0,0,0,0.25)",
           fontFamily:
@@ -67,9 +67,9 @@ export default function ArtIndexPage() {
       >
         <h1
           style={{
-            fontSize: 18,
+            fontSize: 32,
             fontWeight: 500,
-            margin: "0 0 14px",
+            marginBottom: 36,
             letterSpacing: "-0.02em",
           }}
         >
@@ -80,7 +80,7 @@ export default function ArtIndexPage() {
           {projects.map((p) => {
             const img = p.image ?? `/images/art/${p.slug}-bg.jpg`;
             return (
-              <li key={p.slug} style={{ marginBottom: 8 }}>
+              <li key={p.slug} style={{ marginBottom: 20 }}>
                 <Link
                   href={`/art/${p.slug}`}
                   onMouseEnter={() => setActiveImage(img)}
@@ -88,7 +88,7 @@ export default function ArtIndexPage() {
                   style={{
                     textDecoration: "none",
                     color: "#111",
-                    fontSize: 13,
+                    fontSize: 19,
                   }}
                 >
                   {p.title}
