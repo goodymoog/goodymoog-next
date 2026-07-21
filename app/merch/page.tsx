@@ -95,7 +95,6 @@ export default function MerchPage() {
                 style={{
                   fontSize: 32,
                   fontWeight: 500,
-                  marginBottom: 36,
                   letterSpacing: "-0.02em",
                 }}
               >
