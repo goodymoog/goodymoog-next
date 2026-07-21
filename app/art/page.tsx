@@ -46,7 +46,7 @@ export default function ArtIndexPage() {
             letterSpacing: "-0.02em",
           }}
         >
-          Art
+          Prior Works
         </h1>
 
         <ul style={{ listStyle: "none", padding: 0, margin: 0 }}>
