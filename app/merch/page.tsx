@@ -17,7 +17,7 @@ type MerchItem = {
 const MERCH: MerchItem[] = [
   {
     id: "sickwiththeflow-cd",
-    title: "Sickwiththeflow — CD (Jewel Case)",
+    title: "Sickwiththeflow CD",
     subtitle: "Physical release",
     price: "$10",
     status: "In stock",
@@ -32,7 +32,7 @@ const MERCH: MerchItem[] = [
   },
   {
     id: "new-mexico-cd",
-    title: "New Mexico — CD (Jewel Case)",
+    title: "New Mexico CD",
     subtitle: "Physical release",
     price: "$10",
     status: "In stock",
@@ -90,7 +90,18 @@ export default function MerchPage() {
         <div className={styles.article}>
           <header className={styles.top}>
             <div className={styles.titleRow}>
-              <h1 className={styles.h1}>Items</h1>
+              {/* <h1 className={styles.h1}>Items</h1> */}
+              <h1
+                style={{
+                  fontSize: 32,
+                  fontWeight: 500,
+                  marginBottom: 36,
+                  letterSpacing: "-0.02em",
+                }}
+              >
+                Items
+              </h1>
+              
             </div>
             <p className={styles.subtitle}>
               Official physical items and limited releases.
