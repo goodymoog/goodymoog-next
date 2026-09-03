@@ -1,11 +1,28 @@
 import Link from "next/link";
 import styles from "./MeditativeSpaces.module.css";
 
+const images = [
+  "IMG_0327.JPG",
+  "IMG_0332.JPG",
+  "IMG_0333.JPG",
+  "IMG_0337.JPG",
+  "IMG_0340.JPG",
+  "IMG_0343.JPG",
+  "IMG_0351.JPG",
+  "IMG_0352.JPG",
+  "IMG_0354.JPG",
+  "IMG_0355.JPG",
+  "IMG_0357.JPG",
+  "IMG_0360.JPG",
+  "IMG_0361.JPG",
+  "IMG_0362.JPG",
+  "IMG_0365.JPG",
+];
+
 export default function Page() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
-
         <div className={styles.breadcrumb}>
           <Link href="/art">Art</Link> / Meditative Spaces
         </div>
@@ -15,41 +32,19 @@ export default function Page() {
         </header>
 
         <article className={styles.article}>
-
-          <figure className={styles.figure}>
-            <img
-              src="/images/art/meditative-spaces/IMG_0333.JPG"
-              alt="Meditative Spaces photograph 1"
-            />
-          </figure>
-
-          <figure className={styles.figure}>
-            <img
-              src="/images/art/meditative-spaces/IMG_0337.JPG"
-              alt="Meditative Spaces photograph 2"
-            />
-          </figure>
-
-          <figure className={styles.figure}>
-            <img
-              src="/images/art/meditative-spaces/IMG_0340.JPG"
-              alt="Meditative Spaces photograph 3"
-            />
-          </figure>
-
-          <figure className={styles.figure}>
-            <img
-              src="/images/art/meditative-spaces/IMG_0343.JPG"
-              alt="Meditative Spaces photograph 4"
-            />
-          </figure>
-
+          {images.map((image, index) => (
+            <figure className={styles.figure} key={image}>
+              <img
+                src={`/images/art/meditative-spaces/${image}`}
+                alt={`Meditative Spaces ${index + 1}`}
+              />
+            </figure>
+          ))}
         </article>
 
         <div className={styles.back}>
           <Link href="/art">← Back to Art</Link>
         </div>
-
       </div>
     </main>
   );
