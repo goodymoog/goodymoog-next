@@ -1,6 +1,29 @@
 import Link from "next/link";
 import styles from "./Washingtons.module.css";
 
+export const metadata = {
+  title: "The Washingtons",
+  description: "The Washingtons — visual art by Théo Heron.",
+  openGraph: {
+    title: "The Washingtons",
+    description: "The Washingtons — visual art by Théo Heron.",
+    url: "https://goodymoog.com/art/the-washingtons",
+    images: [
+      {
+        url: "https://goodymoog.com/images/art/the-washingtons/carrie.png",
+        alt: "The Washingtons by Théo Heron",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      "https://goodymoog.com/images/art/the-washingtons/carrie.png"
+    ],
+  },
+};
+
+
 export default function Page() {
   return (
     <main className={styles.page}>

@@ -1,6 +1,29 @@
 import Link from "next/link";
 import styles from "./MeditativeSpaces.module.css";
 
+export const metadata = {
+  title: "Meditative Spaces",
+  description: "Meditative Spaces — visual art by Théo Heron.",
+  openGraph: {
+    title: "Meditative Spaces",
+    description: "Meditative Spaces — visual art by Théo Heron.",
+    url: "https://goodymoog.com/art/meditative-spaces",
+    images: [
+      {
+        url: "https://goodymoog.com/images/art/meditative-spaces/IMG_0337.JPG",
+        alt: "Meditative Spaces by Théo Heron",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: [
+      "https://goodymoog.com/images/art/meditative-spaces/IMG_0337.JPG"
+    ],
+  },
+};
+
+
 const images = [
   "IMG_0332.JPG",
   "IMG_0333.JPG",
