@@ -2,21 +2,18 @@ import Link from "next/link";
 import styles from "./MeditativeSpaces.module.css";
 
 const images = [
-  "IMG_0327.JPG",
   "IMG_0332.JPG",
   "IMG_0333.JPG",
   "IMG_0337.JPG",
   "IMG_0340.JPG",
   "IMG_0343.JPG",
-  "IMG_0351.JPG",
-  "IMG_0352.JPG",
-  "IMG_0354.JPG",
   "IMG_0355.JPG",
   "IMG_0357.JPG",
   "IMG_0360.JPG",
-  "IMG_0361.JPG",
   "IMG_0362.JPG",
-  "IMG_0365.JPG",
+  "IMG_0351.JPG",
+  "IMG_0352.JPG",
+  "IMG_0354.JPG",
 ];
 
 export default function Page() {
