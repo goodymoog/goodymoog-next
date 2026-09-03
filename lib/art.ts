@@ -30,22 +30,6 @@ export const ART: ArtSeries[] = [
   works: [],
 },
  
- 
- 
- 
-  {
-    slug: "wild-flowers",
-    title: "Wild Flowers",
-    tags: ["Photography", "Series"],
-    // Add your lead image(s)
-    leadImage: "/images/art/wild-flowers/cover.webp",
-    description: "A photographic series exploring intimacy, texture, and color.",
-    works: [
-      // Add images/captions as you want
-      { title: "Untitled 1", year: "2021", medium: "Photograph", image: "/images/art/wild-flowers/1.webp" },
-      { title: "Untitled 2", year: "2021", medium: "Photograph", image: "/images/art/wild-flowers/2.webp" },
-    ],
-  },
 
   {
     slug: "shattered-sidewalks",

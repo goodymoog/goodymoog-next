@@ -1,94 +1,57 @@
 import Link from "next/link";
-import styles from "./Washington.module.css";
+import styles from "./Washingtons.module.css";
 
 export default function Page() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
+
         <div className={styles.breadcrumb}>
-          <Link href="/art">Art</Link> / Wild Flowers
+          <Link href="/art">Art</Link> / The Washingtons
         </div>
 
         <header className={styles.header}>
           <h1>The Washingtons</h1>
-          <div className={styles.year}>2021–2022</div>
-
-          <p className={styles.lead}>
-            Enter Description
-          </p>
         </header>
 
-        <div className={styles.layout}>
-          <article className={styles.article}>
-            <section>
-              <h2>Overview</h2>
-              <p>
-               ...
-              </p>
-              <p>
-                ...
-              </p>
-            </section>
+        <section className={styles.gallery}>
 
-            <section>
-              <h2>Process</h2>
-              <p>
-                ...
-              </p>
-              <p>
-                ...
-              </p>
-            </section>
-
-            <section id="works">
-              <h2>Works</h2>
-
-              <figure className={styles.figure}>
-                <img
-                  // src="/art/shattered-sidewalks/01.jpg"
-                  // alt="Ash stencil still"
-                />
-                <figcaption>
-                  ...
-                </figcaption>
-              </figure>
-
-              <figure className={styles.figure}>
-                <img
-                  // src="/art/shattered-sidewalks/02.jpg"
-                  // alt="Erosion still"
-                />
-                <figcaption>
-                  ...
-                </figcaption>
-              </figure>
-
-              <div className={styles.videoWrapper}>
-                <iframe
-                  // src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  // title="Shattered Sidewalks video"
-                  allowFullScreen
-                />
-              </div>
-            </section>
-          </article>
-
-          <aside className={styles.infobox}>
+          <figure className={styles.work}>
             <img
-              // src="/art/shattered-sidewalks/cover.jpg"
-              // alt="Shattered Sidewalks cover"
+              src="/images/art/the-washingtons/carrie.png"
+              alt="Carrie Washington"
             />
+            <figcaption>
+              Carrie Washington, Digital Print, 2021, 24&quot; × 36&quot;
+            </figcaption>
+          </figure>
 
-            <div className={styles.infoBlock}>
-              <div><strong>Title:</strong> Image</div>
-              <div><strong>Year:</strong> 2021–2022</div>
-            </div>
-          </aside>
-        </div>
+          <figure className={styles.work}>
+            <img
+              src="/images/art/the-washingtons/albert.png"
+              alt="Albert Washington"
+            />
+            <figcaption>
+              Albert Washington, Digital Print, 2021, 24&quot; × 36&quot;
+            </figcaption>
+          </figure>
+
+          <figure className={styles.work}>
+            <img
+              src="/images/art/the-washingtons/leisure.png"
+              alt="Leisure"
+            />
+            <figcaption>
+              Leisure, Digital Print, 2021, 24&quot; × 36&quot;
+            </figcaption>
+          </figure>
+
+        </section>
 
         <div className={styles.back}>
           <Link href="/art">← Back to Art</Link>
         </div>
+
       </div>
     </main>
   );
