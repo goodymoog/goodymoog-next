@@ -1,5 +1,5 @@
 import Link from "next/link";
-import styles from "./Mexico.module.css";
+import styles from "./WildFlowers.module.css";
 
 export default function Page() {
   return (
@@ -10,7 +10,7 @@ export default function Page() {
         </div>
 
         <header className={styles.header}>
-          <h1>New Mexico</h1>
+          <h1>Wild Flowers</h1>
           <div className={styles.year}>2021–2022</div>
 
           <p className={styles.lead}>

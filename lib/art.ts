@@ -21,6 +21,18 @@ export type ArtSeries = {
 };
 
 export const ART: ArtSeries[] = [
+ 
+ {
+  slug: "bury-me-in-a-dark-room",
+  title: "Bury Me in a Dark Room",
+  tags: ["Photography", "Series"],
+  description: "",
+  works: [],
+ },
+ 
+ 
+ 
+ 
   {
     slug: "wild-flowers",
     title: "Wild Flowers",
@@ -90,28 +102,7 @@ export const ART: ArtSeries[] = [
     ],
   },
 
-  {
-    slug: "new-mexico",
-    title: "New Mexico",
-    location: "Santa Fe, NM",
-    tags: ["Photography", "Sound", "Collage"],
-    // If you want to use the Squarespace CDN images directly, paste URLs here.
-    // Example (from your page): https://images.squarespace-cdn.com/...
-    leadImage: "/images/art/new-mexico/cover.webp",
-    description:
-      "A body of work about re-entering the world after confinement—nature as texture, geometry, sound, and emotional progression.",
-    longText: [
-      // Keep these as your own words / edited version (I’m not copying the whole Squarespace essay here).
-      "During confinement, the outside world narrowed to brief, cautious encounters. A trip to Santa Fe became a slow return to air, color, and space.",
-      "The work documents early outings, then expands into sound and digital collage—pushing beyond static landscape photography toward interaction and curiosity.",
-      "Titled as a progression (Invitation → Intégration → Immersion), the series uses scale and sequence to mirror intensifying emotion.",
-    ],
-    works: [
-      { title: "Invitation", size: "60 cm × 30 cm", image: "/images/art/new-mexico/invitation.webp" },
-      { title: "Intégration", size: "1 m × 50 cm", image: "/images/art/new-mexico/integration.webp" },
-      { title: "Immersion", size: "1.50 m × 75 cm", image: "/images/art/new-mexico/immersion.webp" },
-    ],
-  },
+
 
   {
     slug: "etude-comparative",
