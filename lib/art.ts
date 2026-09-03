@@ -103,13 +103,4 @@ export const ART: ArtSeries[] = [
   },
 
 
-
-  {
-    slug: "etude-comparative",
-    title: "Étude comparative",
-    tags: ["Series"],
-    leadImage: "/images/art/etude-comparative/cover.webp",
-    description: "Comparative study series (add details + works here).",
-    works: [],
-  },
 ];
