@@ -22,13 +22,13 @@ export type ArtSeries = {
 
 export const ART: ArtSeries[] = [
  
- {
-  slug: "bury-me-in-a-dark-room",
-  title: "Bury Me in a Dark Room",
+{
+  slug: "meditative-spaces",
+  title: "Meditative Spaces",
   tags: ["Photography", "Series"],
   description: "",
   works: [],
- },
+},
  
  
  
