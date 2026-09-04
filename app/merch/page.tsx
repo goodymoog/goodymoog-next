@@ -7,9 +7,9 @@ type MerchItem = {
   id: string;
   title: string;
   price: string;
-  status?: "In stock" | "Preorder" | "Sold out" | "Unavailable";
-  description: string;
+  status: "In stock" | "Preorder" | "Sold out" | "Unavailable";
   image: string;
+  specs: string;
 };
 
 const MERCH: MerchItem[] = [
@@ -18,18 +18,16 @@ const MERCH: MerchItem[] = [
     title: "Sickwiththeflow",
     price: "$10",
     status: "In stock",
-    description:
-      "Physical CD in a jewel case with full tracklist and artwork insert.",
     image: "/images/merch/swtf.jpg",
+    specs: "Jewel case · Artwork insert + disc · Ships from USA",
   },
   {
     id: "new-mexico-cd",
     title: "New Mexico",
     price: "$10",
     status: "In stock",
-    description:
-      "Physical CD in a jewel case with full tracklist and artwork insert.",
     image: "/images/merch/new_mexico.webp",
+    specs: "Jewel case · Artwork insert + disc · Ships from USA",
   },
 ];
 
@@ -50,7 +48,10 @@ export default function MerchPage() {
         return;
       }
 
-      const data: { url?: string; error?: string } = await res.json();
+      const data: {
+        url?: string;
+        error?: string;
+      } = await res.json();
 
       if (data.url) {
         window.location.href = data.url;
@@ -66,14 +67,11 @@ export default function MerchPage() {
     <main className={styles.wrap}>
       <header className={styles.header}>
         <h1>Items</h1>
-
-        <p>
-          Physical editions and limited releases.
-        </p>
+        <p>Physical editions and limited releases.</p>
       </header>
 
       <section className={styles.products}>
-        {MERCH.map((item, index) => {
+        {MERCH.map((item) => {
           const disabled =
             item.status === "Sold out" ||
             item.status === "Unavailable";
@@ -81,49 +79,39 @@ export default function MerchPage() {
           return (
             <article
               key={item.id}
-              className={`${styles.product} ${
-                index % 2 === 0
-                  ? styles.rotateLeft
-                  : styles.rotateRight
-              }`}
+              className={styles.product}
             >
               <div className={styles.imageWrap}>
                 <Image
                   src={item.image}
                   alt={item.title}
-                  width={700}
-                  height={700}
+                  width={500}
+                  height={500}
                   className={styles.image}
+                  priority
                 />
               </div>
 
               <div className={styles.productInfo}>
                 <div className={styles.titleRow}>
                   <h2>{item.title}</h2>
-
                   <span className={styles.price}>
                     {item.price}
                   </span>
                 </div>
 
                 <div className={styles.meta}>
-                  PHYSICAL CD
-                  {item.status && (
-                    <>
-                      <span>·</span>
-                      {item.status === "In stock"
-                        ? "AVAILABLE"
-                        : item.status.toUpperCase()}
-                    </>
-                  )}
+                  <span>PHYSICAL CD</span>
+                  <span>·</span>
+                  <span>
+                    {item.status === "In stock"
+                      ? "AVAILABLE"
+                      : item.status.toUpperCase()}
+                  </span>
                 </div>
 
-                <p className={styles.description}>
-                  {item.description}
-                </p>
-
                 <div className={styles.specs}>
-                  Jewel case · Artwork insert + disc · Ships from USA
+                  {item.specs}
                 </div>
 
                 <div className={styles.actions}>
@@ -135,9 +123,7 @@ export default function MerchPage() {
                       handleCheckout(item.id)
                     }
                   >
-                    {disabled
-                      ? item.status
-                      : "Buy"}
+                    {disabled ? item.status : "Buy"}
                   </button>
 
                   <a
@@ -156,20 +142,16 @@ export default function MerchPage() {
       <section className={styles.bottom}>
         <div className={styles.shipping}>
           <h2>Shipping</h2>
-
           <p>
             Orders usually ship within 1–5 business days.
-            Tracking is provided when available.
+            Tracking provided when available.
           </p>
         </div>
 
         <div className={styles.shipping}>
           <h2>International</h2>
-
           <p>
-            International shipping isn't available automatically
-            yet. <a href="/contact">Contact me</a> and I'll see
-            what I can arrange.
+            Contact me for international shipping options.
           </p>
         </div>
       </section>
