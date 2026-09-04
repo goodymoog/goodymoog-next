@@ -15,6 +15,7 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata = {
+  metadataBase: new URL("https:" + "//" + "www.goodymoog.com"),
   title: {
     default: "Goodymoog",
     template: "%s | Goodymoog",
@@ -32,7 +33,7 @@ export const metadata = {
     title: "Goodymoog",
     description:
       "Ambient and experimental electronic music by Goodymoog.",
-    url: "https://www.goodymoog.com",
+    url: "https:" + "//" + "www.goodymoog.com",
     siteName: "Goodymoog",
     images: [
       {

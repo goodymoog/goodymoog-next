@@ -56,7 +56,7 @@ export default function Page() {
             <figure className={styles.figure} key={image}>
               <img
                 src={`/images/art/meditative-spaces/${image}`}
-                alt={`Meditative Spaces ${index + 1}`}
+                alt={`Photograph ${index + 1} from the Meditative Spaces series by Goodymoog`}
               />
             </figure>
           ))}

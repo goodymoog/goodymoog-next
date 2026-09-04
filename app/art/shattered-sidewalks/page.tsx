@@ -55,8 +55,8 @@ export default function Page() {
 
               <figure className={styles.figure}>
                 <img
-                  src="/art/shattered-sidewalks/01.jpg"
-                  alt="Ash stencil still"
+                  src="/images/art/art/shattered-sidewalks/01.jpg"
+                  alt="Shattered Sidewalks ash stencil at the original site by Goodymoog"
                 />
                 <figcaption>
                   Stencil filled with ash at the original site.
@@ -65,8 +65,8 @@ export default function Page() {
 
               <figure className={styles.figure}>
                 <img
-                  src="/art/shattered-sidewalks/02.jpg"
-                  alt="Erosion still"
+                  src="/images/art/art/shattered-sidewalks/02.jpg"
+                  alt="Shattered Sidewalks image dissolving as ash disperses by Goodymoog"
                 />
                 <figcaption>
                   Image dissolving as ash disperses.
@@ -85,8 +85,8 @@ export default function Page() {
 
           <aside className={styles.infobox}>
             <img
-              src="/art/shattered-sidewalks/cover.jpg"
-              alt="Shattered Sidewalks cover"
+              src="/images/art/art/shattered-sidewalks/cover.jpg"
+              alt="Shattered Sidewalks art project by Goodymoog"
             />
 
             <div className={styles.infoBlock}>

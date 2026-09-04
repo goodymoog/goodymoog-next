@@ -42,7 +42,7 @@ export default function Page() {
           <figure className={styles.work}>
             <img
               src="/images/art/the-washingtons/carrie.png"
-              alt="Carrie Washington"
+              alt="Carrie Washington, digital print, 2021, by Goodymoog"
             />
             <figcaption>
               Carrie Washington, Digital Print, 2021, 24&quot; × 36&quot;
@@ -52,7 +52,7 @@ export default function Page() {
           <figure className={styles.work}>
             <img
               src="/images/art/the-washingtons/albert.png"
-              alt="Albert Washington"
+              alt="Albert Washington, digital print, 2021, by Goodymoog"
             />
             <figcaption>
               Albert Washington, Digital Print, 2021, 24&quot; × 36&quot;
@@ -62,7 +62,7 @@ export default function Page() {
           <figure className={styles.work}>
             <img
               src="/images/art/the-washingtons/leisure.png"
-              alt="Leisure"
+              alt="Leisure, digital print, 2021, by Goodymoog"
             />
             <figcaption>
               Leisure, Digital Print, 2021, 24&quot; × 36&quot;
