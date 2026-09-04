@@ -1,0 +1,113 @@
+.page {
+  min-height: 100vh;
+  width: 100%;
+  background: #fff;
+  color: #111;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 30px 120px;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  margin-bottom: 50px;
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.breadcrumb a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.header {
+  margin-bottom: 90px;
+  text-align: center;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+}
+
+.gallery {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 120px;
+}
+
+.work {
+  width: min(620px, 72vw);
+  margin: 0;
+}
+
+.work img {
+  display: block;
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+}
+
+.work figcaption {
+  margin-top: 16px;
+
+  font-size: 15px;
+  line-height: 1.5;
+
+  color: rgba(0, 0, 0, 0.68);
+}
+
+.work figcaption strong {
+  font-weight: 600;
+  color: #111;
+}
+
+.back {
+  margin-top: 150px;
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.back a {
+  color: inherit;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 70px 18px 90px;
+  }
+
+  .header {
+    margin-bottom: 65px;
+  }
+
+  .header h1 {
+    font-size: 34px;
+  }
+
+  .gallery {
+    gap: 85px;
+  }
+
+  .work {
+    width: 90vw;
+  }
+
+  .work figcaption {
+    margin-top: 12px;
+    font-size: 14px;
+  }
+
+  .back {
+    margin-top: 100px;
+  }
+}

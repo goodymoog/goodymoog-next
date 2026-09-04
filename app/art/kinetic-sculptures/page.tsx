@@ -1,90 +1,60 @@
 import Link from "next/link";
-import styles from "./Kinetic.module.css";
+import styles from "./page.module.css";
+
+export const metadata = {
+  title: "Kinetic Sculptures",
+  description: "Kinetic Sculptures — visual art by Théo Heron.",
+};
+
+const works = [
+  {
+    title: "Wrench",
+    image: "/images/art/kinetic-sculptures/Wrench.png",
+  },
+  {
+    title: "Wrench 2",
+    image: "/images/art/kinetic-sculptures/Wrench 2.png",
+  },
+  {
+    title: "Door",
+    image: "/images/art/kinetic-sculptures/door.png",
+  },
+  {
+    title: "Tree",
+    image: "/images/art/kinetic-sculptures/Tree.png",
+  },
+  {
+    title: "Tree 2",
+    image: "/images/art/kinetic-sculptures/Tree 2.png",
+  },
+];
 
 export default function Page() {
   return (
     <main className={styles.page}>
       <div className={styles.container}>
         <div className={styles.breadcrumb}>
-          <Link href="/art">Art</Link> / Wild Flowers
+          <Link href="/art">Art</Link> / Kinetic Sculptures
         </div>
 
         <header className={styles.header}>
           <h1>Kinetic Sculptures</h1>
-          <div className={styles.year}>2021–2022</div>
-
-          <p className={styles.lead}>
-            Enter Description
-          </p>
         </header>
 
-        <div className={styles.layout}>
-          <article className={styles.article}>
-            <section>
-              <h2>Overview</h2>
-              <p>
-               ...
-              </p>
-              <p>
-                ...
-              </p>
-            </section>
+        <section className={styles.gallery}>
+          {works.map((work) => (
+            <figure className={styles.work} key={work.title}>
+              <img
+                src={work.image}
+                alt={`${work.title} by Théo Heron`}
+              />
 
-            <section>
-              <h2>Process</h2>
-              <p>
-                ...
-              </p>
-              <p>
-                ...
-              </p>
-            </section>
-
-            <section id="works">
-              <h2>Works</h2>
-
-              <figure className={styles.figure}>
-                <img
-                  // src="/art/shattered-sidewalks/01.jpg"
-                  // alt="Ash stencil still"
-                />
-                <figcaption>
-                  ...
-                </figcaption>
-              </figure>
-
-              <figure className={styles.figure}>
-                <img
-                  // src="/art/shattered-sidewalks/02.jpg"
-                  // alt="Erosion still"
-                />
-                <figcaption>
-                  ...
-                </figcaption>
-              </figure>
-
-              <div className={styles.videoWrapper}>
-                <iframe
-                  // src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  // title="Shattered Sidewalks video"
-                  allowFullScreen
-                />
-              </div>
-            </section>
-          </article>
-
-          <aside className={styles.infobox}>
-            <img
-              // src="/art/shattered-sidewalks/cover.jpg"
-              // alt="Shattered Sidewalks cover"
-            />
-
-            <div className={styles.infoBlock}>
-              <div><strong>Title:</strong> Image</div>
-              <div><strong>Year:</strong> 2021–2022</div>
-            </div>
-          </aside>
-        </div>
+              <figcaption>
+                <strong>{work.title}</strong>, 2021, Digital Print, 18&quot; X 24&quot;
+              </figcaption>
+            </figure>
+          ))}
+        </section>
 
         <div className={styles.back}>
           <Link href="/art">← Back to Art</Link>
