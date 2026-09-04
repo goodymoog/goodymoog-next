@@ -1,7 +1,76 @@
+"use client";
+
+import Image from "next/image";
 import Link from "next/link";
-import styles from "./Shattered.module.css";
+import { useEffect, useState } from "react";
+import styles from "./page.module.css";
+
+const images = [
+  "/images/art/shattered-sidewalks/1.png",
+  "/images/art/shattered-sidewalks/2.png",
+  "/images/art/shattered-sidewalks/3.png",
+];
+
+const START_TIME = 19 * 60 * 60 + 45 * 60;
+const MIDNIGHT = 24 * 60 * 60;
+const TIME_RANGE = MIDNIGHT - START_TIME;
+const CYCLE_DURATION = 60000;
+
+function pad(value: number) {
+  return Math.floor(value).toString().padStart(2, "0");
+}
+
+function formatClock(totalSeconds: number) {
+  if (totalSeconds >= MIDNIGHT - 0.5) {
+    return "12:00:00 AM";
+  }
+
+  const whole = Math.floor(totalSeconds);
+
+  let hours = Math.floor(whole / 3600);
+  const minutes = Math.floor((whole % 3600) / 60);
+  const seconds = whole % 60;
+
+  const period = hours >= 12 ? "PM" : "AM";
+
+  hours = hours % 12;
+
+  if (hours === 0) {
+    hours = 12;
+  }
+
+  return `${hours}:${pad(minutes)}:${pad(seconds)} ${period}`;
+}
 
 export default function Page() {
+  const [clockTime, setClockTime] = useState(START_TIME);
+
+  useEffect(() => {
+    const startedAt = performance.now();
+    let frame: number;
+
+    const update = () => {
+      const elapsed = performance.now() - startedAt;
+      const phase = (elapsed % CYCLE_DURATION) / CYCLE_DURATION;
+
+      const progress =
+        phase <= 0.5
+          ? phase * 2
+          : (1 - phase) * 2;
+
+      const current =
+        START_TIME + TIME_RANGE * progress;
+
+      setClockTime(current);
+
+      frame = requestAnimationFrame(update);
+    };
+
+    frame = requestAnimationFrame(update);
+
+    return () => cancelAnimationFrame(frame);
+  }, []);
+
   return (
     <main className={styles.page}>
       <div className={styles.container}>
@@ -11,92 +80,29 @@ export default function Page() {
 
         <header className={styles.header}>
           <h1>Shattered Sidewalks</h1>
-          <div className={styles.year}>2021–2022</div>
-
-          <p className={styles.lead}>
-            Shattered Sidewalks is a site-specific stencil-and-ash work created
-            at the former location of a church that burned down. Using ash from
-            the site, a stencil image of the church was formed on the sidewalk
-            and filmed as it gradually disappeared.
-          </p>
         </header>
 
-        <div className={styles.layout}>
-          <article className={styles.article}>
-            <section>
-              <h2>Overview</h2>
-              <p>
-                The project began after witnessing the church fire and reflecting
-                on how structures that feel permanent can vanish overnight.
-              </p>
-              <p>
-                Rather than producing a permanent memorial, the work embraces
-                ephemerality. The ash-based stencil was designed to disappear,
-                with video documentation serving as the lasting record.
-              </p>
-            </section>
-
-            <section>
-              <h2>Process</h2>
-              <p>
-                A stencil of the church was created and placed at the original
-                site. Ash from the burned structure was brushed through the
-                stencil rather than using spray paint.
-              </p>
-              <p>
-                Wind alone was not enough to remove the ash, so brushing
-                techniques—similar to sand animation—were used to erase the
-                image gradually on camera.
-              </p>
-            </section>
-
-            <section id="works">
-              <h2>Works</h2>
-
-              <figure className={styles.figure}>
-                <img
-                  src="/images/art/art/shattered-sidewalks/01.jpg"
-                  alt="Shattered Sidewalks ash stencil at the original site by Goodymoog"
-                />
-                <figcaption>
-                  Stencil filled with ash at the original site.
-                </figcaption>
-              </figure>
-
-              <figure className={styles.figure}>
-                <img
-                  src="/images/art/art/shattered-sidewalks/02.jpg"
-                  alt="Shattered Sidewalks image dissolving as ash disperses by Goodymoog"
-                />
-                <figcaption>
-                  Image dissolving as ash disperses.
-                </figcaption>
-              </figure>
-
-              <div className={styles.videoWrapper}>
-                <iframe
-                  src="https://www.youtube.com/embed/YOUR_VIDEO_ID"
-                  title="Shattered Sidewalks video"
-                  allowFullScreen
-                />
-              </div>
-            </section>
-          </article>
-
-          <aside className={styles.infobox}>
-            <img
-              src="/images/art/art/shattered-sidewalks/cover.jpg"
-              alt="Shattered Sidewalks art project by Goodymoog"
+        <div className={styles.slideshow}>
+          {images.map((src, index) => (
+            <Image
+              key={src}
+              src={src}
+              alt={`Photograph ${index + 1} from the Shattered Sidewalks series by Goodymoog`}
+              fill
+              unoptimized
+              priority
+              className={`${styles.image} ${styles[`image${index + 1}`]}`}
+              sizes="(max-width: 700px) 86vw, 700px"
             />
-
-            <div className={styles.infoBlock}>
-              <div><strong>Year:</strong> 2021–2022</div>
-              <div><strong>Medium:</strong> Stencil + ash + video</div>
-              <div><strong>Theme:</strong> Ephemerality</div>
-              <div><strong>Influences:</strong> Banksy; sand animation</div>
-            </div>
-          </aside>
+          ))}
         </div>
+
+        <section className={styles.timeSection}>
+          <div className={styles.date}>Aug 27, 2021</div>
+          <div className={styles.clock}>
+            {formatClock(clockTime)}
+          </div>
+        </section>
 
         <div className={styles.back}>
           <Link href="/art">← Back to Art</Link>

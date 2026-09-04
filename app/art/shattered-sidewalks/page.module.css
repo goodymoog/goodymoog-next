@@ -1,0 +1,162 @@
+.page {
+  background: #000;
+  color: #fff;
+  min-height: 100vh;
+  width: 100%;
+  font-family: Arial, Helvetica, sans-serif;
+  overflow-x: hidden;
+}
+
+.container {
+  width: 100%;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 40px 30px 100px;
+  box-sizing: border-box;
+}
+
+.breadcrumb {
+  font-size: 13px;
+  margin-bottom: 42px;
+  opacity: 0.5;
+}
+
+.breadcrumb a {
+  color: #fff;
+  text-decoration: none;
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 28px;
+}
+
+.header h1 {
+  margin: 0;
+  font-size: 42px;
+  font-weight: 400;
+  letter-spacing: -0.03em;
+
+  color: rgba(255, 255, 255, 0.72);
+
+  text-shadow:
+    0 0 8px rgba(255, 245, 220, 0.12),
+    0 0 22px rgba(255, 245, 220, 0.06);
+}
+
+.slideshow {
+  position: relative;
+  width: min(700px, 66vw);
+  aspect-ratio: 3 / 2;
+  margin: 0 auto;
+  overflow: hidden;
+  background: #000;
+
+  border-radius: 22px;
+}
+
+.image {
+  position: absolute;
+  inset: 0;
+  object-fit: contain;
+}
+
+.image1 {
+  animation: imageOne 60s linear infinite;
+}
+
+.image2 {
+  animation: imageTwo 60s linear infinite;
+}
+
+.image3 {
+  animation: imageThree 60s linear infinite;
+}
+
+@keyframes imageOne {
+  0% { opacity: 1; }
+  13.33% { opacity: 1; }
+  33.33% { opacity: 0; }
+  80% { opacity: 0; }
+  100% { opacity: 1; }
+}
+
+@keyframes imageTwo {
+  0% { opacity: 0; }
+  13.33% { opacity: 0; }
+  33.33% { opacity: 1; }
+  46.67% { opacity: 1; }
+  66.67% { opacity: 0; }
+  100% { opacity: 0; }
+}
+
+@keyframes imageThree {
+  0% { opacity: 0; }
+  46.67% { opacity: 0; }
+  66.67% { opacity: 1; }
+  80% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+.timeSection {
+  width: min(700px, 66vw);
+  margin: 18px auto 0;
+  text-align: center;
+}
+
+.date {
+  margin-bottom: 4px;
+  font-size: 13px;
+  letter-spacing: 0.04em;
+  color: rgba(255, 255, 255, 0.45);
+}
+
+.clock {
+  font-size: 17px;
+  font-weight: 400;
+  letter-spacing: 0.05em;
+  color: rgba(255, 255, 255, 0.78);
+  font-variant-numeric: tabular-nums;
+}
+
+.back {
+  margin-top: 90px;
+  font-size: 13px;
+  opacity: 0.5;
+}
+
+.back a {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media (max-width: 700px) {
+  .container {
+    padding: 70px 18px 90px;
+  }
+
+  .breadcrumb {
+    margin-bottom: 38px;
+  }
+
+  .header {
+    margin-bottom: 24px;
+  }
+
+  .header h1 {
+    font-size: 34px;
+  }
+
+  .slideshow {
+    width: 86vw;
+  }
+
+  .timeSection {
+    width: 86vw;
+    margin-top: 16px;
+  }
+
+  .back {
+    margin-top: 80px;
+  }
+}
