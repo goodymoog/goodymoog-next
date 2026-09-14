@@ -299,17 +299,22 @@ body { background: #fff; }
 .homePage {
   padding-bottom: 64px; /* space for footer */
 }
-.spinning-cd-video {
-  display: block;
+.spinning-cd-crop {
   width: 100%;
   max-width: 850px;
-  height: auto;
   margin: 12px auto 18px;
+  overflow: hidden;
+  background: white;
+}
 
-  background: #ffffff;
-  border: none !important;
-  outline: none !important;
-  box-shadow: none !important;
+.spinning-cd-video {
+  display: block;
+  width: 102%;
+  height: auto;
+  margin: -1%;
 
+  border: 0;
+  outline: 0;
+  box-shadow: none;
   cursor: pointer;
 }

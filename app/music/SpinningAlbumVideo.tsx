@@ -27,15 +27,17 @@ export default function SpinningAlbumVideo() {
   };
 
   return (
-    <video
-      ref={videoRef}
-      className="spinning-cd-video"
-      loop
-      playsInline
-      preload="metadata"
-      onClick={togglePlayback}
-    >
-      <source src="/videos/spinning-cd.mp4" type="video/mp4" />
-    </video>
+    <div className="spinning-cd-crop">
+      <video
+        ref={videoRef}
+        className="spinning-cd-video"
+        loop
+        playsInline
+        preload="metadata"
+        onClick={togglePlayback}
+      >
+        <source src="/videos/spinning-cd.mp4" type="video/mp4" />
+      </video>
+    </div>
   );
 }
