@@ -1,3 +1,4 @@
+import SpinningAlbumVideo from "./SpinningAlbumVideo";
 export const metadata = {
   // title: "Music",
   description:

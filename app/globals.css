@@ -306,4 +306,8 @@ body { background: #fff; }
   height: auto;
   margin: 12px auto 18px;
   background: #fff;
+  border: 0;
+  outline: 0;
+  box-shadow: none;
+  cursor: pointer;
 }
