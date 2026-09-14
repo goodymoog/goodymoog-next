@@ -299,10 +299,11 @@ body { background: #fff; }
 .homePage {
   padding-bottom: 64px; /* space for footer */
 }
-.music-video {
+.spinning-cd-video {
   display: block;
   width: 100%;
   max-width: 850px;
   height: auto;
   margin: 12px auto 18px;
+  background: #fff;
 }

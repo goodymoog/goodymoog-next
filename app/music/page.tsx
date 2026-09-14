@@ -13,8 +13,14 @@ export default function Home() {
           {/* MAIN */}
           <div className="main-content">
             <h2>2026: Warp Drive</h2>
-            <video className="music-video" controls playsInline>
-              <source src="/videos/warp-drive.mp4" type="video/mp4" />
+            <video
+              className="spinning-cd-video"
+              autoPlay
+              loop
+              muted
+              playsInline
+            >
+              <source src="/videos/spinning-cd.mp4" type="video/mp4" />
             </video>
             <div className="album-box">
               <p>
