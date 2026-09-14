@@ -15,6 +15,17 @@ export default function SpinningAlbumVideo() {
     }
   }, []);
 
+  const togglePlayback = () => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    if (video.paused) {
+      video.play();
+    } else {
+      video.pause();
+    }
+  };
+
   return (
     <video
       ref={videoRef}
@@ -22,9 +33,7 @@ export default function SpinningAlbumVideo() {
       loop
       playsInline
       preload="metadata"
-      onClick={(e) => {
-        e.currentTarget.play();
-      }}
+      onClick={togglePlayback}
     >
       <source src="/videos/spinning-cd.mp4" type="video/mp4" />
     </video>
