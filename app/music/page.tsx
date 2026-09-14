@@ -14,15 +14,7 @@ export default function Home() {
           {/* MAIN */}
           <div className="main-content">
             <h2>2026: Warp Drive</h2>
-            <video
-              className="spinning-cd-video"
-              autoPlay
-              loop
-              muted
-              playsInline
-            >
-              <source src="/videos/spinning-cd.mp4" type="video/mp4" />
-            </video>
+            <SpinningAlbumVideo />
             <div className="album-box">
               <p>
                 <i>Warp Drive</i> is a collection of songs that forced me to 
