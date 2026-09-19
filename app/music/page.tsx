@@ -13,7 +13,13 @@ export default function Home() {
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
-            <h2>
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+              }}
+            >
               <span>Warp Drive</span>
               <span>Sep 2026</span>
             </h2>
