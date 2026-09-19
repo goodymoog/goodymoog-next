@@ -13,14 +13,16 @@ export default function Home() {
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
-            <h2>2026: Warp Drive</h2>
+            <h2>
+              <span>Warp Drive</span>
+              <span>Sep 2026</span>
+            </h2>
             <SpinningAlbumVideo />
             <div className="album-box">
               <p>
-                <i>Warp Drive</i> is a collection of songs that forced me to 
-                destroy my worst nightmares. I now understand that under the veil of
-                anger is sadness. And, under all that sadness is a longing to change
-                our warped vision of the past.
+                <i>Warp Drive</i> forced me to face my worst nightmares, and see that under the veil of
+                anger is sadness ... and under all that sadness is a longing to change
+                my warped vision of the past. Through all this anger, I made this music to find my own forgiveness. 
               </p>
             </div>
 
@@ -34,12 +36,15 @@ export default function Home() {
               <p>Chasing love and dreaming under a clearer sky.</p>
             </div> */}
 
-            <h2>2025: Sickwiththeflow</h2>
+            <h2>
+              <span>Sickwiththeflow</span>
+              <span>June 2025</span>
+            </h2>
             <div className="album-box">
               <p>
                 <i>Sickwiththeflow</i> is a raw and unfiltered account of all the
                 things that make me sick to my stomach: toxic friends, strained
-                relationships, excessive overthinking, low self esteem... but it’s
+                relationships, excessive overthinking, low self esteem but it’s
                 also about finding my rhythm in the middle of all that noise.{" "}
                 <a
                   href="https://www.goodymoog.com/sickwiththeflow"
@@ -56,13 +61,16 @@ export default function Home() {
               <iframe src="https://www.youtube.com/embed/wZic1EBhgAI" allowFullScreen />
             </div>
 
-            <h2>2024–2025: New Mexico II</h2>
+            <h2>
+              <span>New Mexico II</span>
+              <span>Oct 2025</span>
+            </h2>
             <div className="album-box">
               <p>
                 Searching for meditative music to help me study, I created
                 <i> New Mexico</i> as a way to re-experience the state's vivid
                 landscapes and vibrant wildlife. For me, New Mexico represents calm
-                and tranquility—feelings I’ve tried to capture throughout the album.{" "}
+                and tranquility, feelings I’ve tried to capture throughout the album.{" "}
                 <a href="https://www.goodymoog.com/new-mexico" target="_blank" rel="noreferrer">
                   Read more
                 </a>
