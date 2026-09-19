@@ -29,7 +29,7 @@ export default function Home() {
                 letterSpacing: "0.03em",
               }}
             >
-              SEP 2026
+              Sep 2026
             </span>
           </h2>
             <SpinningAlbumVideo />
