@@ -21,12 +21,12 @@ export default function Home() {
             }}
           >
             <span>Warp Drive</span>
+
             <span
               style={{
-                fontSize: "0.72em",
+                fontSize: "0.65em",
                 fontWeight: 400,
-                opacity: 0.75,
-                letterSpacing: "0.03em",
+                opacity: 0.55,
               }}
             >
               Sep 2026
