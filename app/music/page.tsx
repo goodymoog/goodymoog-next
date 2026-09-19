@@ -21,7 +21,7 @@ export default function Home() {
               }}
             >
               <span>Warp Drive</span>
-              <span style={{ opacity: 0.55 }}>Sep 2026</span>
+              <span style={{ opacity: 0.55 }}>Aug 2026</span>
             </h2>
             <SpinningAlbumVideo />
             <div className="album-box">
