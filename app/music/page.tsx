@@ -42,9 +42,15 @@ export default function Home() {
               <p>Chasing love and dreaming under a clearer sky.</p>
             </div> */}
 
-            <h2>
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+              }}
+            >
               <span>Sickwiththeflow</span>
-              <span>June 2025</span>
+              <span>Jun 2025</span>
             </h2>
             <div className="album-box">
               <p>
@@ -67,9 +73,15 @@ export default function Home() {
               <iframe src="https://www.youtube.com/embed/wZic1EBhgAI" allowFullScreen />
             </div>
 
-            <h2>
+            <h2
+              style={{
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
+              }}
+            >
               <span>New Mexico II</span>
-              <span>Oct 2025</span>
+              <span>Oct 2024</span>
             </h2>
             <div className="album-box">
               <p>
