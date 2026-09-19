@@ -21,15 +21,15 @@ export default function Home() {
             }}
           >
             <span>Warp Drive</span>
-
             <span
               style={{
-                fontSize: "0.65em",
+                fontSize: "0.72em",
                 fontWeight: 400,
-                opacity: 0.55,
+                opacity: 0.75,
+                letterSpacing: "0.03em",
               }}
             >
-              Sep 2026
+              SEP 2026
             </span>
           </h2>
             <SpinningAlbumVideo />
