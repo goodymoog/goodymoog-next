@@ -13,25 +13,16 @@ export default function Home() {
         <div className="content">
           {/* MAIN */}
           <div className="main-content">
-          <h2
-            style={{
-              display: "flex",
-              justifyContent: "space-between",
-              alignItems: "baseline",
-            }}
-          >
-            <span>Warp Drive</span>
-
-            <span
+            <h2
               style={{
-                fontSize: "0.65em",
-                fontWeight: 400,
-                opacity: 0.55,
+                display: "flex",
+                justifyContent: "space-between",
+                alignItems: "baseline",
               }}
             >
-              Sep 2026
-            </span>
-          </h2>
+              <span>Warp Drive</span>
+              <span>Oct 2026</span>
+            </h2>
             <SpinningAlbumVideo />
             <div className="album-box">
               <p>
