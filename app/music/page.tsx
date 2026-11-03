@@ -226,7 +226,7 @@ export default function Home() {
                 </a>
               </li>
               <li><a href="https://www.goodymoog.com/djswaglevel100" target="_blank" rel="noreferrer">Remix/Unreleased</a></li>
-              <li><a href="https://www.goodymoog.com/photos target="_blank" rel="noreferrer">Photos</a></li>
+              <li><a href="https://www.goodymoog.com/photos" target="_blank" rel="noreferrer">Photos</a></li>
             </ul>
 
             <h3>Interesting</h3>
