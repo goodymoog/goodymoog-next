@@ -215,6 +215,7 @@ export default function Home() {
             <h3>More Art</h3>
             <ul className="sidebar-list">
               <li><a href="https://www.goodymoog.com/artportfolio" target="_blank" rel="noreferrer">Art Portfolio</a></li>
+              <li><a href="https://goodymoog.com/bang-dur/index.html" target="_blank" rel="noreferrer" style="color: #D4AF37;">Cicadas in Barad-dûr</a></li>
               <li><a href="https://www.goodymoog.com/remixes" target="_blank" rel="noreferrer">Remix/Unreleased</a></li>
               <li><a href="https://www.goodymoog.com/press" target="_blank" rel="noreferrer">Photos</a></li>
             </ul>
