@@ -222,7 +222,7 @@ export default function Home() {
                   rel="noreferrer"
                   style={{ color: "#D4AF37" }}
                 >
-                  Cicadas in Barad-dûr
+                  Cicadas in Balladur
                 </a>
               </li>
               <li><a href="https://www.goodymoog.com/djswaglevel100" target="_blank" rel="noreferrer">Remix/Unreleased</a></li>
