@@ -217,7 +217,7 @@ export default function Home() {
               <li><a href="https://www.goodymoog.com/art" target="_blank" rel="noreferrer">Art Portfolio</a></li>
               <li>
                 <a
-                  href="https://goodymoog.com/bang-dur/index.html"
+                  href="https://goodymoog.com/balladur/index.html"
                   target="_blank"
                   rel="noreferrer"
                   style={{ color: "#D4AF37" }}
