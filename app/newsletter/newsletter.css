@@ -1,0 +1,39 @@
+/* GOODYMOOG / newsletter — intentionally not a landing page. */
+.gnl { --ink:#242424; --blue:#007cff; --orange:#f06a49; color:var(--ink); background:#fff; font: 16px/1.47 Arial,Helvetica,sans-serif; min-height:calc(100vh - 110px); }
+.gnl * { box-sizing:border-box; }
+.gnl a { color:inherit; text-decoration:underline; text-underline-offset:3px; }
+.gnl-main { position:relative; width:min(1110px,calc(100% - 64px)); margin:0 auto; padding:66px 0 130px; }
+.gnl-heading { margin:0 0 32px 1px; font-size:30px; font-weight:400; letter-spacing:-.035em; }
+.gnl-paper { position:relative; display:grid; grid-template-columns: 560px minmax(270px,1fr); column-gap:70px; align-items:start; }
+.gnl-copy { padding-left:3px; }
+.gnl-intro { font:400 21px/1.48 Arial,Helvetica,sans-serif; max-width:425px; margin:0 0 19px; letter-spacing:-.018em; }
+.gnl-sidecopy { max-width:410px; margin:0 0 43px; font-size:15px; }
+.gnl-emailnote { display:block; font-family:'Courier New',monospace; font-size:12px; line-height:1.5; color:#575757; margin:4px 0 10px; }
+.gnl-form { display:flex; align-items:center; gap:8px; flex-wrap:wrap; }
+.gnl-form input { font:14px Arial,Helvetica,sans-serif; border:1px solid #888; border-radius:0; background:#fff; height:34px; width:275px; padding:6px 8px; color:#222; }
+.gnl-form button { border-radius:0; background:#eaeaea; border:1px solid #888; box-shadow:inset 1px 1px white, inset -1px -1px #b6b6b6; padding:5px 13px; font:14px Arial,Helvetica,sans-serif; height:34px; cursor:pointer; color:#111; }
+.gnl-form button:hover { background:#dadada; }
+.gnl-form button:active { box-shadow:inset 1px 1px #bbb; background:#ddd; }
+.gnl-fine { margin:11px 0 0; color:#6d6d6d; font-size:12px; }
+.gnl-msg { max-width:400px; color:#b24426; font-size:13px; margin:12px 0 0; }
+.gnl-cover { position:relative; margin:4px 0 0; justify-self:start; width:325px; transform: rotate(2.2deg); }
+.gnl-cover:before { content:''; position:absolute; width:71px; height:24px; background:rgba(228,215,183,.55); left:37%; top:-15px; transform:rotate(-7deg); z-index:2; border-left:1px solid rgba(190,180,160,.4); border-right:1px solid rgba(190,180,160,.4); }
+.gnl-cover img { display:block; width:100%; height:auto; filter:contrast(.96) saturate(.92); box-shadow:2px 5px 0 rgba(0,0,0,.09); }
+.gnl-scribble { position:absolute; right:-8px; top:282px; font: italic 15px Georgia,serif; transform:rotate(-5deg); color:#777; }
+.gnl-bottom { position:relative; margin-top:115px; padding-left:8px; display:flex; gap:180px; align-items:start; }
+.gnl-bottom h2 { font: 400 15px Arial,Helvetica,sans-serif; margin:0 0 14px; }
+.gnl-maybe { width:380px; }
+.gnl-maybe ul { margin:0; list-style:none; padding:0; }
+.gnl-maybe li { padding:4px 0; font-size:14px; }
+.gnl-maybe li:before { content:'—  '; color:#777; }
+.gnl-archive { max-width:290px; font-size:14px; padding-top:1px; }
+.gnl-archive p { margin:0; color:#666; }
+.gnl-tiny { font:11px/1.4 'Courier New',monospace; color:#666; padding-top:13px; }
+.gnl-archive a { text-decoration:underline; }
+.gnl-letter { font:12px/1.5 'Courier New',monospace; color:#777; position:absolute; bottom:55px; right:12%; transform:rotate(3deg); }
+@media (min-width:1300px) { .gnl-main { padding-top:70px; } }
+@media (max-width:980px) { .gnl-paper{grid-template-columns:minmax(300px,1fr) 300px; gap:30px;} .gnl-bottom{gap:80px;margin-top:90px} .gnl-cover{width:280px}.gnl-scribble{display:none} }
+@media (max-width:690px) { .gnl-main{width:calc(100% - 44px);padding:38px 0 90px} .gnl-heading{font-size:26px;margin-bottom:25px} .gnl-paper{display:flex;flex-direction:column;gap:30px} .gnl-intro{font-size:19px;max-width:95%} .gnl-sidecopy{margin-bottom:28px} .gnl-cover{align-self:flex-end;margin:18px 22px 5px 0;width:min(75%,310px)} .gnl-bottom{display:block;margin-top:55px;padding-left:0}.gnl-maybe{width:auto}.gnl-archive{margin-top:34px}.gnl-letter{position:static;display:block;margin-top:50px}.gnl-form input{width:min(255px,65vw)} }
+
+/* Keyboard focus is visible without changing the normal design. */
+.gnl-form input:focus-visible, .gnl-form button:focus-visible, .gnl a:focus-visible { outline:2px solid #007cff; outline-offset:2px; }

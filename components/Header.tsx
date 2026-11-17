@@ -22,6 +22,7 @@ export default function Header() {
           <Link href="/merch">Items</Link>
           <Link href="/art">Art</Link>
           <Link href="/contact">Contact</Link>
+          <Link href="/newsletter">News</Link>
         </nav>
       </div>
     </header>
