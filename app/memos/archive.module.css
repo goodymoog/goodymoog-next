@@ -10,3 +10,68 @@
 
 .trackInfo[draggable=true]{cursor:grab;}
 .trackInfo[draggable=true]:active{cursor:grabbing;}
+
+/* GOODYMOOG_MOBILE_LAYOUT_19 — isolated Memos responsive refinements */
+/* The original input rule has higher specificity than .shell .search. */
+.shell input.search:not([type=range]) {
+  padding-left: 40px;
+  padding-right: 12px;
+}
+.searchWrap > svg { z-index: 1; flex-shrink: 0; }
+@media (max-width: 600px) {
+  .workspace { padding: 18px 16px 0; }
+  .shell h1 { font-size: 30px; letter-spacing: -1.1px; }
+  .top { display: grid; grid-template-columns: minmax(0, 1fr) auto; column-gap: 8px; row-gap: 8px; align-items: center; }
+  .top > div:first-child { display: contents; }
+  .top .heading { grid-column: 1; grid-row: 1; min-width: 0; gap: 4px; }
+  .top .heading h1 { min-width: 0; overflow-wrap: anywhere; }
+  .top .heading button { flex: 0 0 28px; }
+  .top > div:first-child > small { grid-column: 1 / -1; grid-row: 2; margin: 0; font-size: 12px; }
+  .top > .actions { grid-column: 2; grid-row: 1; flex-wrap: nowrap; justify-content: flex-end; gap: 5px; }
+  .top > .actions button { min-height: 40px; font-size: 12px; padding: 7px 8px; }
+  .nav { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 3px; margin: 14px 0 10px; align-items: center; }
+  .nav > button { padding: 4px 2px; font-size: 12px; min-height: 44px; white-space: normal; line-height: 1.2; }
+  .navEnd { grid-column: 1 / -1; justify-content: flex-end; margin: 0; gap: 8px; }
+  .navEnd button { min-height: 40px; font-size: 12px; padding: 5px 8px; }
+  .navEnd svg { width: 16px; height: 16px; }
+  .searchWrap { margin-bottom: 16px; }
+  .shell input.search:not([type=range]) { font-size: 16px; min-height: 44px; padding-top: 9px; padding-bottom: 9px; }
+  .grid { gap: 12px; }
+  .shell .folder { min-height: 132px; padding: 12px; gap: 6px; }
+  .folder > svg { width: 44px; height: 38px; }
+  .folder strong { font-size: 15px; line-height: 1.3; }
+  .folder small { font-size: 12px; }
+  .tileActions { gap: 0; right: 3px; top: 3px; }
+  .tileActions .iconButton { width: 36px; min-width: 36px; height: 40px; min-height: 40px; }
+  .library { min-height: 0; padding-bottom: 18px; }
+  .track { flex-wrap: wrap; row-gap: 3px; padding: 12px; }
+  .trackInfo { flex: 1 1 100%; }
+  .track .actions { margin-left: auto; flex-wrap: wrap; }
+  .track .actions button { width: 40px; min-width: 40px; height: 40px; }
+  .track .actions button:not([aria-label]) { width: auto; }
+  .dock { padding: 0 16px max(10px, env(safe-area-inset-bottom, 0px)); }
+  .recorder { gap: 5px; padding: 12px 0 5px; }
+  .recorder small { font-size: 11px; text-align: center; }
+  .timer { font-size: 32px; }
+  .shell .record { width: 56px; height: 56px; }
+  .record span { width: 44px; height: 44px; }
+  .record span.stop { width: 24px; height: 24px; }
+  .settings .iconButton { width: 44px; min-width: 44px; height: 44px; }
+  .pending .actions { flex-wrap: wrap; }
+  .shell .login input, .shell .form input:not([type=color]), .shell .form textarea, .shell .form select, .shell .pending input { font-size: 16px; }
+}
+@media (max-width: 365px) {
+  .workspace { padding-left: 12px; padding-right: 12px; }
+  .top .heading { grid-column: 1 / -1; }
+  .top > div:first-child > small { grid-row: 2; }
+  .top > .actions { grid-column: 1 / -1; grid-row: 3; justify-content: flex-start; }
+  .nav > button { font-size: 11px; }
+  .tileActions .iconButton { width: 32px; min-width: 32px; }
+  .folder > svg { width: 38px; }
+}
+@media (max-width: 600px) and (max-height: 550px) {
+  .recorder { padding-top: 6px; gap: 3px; }
+  .timer { font-size: 24px; }
+}
+
+.namePreview { overflow-wrap: anywhere; font-size: 12px; }
