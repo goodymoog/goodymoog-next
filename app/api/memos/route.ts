@@ -1,5 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand } from '@aws-sdk/client-s3';
+import { S3Client, PutObjectCommand, GetObjectCommand, HeadObjectCommand, DeleteObjectCommand } from '@aws-sdk/client-s3';
 import { getSignedUrl } from '@aws-sdk/s3-request-presigner';
 import { createHash, randomUUID } from 'node:crypto';
 export const runtime = 'nodejs';
@@ -55,7 +55,15 @@ export async function POST(req:NextRequest){
     const uid=await owner(token);
     if(b.action==='list'||b.action==='list_v2'||b.action==='list_v3'){
       const [folders,recordings]=await Promise.all([all('gm_folders',token,b.action==='list_v3'?'':'&trashed_at=is.null'),all('gm_recordings',token,b.action==='list'?'&trashed_at=is.null':'')]);
-      return json({folders,recordings,sync_version:b.action==='list_v3'?3:2});
+      return json({folders,recordings:b.action==='list_v3'?recordings:recordings.filter(r=>!r.purged_at),sync_version:b.action==='list_v3'?3:2});
+    }
+    if(b.action==='purge_recording'){
+      const id=validId(b.id);if(typeof b.revision!=='number'||!Number.isSafeInteger(b.revision)||b.revision<0)throw new ApiError(400,'Invalid revision.');
+      const row=await sup('/rest/v1/rpc/gm_claim_purge',token,{p_id:id,p_revision:b.revision});
+      if(!row)throw new ApiError(409,'Recording is not in Trash or changed. Refresh first.');
+      if(!Object.hasOwn(mime,row.extension)||row.object_key!==`${uid}/${id}.${row.extension}`)throw new ApiError(409,'Invalid storage key.');
+      if(!row.purge_done){await s3().send(new DeleteObjectCommand({Bucket:env('R2_BUCKET_NAME'),Key:row.object_key}));if(await sup('/rest/v1/rpc/gm_finish_purge',token,{p_id:id})!==true)throw new ApiError(502,'Cloud deletion not confirmed; retry.');}
+      return json({purged:true});
     }
     if(b.action==='edit_recording_v3'||b.action==='edit_recording'){
       const id=validId(b.id), name=label(b.name), folder_id=await folder(token,b.folder_id);
@@ -82,8 +90,8 @@ export async function POST(req:NextRequest){
     }
     if(b.action==='prepare'||b.action==='finish'){
       const m=meta(b),folder_id=await folder(token,b.folder_id),key=`${uid}/${m.id}.${m.extension}`,Bucket=env('R2_BUCKET_NAME'),client=s3();
-      const rows=await sup(`/rest/v1/gm_recordings?select=id,sha256,byte_count,extension&id=eq.${m.id}`,token);
-      if(rows.length){if(rows[0].sha256===m.sha256&&Number(rows[0].byte_count)===m.byte_count&&rows[0].extension===m.extension)return json({complete:true});throw new ApiError(409,'Recording ID already used.');}
+      const rows=await sup(`/rest/v1/gm_recordings?select=id,sha256,byte_count,extension,purged_at&id=eq.${m.id}`,token);
+      if(rows.length){if(rows[0].purged_at)throw new ApiError(409,'Recording was permanently deleted.');if(rows[0].sha256===m.sha256&&Number(rows[0].byte_count)===m.byte_count&&rows[0].extension===m.extension)return json({complete:true});throw new ApiError(409,'Recording ID already used.');}
       if(b.action==='prepare'){
         const checksum=Buffer.from(m.sha256,'hex').toString('base64');
         const headers={'Content-Type':mime[m.extension],'If-None-Match':'*','x-amz-checksum-sha256':checksum};
@@ -100,9 +108,9 @@ export async function POST(req:NextRequest){
       if(n!==m.byte_count||h.digest('hex')!==m.sha256)throw new ApiError(409,'Uploaded checksum does not match.');
       await sup('/rest/v1/gm_recordings',token,{...m,folder_id});return json({complete:true});
     }
-    if(b.action==='play'){
-      const id=validId(b.id),rows=await sup(`/rest/v1/gm_recordings?select=id,extension,object_key&id=eq.${id}`,token);const r=rows[0];
-      if(!r||!Object.hasOwn(mime,r.extension)||r.object_key!==`${uid}/${id}.${r.extension}`)throw new ApiError(404,'Recording not found.');
+    if(b.action==='play'||b.action==='export_audio'){
+      const id=validId(b.id),rows=await sup(`/rest/v1/gm_recordings?select=id,extension,object_key,purged_at,trashed_at&id=eq.${id}`,token);const r=rows[0];
+      if(!r||r.purged_at||(b.action==='export_audio'&&r.trashed_at)||!Object.hasOwn(mime,r.extension)||r.object_key!==`${uid}/${id}.${r.extension}`)throw new ApiError(404,'Recording not found.');
       const url=await getSignedUrl(s3(),new GetObjectCommand({Bucket:env('R2_BUCKET_NAME'),Key:r.object_key}),{expiresIn:900});return json({url});
     }
     throw new ApiError(400,'Unknown action.');

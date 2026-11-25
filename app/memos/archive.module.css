@@ -7,3 +7,6 @@
 @media(max-height:550px){.recorder{padding:6px 0;gap:3px}.timer{font-size:24px}.pending{max-height:25dvh}}
 /* Restore is a textual action, not an icon. */
 .shell .track .actions button:not([aria-label]){width:auto;min-width:65px;padding:6px 10px;background:var(--hover)}
+
+.trackInfo[draggable=true]{cursor:grab;}
+.trackInfo[draggable=true]:active{cursor:grabbing;}
