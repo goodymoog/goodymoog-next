@@ -13,7 +13,7 @@ function env(n:string){ const v=process.env[n]; if(!v) throw new ApiError(503,'A
 function json(data:unknown,status=200){return NextResponse.json(data,{status,headers:{'Cache-Control':'private, no-store','X-Robots-Tag':'noindex, nofollow','Referrer-Policy':'no-referrer'}});}
 async function sup(path:string, token?:string, body?:unknown, more:Record<string,string>={}) {
   const res=await fetch(env('NEXT_PUBLIC_SUPABASE_URL').replace(/\/$/,'')+path,{method:body===undefined?'GET':'POST',headers:{apikey:env('NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY'),...(token?{Authorization:`Bearer ${token}`} : {}), 'Content-Type':'application/json', ...more},body:body===undefined?undefined:JSON.stringify(body),cache:'no-store'});
-  if(!res.ok) throw new ApiError(res.status===401?401:res.status===403?403:502, res.status===401?'Please sign in again.':res.status===403?'Access denied.':'Database request failed. Check the configuration and retry.');
+  if(!res.ok) throw new ApiError(res.status===401?401:res.status===403?403:res.status===409?409:502, res.status===401?'Please sign in again.':res.status===403?'Access denied.':'Database request failed. Check the configuration and retry.');
   const raw=await res.text();return raw?JSON.parse(raw):null;
 }
 async function owner(token:string){
@@ -26,7 +26,7 @@ async function owner(token:string){
 function s3(){return new S3Client({region:'auto',endpoint:env('R2_ENDPOINT'),forcePathStyle:true,credentials:{accessKeyId:env('R2_ACCESS_KEY_ID'),secretAccessKey:env('R2_SECRET_ACCESS_KEY')},requestChecksumCalculation:'WHEN_REQUIRED',responseChecksumValidation:'WHEN_REQUIRED'});}
 function validId(v:unknown){if(typeof v!=='string'||!uuid.test(v)) throw new ApiError(400,'Invalid ID.');return v.toLowerCase();}
 function label(v:unknown){if(typeof v!=='string'||!v.trim()||v.trim().length>512)throw new ApiError(400,'Enter a name (1–512 characters).');return v.trim();}
-async function folder(token:string,v:unknown){if(v===null||v===undefined)return null;const id=validId(v);const rows=await sup(`/rest/v1/gm_folders?select=id&id=eq.${id}`,token);if(!rows.length)throw new ApiError(400,'Folder no longer exists.');return id;}
+async function folder(token:string,v:unknown){if(v===null||v===undefined)return null;const id=validId(v);const rows=await sup(`/rest/v1/gm_folders?select=id&id=eq.${id}&trashed_at=is.null`,token);if(!rows.length)throw new ApiError(400,'Folder no longer exists.');return id;}
 function meta(b:Record<string,unknown>){
   const id=validId(b.id), ext=typeof b.extension==='string'?b.extension.toLowerCase():'';
   if(!Object.hasOwn(mime,ext))throw new ApiError(400,'Unsupported audio format.');
@@ -36,7 +36,7 @@ function meta(b:Record<string,unknown>){
   const duration=b.duration_seconds;if(typeof duration!=='number'||!Number.isFinite(duration)||duration<0)throw new ApiError(400,'Invalid duration.');
   return {id,extension:ext,byte_count:size,sha256:hash,name:label(b.name),original_filename:label(b.original_filename),recorded_at:date.toISOString(),duration_seconds:duration};
 }
-async function all(table:string,token:string){const out=[];for(let i=0;i<10000;i+=500){const rows=await sup(`/rest/v1/${table}?select=*&order=created_at.asc,id.asc&limit=500&offset=${i}`,token);out.push(...rows);if(rows.length<500)return out;}throw new ApiError(413,'Library exceeds the pilot listing limit.');}
+async function all(table:string,token:string,filter=''){const out=[];for(let i=0;i<10000;i+=500){const rows=await sup(`/rest/v1/${table}?select=*&order=created_at.asc,id.asc&limit=500&offset=${i}${filter}`,token);out.push(...rows);if(rows.length<500)return out;}throw new ApiError(413,'Library exceeds the pilot listing limit.');}
 export async function POST(req:NextRequest){
   try {
     const origin=req.headers.get('origin');
@@ -53,10 +53,32 @@ export async function POST(req:NextRequest){
     if(b.action==='logout'){const r=json({ok:true});r.cookies.set('gm_archive_session','',{httpOnly:true,secure:process.env.NODE_ENV==='production',sameSite:'strict',path:'/api/memos',maxAge:0});return r;}
     const token=req.cookies.get('gm_archive_session')?.value||'';
     const uid=await owner(token);
-    if(b.action==='list'){const [folders,recordings]=await Promise.all([all('gm_folders',token),all('gm_recordings',token)]);return json({folders,recordings});}
-    if(b.action==='folder'){
-      const parent_id=await folder(token,b.parent_id), name=label(b.name), color_hex=typeof b.color_hex==='string'&&/^[0-9a-f]{6}$/i.test(b.color_hex)?b.color_hex:'659ce0';
-      await sup('/rest/v1/gm_folders',token,{id:randomUUID(),parent_id,name,color_hex});return json({ok:true});
+    if(b.action==='list'||b.action==='list_v2'||b.action==='list_v3'){
+      const [folders,recordings]=await Promise.all([all('gm_folders',token,b.action==='list_v3'?'':'&trashed_at=is.null'),all('gm_recordings',token,b.action==='list'?'&trashed_at=is.null':'')]);
+      return json({folders,recordings,sync_version:b.action==='list_v3'?3:2});
+    }
+    if(b.action==='edit_recording_v3'||b.action==='edit_recording'){
+      const id=validId(b.id), name=label(b.name), folder_id=await folder(token,b.folder_id);
+      if(typeof b.revision!=='number'||!Number.isSafeInteger(b.revision)||b.revision<0||typeof b.trashed!=='boolean')throw new ApiError(400,'Invalid revision or Trash state.');
+      const fields={p_id:id,p_revision:b.revision,p_name:name,p_folder_id:folder_id,p_trashed:b.trashed};
+      let updated;
+      if(b.action==='edit_recording_v3'){
+        if(typeof b.favorite!=='boolean'||typeof b.notes!=='string'||b.notes.length>4000)throw new ApiError(400,'Invalid notes or favorite.');
+        updated=await sup('/rest/v1/rpc/gm_edit_track_v3',token,{...fields,p_favorite:b.favorite,p_notes:b.notes});
+      }else{updated=await sup('/rest/v1/rpc/gm_edit_recording',token,fields);}
+      if(!updated)throw new ApiError(409,'Recording changed on another device. Refresh and try again.');return json({recording:updated});
+    }
+    if(b.action==='edit_folder_v3'){
+      const id=validId(b.id), name=label(b.name), parent_id=b.parent_id==null?null:validId(b.parent_id);
+      if(typeof b.revision!=='number'||!Number.isSafeInteger(b.revision)||b.revision<0||typeof b.trashed!=='boolean'||typeof b.color_hex!=='string'||!(/^[a-f0-9]{6}$/i.test(b.color_hex)))throw new ApiError(400,'Invalid folder edit.');
+      const updated=await sup('/rest/v1/rpc/gm_edit_folder_v3',token,{p_id:id,p_revision:b.revision,p_name:name,p_parent_id:parent_id,p_color_hex:b.color_hex,p_trashed:b.trashed,p_recursive:b.recursive===true,p_trash_contents:b.trash_contents===true});
+      if(!updated)throw new ApiError(409,'Folder changed on another device. Refresh and try again.');return json({folder:updated});
+    }
+    if(b.action==='folder'||b.action==='folder_v3'){
+      const parent_id=await folder(token,b.parent_id), name=label(b.name), color_hex=typeof b.color_hex==='string'&&/^[0-9a-f]{6}$/i.test(b.color_hex)?b.color_hex:'659ce0',id=b.action==='folder_v3'?validId(b.id):randomUUID();
+      const existing=await sup(`/rest/v1/gm_folders?select=*&id=eq.${id}`,token);
+      if(existing.length){const f=existing[0];if(!f.trashed_at&&f.name===name&&f.parent_id===parent_id&&f.color_hex?.toUpperCase()===color_hex.toUpperCase())return json({folder:f});throw new ApiError(409,'Folder ID already exists.');}
+      const rows=await sup('/rest/v1/gm_folders',token,{id,parent_id,name,color_hex},{Prefer:'return=representation'});return json({ok:true,folder:rows[0]});
     }
     if(b.action==='prepare'||b.action==='finish'){
       const m=meta(b),folder_id=await folder(token,b.folder_id),key=`${uid}/${m.id}.${m.extension}`,Bucket=env('R2_BUCKET_NAME'),client=s3();
